@@ -1,7 +1,7 @@
 // imports
-
 import React from "react";
 import "./add-info.css";
+
 
 // class App extends React.Component {
 //   state = {
@@ -54,6 +54,45 @@ function AddInfo() {
                 placeholder="Email"
                 name="email"
                 id="email-input"
+              ></input>
+            </div>
+            <br></br>
+            {/**User street address */}
+            <div>
+              <label htmlFor="user-address">
+                Street:<br></br>
+              </label>
+              <input
+                type="text"
+                placeholder="Your street address here..."
+                name="user-address"
+                id="address-input"
+              ></input>
+            </div>
+            <br></br>
+            {/**User city or town */}
+            <div>
+              <label htmlFor="user-city">
+                City/Town:<br></br>
+              </label>
+              <input
+                type="text"
+                placeholder="Your city or town here..."
+                name="user-city"
+                id="city-input"
+              ></input>
+            </div>
+            <br></br>
+             {/**User's State (In this case it's only VT but we added in case of expansion) */}
+             <div>
+              <label htmlFor="user-state">
+                State:<br></br>
+              </label>
+              <input
+                type="text"
+                placeholder="Which state?"
+                name="user-state"
+                id="state-input"
               ></input>
             </div>
             <br></br>
