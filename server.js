@@ -31,6 +31,13 @@ app.get("/", (req, res) => {
   res.send("Test of Covid Server");
 });
 
+// Route to read a user based on email
+app.get("/get/:email", async (request, response) => {
+  let data = await userCollection.readDataByEmail(request.params.email)
+  response.send(data)
+
+})
+
 // Route to read ALL users
 app.get("/get", async (request, response) => {
   let data = await userCollection.readData();
