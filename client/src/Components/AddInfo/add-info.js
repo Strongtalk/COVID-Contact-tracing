@@ -1,13 +1,37 @@
-import React from "react";
-import "./add-info.css"
+// imports
 
+import React from "react";
+import "./add-info.css";
+
+// class App extends React.Component {
+//   state = {
+//     disabled: true
+//   }
+  
+
+//   handleChange = (env) => {
+//     if(env.target.value.length >=5) {
+//       this.setState({
+//         disabled: false
+//       })
+//     }
+//   }
+// }
+
+
+// component creation
 function AddInfo() {
   return (
+    //general wrapper for page
     <div className="page-wrapper">
-        <h1>Add Info!</h1>
+      {/** general header */}
+      <h1>Add Contact Info!</h1>
+      {/**Main list wrapper */}
       <div id="main-list-wrapper">
+        {/** beginning of form which holds our inputs */}
         <form>
           <div>
+            {/**Name input and label */}
             <div>
               <label htmlFor="nameInput">
                 Enter Name:<br></br>
@@ -20,9 +44,10 @@ function AddInfo() {
               ></input>
             </div>
             <br></br>
+            {/**Email input and label for user */}
             <div>
               <label htmlFor="email">
-                Enter your Email:<br></br>
+                Enter your email:<br></br>
               </label>
               <input
                 type="text"
@@ -32,7 +57,7 @@ function AddInfo() {
               ></input>
             </div>
             <br></br>
-
+            {/**Phone number input and label */}
             <div>
               <label htmlFor="phoneNumber">
                 Enter your phone number:<br></br>
@@ -45,18 +70,20 @@ function AddInfo() {
               ></input>
             </div>
             <br></br>
+            {/** Beginning of our checkboxs asking user if this is a personal input or third party */}
             <div>
               <label>Is this you?</label>
               <input type="checkbox" name="isItYou"></input>
             </div>
-            <br></br>
+            <p>or</p>
             <div>
-              <label>Or a friend?</label>
+              <label> A friend?</label>
               <input type="checkbox" name="isItFriend"></input>
             </div>
-            <br></br>
             <div>
-              <input type="submit"></input>
+              <br></br>
+              {/**Submit button */}
+              <input  id='submitButton' type="submit"></input>
             </div>
           </div>
         </form>

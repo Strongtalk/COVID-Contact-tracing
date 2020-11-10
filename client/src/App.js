@@ -3,8 +3,10 @@ import React from "react";
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 // page imports
-import LandingPage from "./landingPage.js";
-import AddInfo from "./Components/add-info";
+import LandingPage from "./Components/LandingPage/landingPage.js";
+import AddInfo from "./Components/AddInfo/add-info.js";
+
+
 
 function App() {
   return (

@@ -1,0 +1,20 @@
+h1 {
+    text-align: center;
+}
+
+.page-wrapper {
+    text-align: center;
+}
+
+#submitButton:disabled {
+    padding: 8px 18px;
+    font-size: 20px;
+}
+
+#submitButton:enabled {
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    padding: 8px 18px;
+    font-size: 20px;
+}

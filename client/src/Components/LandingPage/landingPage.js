@@ -1,4 +1,4 @@
-import "./App.css";
+import "./landingPage.css";
 
 function LandingPage() {
   return (
