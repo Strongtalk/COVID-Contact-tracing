@@ -4,6 +4,7 @@ import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 // page imports
 import LandingPage from "./landingPage.js";
+import AddInfo from "./Components/add-info";
 
 function App() {
   return (
@@ -14,15 +15,15 @@ function App() {
             <Link to="/">
               <h1 id="title">COVID App</h1>
             </Link>
-            <Link to="/login-page">Login</Link>
+            <Link to="/addinfo-page">Login</Link>
           </div>
         </nav>
         <Switch>
           <Route exact={true} path="/">
             <LandingPage />
           </Route>
-          <Route exact={true} path="/login">
-            <getInfo />
+          <Route exact={true} path="/addinfo-page">
+            <AddInfo />
           </Route>
         </Switch>
       </div>
