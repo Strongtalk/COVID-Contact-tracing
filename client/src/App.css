@@ -1,0 +1,13 @@
+
+/* ---------------------- Nav Bar -------------------------- */
+.App{
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(138, 119, 119);
+}
+.navLinks{
+  color: white;
+  font-size: 20px;
+}
+
+

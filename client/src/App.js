@@ -13,11 +13,11 @@ function App() {
     <Router>
       <div>
         <nav>
-          <div className="App">
+           <div className="App">
             <Link to="/">
-              <h1 id="title">COVID App</h1>
+              <h1 className="navLinks">COVID App</h1>
             </Link>
-            <Link to="/addinfo-page">Login</Link>
+            <Link to="/addinfo-page"><h1 className='navLinks' >Tract Activity</h1></Link>
           </div>
         </nav>
         <Switch>
