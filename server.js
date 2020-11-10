@@ -81,4 +81,23 @@ app.post("/event", async (request, response) => {
   }
 });
 
+app.post("/eventcontact", async (request, response) => {
+    let newEventContact = {
+        eventid: ObjectId(request.body.eventid),
+        name: request.body.name,
+        type: request.body.type,
+        email: request.body.email,
+        phone: request.body.phone
+    }
+
+    let statusObj = await eventContactCollection.insert(newEventContact);
+    if (statusObj.status === "ok") {
+        //if it work send over a 200/ OK STATUS
+        response.status(200).send(statusObj.data);
+      } else {
+        //if it doesn't work send over a 400 and let us know what the error was pls
+        response.status(400).send(statusObj.error);
+      }
+})
+
 module.exports = DataStore;
