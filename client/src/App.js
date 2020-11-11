@@ -6,6 +6,7 @@ import "./App.css";
 import LandingPage from "./Components/LandingPage/landingPage.js";
 import AddInfo from "./Components/AddInfo/add-info.js";
 import UserLogin from "./Components/Login/user-login";
+import NewUser from "./Components/newUser/newUser.js"
 
 
 
@@ -22,6 +23,7 @@ function App() {
               <h1 className="userLogin">Login</h1>
             </Link>
             <Link to="/addinfo-page"><h1 className='navLinks' >Tract Activity</h1></Link>
+            <Link to="/user"><h1 className="navLinks" >Sign Up</h1></Link>
           </div>
         </nav>
         <Switch>
@@ -33,6 +35,9 @@ function App() {
           </Route>
           <Route exact={true} path="/addinfo-page">
             <AddInfo />
+          </Route>
+          <Route exact={true} path="/user" >
+            <NewUser/>
           </Route>
         </Switch>
       </div>

@@ -1,0 +1,21 @@
+body{
+    height: 100vh;
+    border: 1px solid black;
+}
+
+.newUserInput{
+    border: 1px solid black;
+    margin: 5px 0;
+    width: 75vw;
+    height: 35px;
+    font-size: 25px;
+}
+#inputContainer{
+    text-align: center;
+}
+
+#createAccountButton{
+    text-align: center;
+    border: 1px solid black;
+
+}

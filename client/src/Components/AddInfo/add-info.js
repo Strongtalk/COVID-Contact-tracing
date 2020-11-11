@@ -2,23 +2,6 @@
 import React from "react";
 import "./add-info.css";
 
-
-// class App extends React.Component {
-//   state = {
-//     disabled: true
-//   }
-  
-
-//   handleChange = (env) => {
-//     if(env.target.value.length >=5) {
-//       this.setState({
-//         disabled: false
-//       })
-//     }
-//   }
-// }
-
-
 // component creation
 function AddInfo() {
   return (
@@ -28,10 +11,10 @@ function AddInfo() {
       <h1>Add Event !</h1>
       {/**Main list wrapper */}
       <div id="main-list-wrapper">
-        {/** beginning of form which holds our inputs */}
+        {/* beginning of form which holds our inputs */}
         <form>
           <div>
-            {/**Name input and label */}
+            {/* Name input and label */}
             <div>
               <label htmlFor="nameInput">
                 Enter Name:<br></br>
