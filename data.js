@@ -64,11 +64,13 @@ class DataStore {
   }
 
   //search for user events within a specific date frame
-  async readDataEvtDate(userid) {
+  async readDataEvtDate(userid, date) {
     let events = [];
     //did hardcode this will probably have to modify
-    // REMINDER *months start at 0 !!!!*
-    let searchDate = new Date(2020,10,4)
+    // REMINDER *months start at 0 if they are put in as number!!!!*
+    console.log(date)
+    let searchDate = new Date(date)
+    console.log(searchDate)
     let collection = await this.collection();
     await collection.find({"start": {$gte: searchDate}, userid: ObjectId(userid) }).forEach((event) => {
       events.push(event);
