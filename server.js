@@ -32,13 +32,25 @@ app.get("/", (req, res) => {
 });
 
 // Route to read a user based on email
-app.get("/get/:email", async (request, response) => {
+app.get("/user/:email", async (request, response) => {
   let data = await userCollection.readData(request.params.email)
   response.send(data)
 })
 
+// get all events coordinating to a specific user id 
+app.get("/event/:userid", async (request, response) => {
+  let data = await eventCollection.readDataEvt(request.params.userid)
+  response.send(data)
+})
+
+// get specific event parameters per user based on date
+app.get("/events/:userid", async (request, response) =>{
+  let data = await eventCollection.readDataEvtDate(request.params.userid)
+  response.send(data)
+})
+
 // Route to read ALL users
-app.get("/get", async (request, response) => {
+app.get("/user", async (request, response) => {
   let data = await userCollection.readData();
   response.send(data);
 });
@@ -73,8 +85,8 @@ app.post("/event", async (request, response) => {
     userid: ObjectId(request.body.userid),
     name: request.body.name.trim(),
     description: request.body.description,
-    start: request.body.start,
-    end: request.body.end,
+    start: new Date(request.body.start),
+    end: new Date(request.body.end),
   };
 
   let statusObj = await eventCollection.insert(newEvent);
