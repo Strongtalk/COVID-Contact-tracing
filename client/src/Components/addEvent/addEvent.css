@@ -1,0 +1,19 @@
+#eventContainer{
+    text-align: center;
+}
+.eventInput{
+    border: 1px solid black;
+    margin: 5px 0;
+    width: 75vw;
+    height: 35px;
+    font-size: 25px;
+}
+
+#eventSubmit{
+    text-align: center;
+    border: 1px solid black;
+}
+
+.eventLabel{
+    font-size: 25px;
+}
