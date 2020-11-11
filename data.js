@@ -42,12 +42,40 @@ class DataStore {
 
   // Read a single user based on query criteria
   async readData(email) {
-    let users = []
+    let users = [];
     let client = await this.connect();
     let db = await client.db(this.dbName);
     const collection = db.collection(this.collName);
-    await collection.find({email:email}).forEach((user)=> {(users.push(user))});
+    await collection.find({ email: email }).forEach((user) => {
+      users.push(user);
+    });
     return users;
+  }
+
+
+  //reads all events in database for a user
+  async readDataEvt(userid) {
+    let events = [];
+    let collection = await this.collection();
+    await collection.find({ userid: ObjectId(userid) } ).forEach((event) => {
+      events.push(event);
+    });
+    return events;
+  }
+
+  //search for user events within a specific date frame
+  async readDataEvtDate(userid) {
+    let events = [];
+    //did hardcode this will probably have to modify
+    // REMINDER *months start at 0 !!!!*
+    let searchDate = new Date(2020,10,4)
+    let collection = await this.collection();
+    await collection.find({"start": {$gte: searchDate}, userid: ObjectId(userid) }).forEach((event) => {
+      events.push(event);
+     
+    });
+    console.log(events)
+    return events;
   }
 
   //write to database- user collection
