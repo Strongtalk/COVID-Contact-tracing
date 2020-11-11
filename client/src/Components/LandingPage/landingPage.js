@@ -6,19 +6,19 @@ function LandingPage() {
       <body>
         <div id="articleContainer">
           <h1>COVID-19 News</h1>
-          <div class="individualArticleContainer">
-            <h3 class="newsTitle">Article One</h3>
+          <div className="individualArticleContainer">
+            <h3 className="newsTitle">Article One</h3>
             <p>News News News</p>
           </div>
-          <button class="continueReadingButton">Continue Reading</button>
-          <div class="individualArticleContainer">
-            <h3 class="newsTitle">Article Two</h3>
+          <button className="continueReadingButton">Continue Reading</button>
+          <div className="individualArticleContainer">
+            <h3 className="newsTitle">Article Two</h3>
           </div>
-          <button class="continueReadingButton">Continue Reading</button>
-          <div class="individualArticleContainer">
-            <h3 class="newsTitle">Article Three</h3>
+          <button className="continueReadingButton">Continue Reading</button>
+          <div className="individualArticleContainer">
+            <h3 className="newsTitle">Article Three</h3>
           </div>
-          <button class="continueReadingButton">Continue Reading</button>
+          <button className="continueReadingButton">Continue Reading</button>
         </div>
         <div id="footerContainer">
           <h2>Contact Contact Contact</h2>

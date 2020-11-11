@@ -25,7 +25,7 @@ function AddInfo() {
     //general wrapper for page
     <div className="page-wrapper">
       {/** general header */}
-      <h1>Add Contact Info!</h1>
+      <h1>Add Event !</h1>
       {/**Main list wrapper */}
       <div id="main-list-wrapper">
         {/** beginning of form which holds our inputs */}
@@ -47,7 +47,7 @@ function AddInfo() {
             {/**Email input and label for user */}
             <div>
               <label htmlFor="email">
-                Enter your email:<br></br>
+                Enter contact email:<br></br>
               </label>
               <input
                 type="text"
@@ -57,49 +57,10 @@ function AddInfo() {
               ></input>
             </div>
             <br></br>
-            {/**User street address */}
-            <div>
-              <label htmlFor="user-address">
-                Street:<br></br>
-              </label>
-              <input
-                type="text"
-                placeholder="Your street address here..."
-                name="user-address"
-                id="address-input"
-              ></input>
-            </div>
-            <br></br>
-            {/**User city or town */}
-            <div>
-              <label htmlFor="user-city">
-                City/Town:<br></br>
-              </label>
-              <input
-                type="text"
-                placeholder="Your city or town here..."
-                name="user-city"
-                id="city-input"
-              ></input>
-            </div>
-            <br></br>
-             {/**User's State (In this case it's only VT but we added in case of expansion) */}
-             <div>
-              <label htmlFor="user-state">
-                State:<br></br>
-              </label>
-              <input
-                type="text"
-                placeholder="Which state?"
-                name="user-state"
-                id="state-input"
-              ></input>
-            </div>
-            <br></br>
             {/**Phone number input and label */}
             <div>
               <label htmlFor="phoneNumber">
-                Enter your phone number:<br></br>
+                Enter contact phone number:<br></br>
               </label>
               <input
                 type="text"
@@ -111,18 +72,18 @@ function AddInfo() {
             <br></br>
             {/** Beginning of our checkboxs asking user if this is a personal input or third party */}
             <div>
-              <label>Is this you?</label>
+              <label>A Person</label>
               <input type="checkbox" name="isItYou"></input>
             </div>
             <p>or</p>
             <div>
-              <label> A friend?</label>
+              <label> A business</label>
               <input type="checkbox" name="isItFriend"></input>
             </div>
             <div>
               <br></br>
               {/**Submit button */}
-              <input  id='submitButton' type="submit"></input>
+              <input id='submitButton' type="submit"></input>
             </div>
           </div>
         </form>
