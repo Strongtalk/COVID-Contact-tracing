@@ -3,7 +3,7 @@ import "./landingPage.css";
 function LandingPage() {
   return (
     <div>
-      <body>
+      
         <div id="articleContainer">
           <h1>COVID-19 News</h1>
           <div className="individualArticleContainer">
@@ -23,7 +23,7 @@ function LandingPage() {
         <div id="footerContainer">
           <h2>Contact Contact Contact</h2>
         </div>
-      </body>
+      
     </div>
   );
 }
