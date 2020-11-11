@@ -64,6 +64,7 @@ function NewUser() {
           name="password"
           required
         />
+        <br></br>
         <input id="createAccountButton" type="submit" value="Create Account" />
       </form>
     </div>
