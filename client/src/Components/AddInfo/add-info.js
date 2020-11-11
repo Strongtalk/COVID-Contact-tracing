@@ -12,7 +12,7 @@ function AddInfo() {
       {/**Main list wrapper */}
       <div id="main-list-wrapper">
         {/* beginning of form which holds our inputs */}
-        <form>
+        <form method="POST" action="/eventcontact" >
           <div>
             {/* Name input and label */}
             <div>
@@ -22,7 +22,7 @@ function AddInfo() {
               <input
                 type="text"
                 placeholder="Name"
-                name="nameInput"
+                name="name"
                 id="name-input"
               ></input>
             </div>
