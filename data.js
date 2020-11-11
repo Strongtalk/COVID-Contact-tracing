@@ -41,14 +41,13 @@ class DataStore {
   }
 
   // Read a single user based on query criteria
-  async readDataByEmail(email) {
-    console.log('read  by email : ', email)
+  async readData(email) {
+    let users = []
     let client = await this.connect();
     let db = await client.db(this.dbName);
     const collection = db.collection(this.collName);
-    let data = await collection.find({"email":email});
-    console.log('data: ', data)
-    return data;
+    await collection.find({email:email}).forEach((user)=> {(users.push(user))});
+    return users;
   }
 
   //write to database- user collection

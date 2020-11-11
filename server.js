@@ -33,9 +33,8 @@ app.get("/", (req, res) => {
 
 // Route to read a user based on email
 app.get("/get/:email", async (request, response) => {
-  let data = await userCollection.readDataByEmail(request.params.email)
+  let data = await userCollection.readData(request.params.email)
   response.send(data)
-
 })
 
 // Route to read ALL users
