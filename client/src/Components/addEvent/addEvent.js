@@ -21,11 +21,13 @@ function AddEvent() {
         <label className="eventLabel" htmlFor="date">
           Today's Date:
         </label>
+        <br></br>
         <input className="eventInput" type="date" name="date" />
         <br></br>
         <label className="eventLabel" htmlFor="start">
           Start and End Time:
         </label>
+        <br></br>
         <input
           className="eventInput"
           type="time"
