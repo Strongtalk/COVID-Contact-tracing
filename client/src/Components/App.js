@@ -25,10 +25,10 @@ function App() {
             <Link to="/userlogin-page">
               <h1 className="userLogin">Log In</h1>
             </Link>
-            <Link to="/addinfo-page"><h1 className='navLinks' >Tract Activity</h1></Link>
+            <Link to="/addinfo-page"><h1 className='navLinks' >Add Event Participant</h1></Link>
             <Link to="/user"><h1 className="navLinks">Sign Up</h1></Link>
             <Link to="/event"><h1 className="navLinks">Add Event</h1></Link>
-            <Link to="userprofile"><h1 className='navLinks' >Profile</h1></Link>
+            <Link to="/user/:email"><h1 className='navLinks' >Profile</h1></Link>
           </div>
         </nav>
         <Navbar />
@@ -48,7 +48,7 @@ function App() {
           <Route exact={true} path="/event">
             <AddEvent/>
           </Route>
-          <Route exact={true} path="/userprofile" >
+          <Route exact={true} path="/user/:email" >
             <ProfilePage/>
           </Route>
         </Switch>

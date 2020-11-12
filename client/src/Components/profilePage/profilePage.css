@@ -2,3 +2,13 @@
     border: 1px solid black;
     margin: 20px;
 }
+
+.profileDisplay{
+    margin: 0;
+    padding: 5px;
+    font-size: 20px;
+}
+#profileName{
+    margin-bottom: 10px;
+}
+
