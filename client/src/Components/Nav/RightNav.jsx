@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Ul = styled.ul`
-  justify-content: flex-end;
+  justify-content: flex-start;
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
@@ -10,7 +10,7 @@ const Ul = styled.ul`
   
 
   li {
-    padding: 18px 10px;
+    padding: 18px 0;
   }
 
   @media (max-width: 768px) {
@@ -20,13 +20,14 @@ const Ul = styled.ul`
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
     top: 0;
     right: 0;
-    height: 55vh;
+    height: 45vh;
     width: 150px;
     padding-top: 1rem;
     transition: transform 0.3s ease-in-out;
 
     li {
       color: #fff;
+      text-decoration: none;
     }
   }
 `;

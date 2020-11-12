@@ -1,4 +1,6 @@
 import "./addEvent.css";
+import Calendar from "react-calendar"
+import 'react-calendar/dist/Calendar.css'
 
 function AddEvent() {
   return (
@@ -43,6 +45,9 @@ function AddEvent() {
         <br></br>
         <input id="eventSubmit" type="submit" value="Add Event" />
       </form>
+      <div id="calendar-container">
+      <Calendar />
+      </div>
     </div>
   );
 }
