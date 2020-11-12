@@ -17,3 +17,9 @@
 .eventLabel{
     font-size: 25px;
 }
+
+#calendar-container {
+    display: flex; 
+    justify-content: center;
+    margin-top: 2px;
+}
