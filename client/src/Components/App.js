@@ -9,6 +9,7 @@ import UserLogin from "./Login/user-login";
 import NewUser from "./newUser/newUser.js";
 import Navbar from "./Nav/Navbar.jsx"
 import AddEvent from "./addEvent/addEvent.js"
+import ProfilePage from "./profilePage/profilePage.js"
 
 
 
@@ -27,6 +28,7 @@ function App() {
             <Link to="/addinfo-page"><h1 className='navLinks' >Tract Activity</h1></Link>
             <Link to="/user"><h1 className="navLinks">Sign Up</h1></Link>
             <Link to="/event"><h1 className="navLinks">Add Event</h1></Link>
+            <Link to="userprofile"><h1 className='navLinks' >Profile</h1></Link>
           </div>
         </nav>
         <Navbar />
@@ -45,6 +47,9 @@ function App() {
           </Route>
           <Route exact={true} path="/event">
             <AddEvent/>
+          </Route>
+          <Route exact={true} path="/userprofile" >
+            <ProfilePage/>
           </Route>
         </Switch>
         
