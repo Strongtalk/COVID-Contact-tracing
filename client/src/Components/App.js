@@ -3,13 +3,12 @@ import React from "react";
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 // page imports
-import LandingPage from "./Components/LandingPage/landingPage.js";
-import AddInfo from "./Components/AddInfo/add-info.js";
-import UserLogin from "./Components/Login/user-login";
-import NewUser from "./Components/newUser/newUser.js";
-import Navbar from "./Components/Navagation/Navbar.js"
-import Burger from "./Components/Navagation/Hamburger";
-import AddEvent from "./Components/addEvent/addEvent.js"
+import LandingPage from "./LandingPage/landingPage.js";
+import AddInfo from "./AddInfo/add-info.js";
+import UserLogin from "./Login/user-login";
+import NewUser from "./newUser/newUser.js";
+import Navbar from "./Nav/Navbar.jsx"
+import AddEvent from "./addEvent/addEvent.js"
 
 
 
