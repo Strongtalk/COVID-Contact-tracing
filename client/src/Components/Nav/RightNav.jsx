@@ -6,6 +6,7 @@ const Ul = styled.ul`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
+  background-color: #8A7777;
   
 
   li {

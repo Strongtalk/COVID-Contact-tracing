@@ -8,9 +8,13 @@ const Nav = styled.nav`
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
+  background-color: #fff;
   
   .logo {
     padding: 15px 0;
+  }
+  @media (min-width: 768px) {
+    display: none;
   }
 `
 
