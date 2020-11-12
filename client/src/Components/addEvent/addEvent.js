@@ -1,8 +1,14 @@
+import React, {useState} from "react"
 import "./addEvent.css";
 import Calendar from "react-calendar"
 import 'react-calendar/dist/Calendar.css'
 
 function AddEvent() {
+
+  const showEvents = () => {
+    console.log('this is a hard coded event reponse')
+  }
+
   return (
     <div>
       <h1>Add Event</h1>

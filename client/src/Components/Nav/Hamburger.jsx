@@ -23,7 +23,7 @@ const StyledBurger = styled.div`
   div {
     width: 2rem;
     height: 0.25rem;
-    background-color: ${({ open }) => open ? '#000000' : '#255C27'};
+    background-color: ${({ open }) => open ? '#000000' : '#57738C'};
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;
@@ -40,7 +40,7 @@ const StyledBurger = styled.div`
   }
 `;
 
-// making compoenet here with => function and useState to trigger the opening on the nav bar
+// making component here with => function and useState to trigger the opening on the nav bar
 const Burger = () => {
   const [open, setOpen] = useState(false)
   

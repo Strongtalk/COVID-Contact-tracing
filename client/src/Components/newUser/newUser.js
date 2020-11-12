@@ -9,56 +9,56 @@ function NewUser() {
       <h1>Sign Up</h1>
       <form id="inputContainer" method="POST" action="/user">
         <input
-          class="newUserInput"
+          className="newUserInput"
           type="text"
           placeholder="Name: "
           name="name"
           required
         />
         <input
-          class="newUserInput"
+          className="newUserInput"
           type="email"
           placeholder="Email: "
           name="email"
           required
         />
         <input
-          class="newUserInput"
+          className="newUserInput"
           type="text"
           placeholder="Address: "
           name="street"
           required
         />
         <input
-          class="newUserInput"
+          className="newUserInput"
           type="text"
           placeholder="City: "
           name="city"
           required
         />
         <input
-          class="newUserInput"
+          className="newUserInput"
           type="text"
           placeholder="State: "
           name="state"
           required
         />
         <input
-          class="newUserInput"
+          className="newUserInput"
           type="text"
           placeholder="Zip Code: "
           name="zip"
           required
         />
         <input
-          class="newUserInput"
+          className="newUserInput"
           type="text"
           placeholder="Phone Number: "
           name="phone"
           required
         />
         <input
-          class="newUserInput"
+          className="newUserInput"
           type="password"
           placeholder="Password: "
           name="password"
