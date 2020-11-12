@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from "react";
-import "./profilePage.css"
+import "./profilePage.css";
 
 function ProfilePage() {
-  const [calendar, setCalendar] = useState("");
   const [profile, setProfile] = useState("");
 
-  useEffect(() => {
-    fetch("/userprofile")
+  const fetchUser = async () => {
+    fetch("/user/hopeswanke@gmail.com")
       .then((response) => response.json())
       .then((userProfile) => {
-        setProfile(userProfile);
+        setProfile(userProfile[0]);
       });
-  });
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
-    <div id="profilePageContainer" >
+    <div id="profilePageContainer">
+      <h1 id="profileName">Hello: {profile.name}</h1>
       <div id="profileContainer">
-          Hello: {profile.name}
-          <br></br>
-          Address: {profile.street}, {profile.city}, {profile.state}, {profile.zip}
-          <br></br>
-          Email: {profile.email}
-          <br></br>
-          Phone: {profile.phone}
+        <p className="profileDisplay">
+          <b>Email:</b> {profile.email}
+        </p>
+        <p className="profileDisplay">
+          <b>Phone: </b> {profile.cell} (my cell is null in the database)
+        </p>
+        <p className="profileDisplay">
+          <b>Address: </b>
+          {profile.street}, {profile.city}, {profile.zip}
+        </p>
       </div>
       <div id="calendarContainer"></div>
     </div>
