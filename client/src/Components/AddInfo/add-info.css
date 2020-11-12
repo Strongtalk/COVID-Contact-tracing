@@ -1,20 +1,40 @@
-h1 {
+.pageContainer{
     text-align: center;
 }
 
-.page-wrapper {
+#typeInputContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addInfoInput{
+    border: 1px solid black;
+    margin: 5px 0;
+    width: 75vw;
+    height: 35px;
+    font-size: 25px;
+}
+
+#checkboxInputContainer{
+    margin: 10px 0;
+}
+.checkBoxLabel{
+    margin-bottom: 0;
+    font-size: 25px;
+    padding-left: 5px;
+}
+.checkBox{
+    height: 20px;
+    width: 20px;
+    margin: 0 5px;
+}
+
+#addInfoSubmitButton{
     text-align: center;
+    border: 1px solid black;
+    width: 30vw;
+    height: 35px;
+    font-size: 25px;
 }
 
-#submitButton:disabled {
-    padding: 8px 18px;
-    font-size: 20px;
-}
-
-#submitButton:enabled {
-    background-color: green;
-    color: white;
-    border-radius: 10px;
-    padding: 8px 18px;
-    font-size: 20px;
-}

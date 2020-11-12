@@ -25,7 +25,7 @@ function App() {
             <Link to="/userlogin-page">
               <h1 className="userLogin">Log In</h1>
             </Link>
-            <Link to="/addinfo-page"><h1 className='navLinks' >Tract Activity</h1></Link>
+            <Link to="/addinfo-page"><h1 className='navLinks' >Add Event Participant</h1></Link>
             <Link to="/user"><h1 className="navLinks">Sign Up</h1></Link>
             <Link to="/event"><h1 className="navLinks">Add Event</h1></Link>
             <Link to="/user/:email"><h1 className='navLinks' >Profile</h1></Link>
