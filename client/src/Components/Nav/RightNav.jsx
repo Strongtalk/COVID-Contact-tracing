@@ -20,8 +20,8 @@ const Ul = styled.ul`
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
     top: 0;
     right: 0;
-    height: 45vh;
-    width: 150px;
+    height: 60vh;
+    width: 85px;
     padding-top: 1rem;
     transition: transform 0.3s ease-in-out;
     

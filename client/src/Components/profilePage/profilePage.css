@@ -12,3 +12,10 @@
     margin-bottom: 10px;
 }
 
+#calendar-container {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    background-color: rgb(30, 30, 37);
+}

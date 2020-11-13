@@ -17,7 +17,7 @@ function AddEvent(props) {
 
   const showEvents = () => {
     // when line 12 is on App.js your user id would change to "props.userid"
-    fetch(`/events/${userid}/${eventDate}`)
+    fetch('#')
       .then((response) => response.json())
       .then((userEvent) => {
         console.log(userEvent);

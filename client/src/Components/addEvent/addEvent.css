@@ -18,9 +18,3 @@
     font-size: 25px;
 }
 
-#calendar-container {
-    display: flex; 
-    justify-content: center;
-    margin-top: 2px;
-    background-color: rgb(30, 30, 37);
-}

@@ -9,8 +9,8 @@ const AnimatedBurger = styled.div`
   width: 2rem;
   height: 2rem;
   position: fixed;
-  top: 14px;
-  right: 9px;
+  top: 4px;
+  right: 5px;
   z-index: 20;
   display: none;
   @media (max-width: 768px) {

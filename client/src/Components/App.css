@@ -1,9 +1,16 @@
-
+*,
+*:after,
+*:before {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 /* ---------------------- Nav Bar -------------------------- */
 .App{
   display: flex;
   justify-content: space-around;
   background-color: rgb(138, 119, 119);
+  height: 5vh;
 }
 .navLinks{
   color: white;
