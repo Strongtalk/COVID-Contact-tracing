@@ -54,7 +54,7 @@ function NewUser() {
           className="newUserInput"
           type="text"
           placeholder="Phone Number: "
-          name="phone"
+          name="cell"
           required
         />
         <input
