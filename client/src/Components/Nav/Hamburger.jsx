@@ -5,7 +5,7 @@ import RightNav from './RightNav';
 
 //This is styled components at its finest... just doing inner CSS,,,
 // below line 23 is where all the animation magic comes in 
-const StyledBurger = styled.div`
+const AnimatedBurger = styled.div`
   width: 2rem;
   height: 2rem;
   position: fixed;
@@ -46,11 +46,11 @@ const Burger = () => {
   
   return (
     <>
-      <StyledBurger open={open} onClick={() => setOpen(!open)}>
+      <AnimatedBurger open={open} onClick={() => setOpen(!open)}>
         <div />
         <div />
         <div />
-      </StyledBurger>
+      </AnimatedBurger>
       {/** calling the right side nav bar component */}
       <RightNav open={open}/>
     </>

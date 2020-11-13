@@ -46,6 +46,7 @@ function App() {
             <NewUser/>
           </Route>
           <Route exact={true} path="/event">
+           {/** pass "userid={userid}" after userid is defined in state on this page */}
             <AddEvent/>
           </Route>
           <Route exact={true} path="/user/:email" >

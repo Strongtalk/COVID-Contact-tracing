@@ -1,18 +1,35 @@
-import React, {useState} from "react"
+import React, { useState, useEffect } from "react";
 import "./addEvent.css";
-import Calendar from "react-calendar"
-import 'react-calendar/dist/Calendar.css'
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
-function AddEvent() {
+// This function is for displaying event info on selected date based on user info.
+//Needs to be updated when we have auth for users 
+function AddEvent(props) {
+  const [eventInfo, setEventInfo] = useState(null);
+  const [eventDate, setEventDate] = useState(null);
+  // This should be living in APP.js 
+  const [userid, setUserid] = useState(null)
+
+  useEffect(() => {
+    showEvents();
+  });
 
   const showEvents = () => {
-    console.log('this is a hard coded event reponse')
-  }
+    // when line 12 is on App.js your user id would change to "props.userid"
+    fetch(`/events/${userid}/${eventDate}`)
+      .then((response) => response.json())
+      .then((userEvent) => {
+        console.log(userEvent);
+        setEventInfo(userEvent);
+      });
+    // when data is click it will setSTATE to be the date that was clicked
+  };
 
   return (
     <div>
       <h1>Add Event</h1>
-      <form id="eventContainer" method="POST" action="/event" >
+      <form id="eventContainer" method="POST" action="/event">
         <input
           className="eventInput"
           type="text"
@@ -52,7 +69,7 @@ function AddEvent() {
         <input id="eventSubmit" type="submit" value="Add Event" />
       </form>
       <div id="calendar-container">
-      <Calendar />
+        <Calendar onClickDay={setEventDate} />
       </div>
     </div>
   );
