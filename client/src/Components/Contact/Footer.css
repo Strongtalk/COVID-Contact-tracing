@@ -1,0 +1,90 @@
+#footerContainer{
+    display: flex;
+    padding-top: 20px;
+    background-color: rgb(138, 119, 119);
+    height: 28vh;
+    justify-content: space-between;
+  }
+
+  h5 {
+    text-decoration: underline;
+  }
+  h4 {
+      display: flex;
+      align-self: center;
+  }
+
+#footerLeft {
+display: flex;
+height: 20vh;
+width: 60vw;
+border: 1px solid white;
+align-items: center;
+flex-direction: column;
+}
+
+#footerCenter {
+    display: flex;
+    height: 20vh;
+    width: 15vw;
+}
+
+#footerRight {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 5px double white;
+    height: 8vh;
+    width: 30vw;
+    align-items: flex-start;
+}
+
+#iconWrapper {
+    display: flex;
+}
+
+#admin-icon {
+    height: 5vh;
+    width: 4vw;
+}
+
+.icon {
+    height: 5vh;
+    width: 3vw;
+}
+
+
+
+
+/* Any other mobile device*/
+@media (max-width: 702px) {
+    #footerRight {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 5px double white;
+        height: 16vh;
+        width: 35vw;
+        align-items: flex-start;
+    }
+}
+/* For Galaxy series*/
+@media (max-height: 667px) {
+    #footerRight {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 5px double white;
+        height: 20vh;
+        width: 35vw;
+        align-items: flex-start;
+    }
+}
+/* For Iphone 5 series*/
+@media (max-height: 580px) {
+    #footerRight {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 5px double white;
+        height: 24vh;
+        width: 35vw;
+        align-items: flex-start;
+    }
+}

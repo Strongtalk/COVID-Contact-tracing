@@ -33,10 +33,5 @@ body{
 }
 
 /* ----------------- Main Page Article Section -------------- */
-#footerContainer{
-  text-align: center;
-  padding-top: 20px;
-  background-color: rgb(138, 119, 119);
-  height: 15vh;
-}
+
 
