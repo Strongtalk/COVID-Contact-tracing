@@ -1,0 +1,21 @@
+
+
+/* Container for the map */
+#map-container {
+  display: flex;
+  flex-direction: column;
+  width: 40/vw;
+  height: 30vh
+}
+
+#app-map{
+  width: 60vw;
+  height: 40vh;
+  float: right;
+}
+
+/* The map */
+.leaflet-container {
+  width: 40vw;
+  height: 50vw;
+}
