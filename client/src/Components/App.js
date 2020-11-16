@@ -10,6 +10,8 @@ import NewUser from "./newUser/newUser.js";
 import Navbar from "./Nav/Navbar.jsx"
 import AddEvent from "./addEvent/addEvent.js"
 import ProfilePage from "./profilePage/profilePage.js"
+import PrivateRoute from './privateRoute.js'
+import PublicRoute from './publicRoute.js'
 
 
 
@@ -33,26 +35,12 @@ function App() {
         </nav>
         <Navbar />
         <Switch>
-          <Route exact={true} path="/">
-            <LandingPage />
-          </Route>
-          <Route exact={true} path="/userlogin-page">
-            <UserLogin />
-          </Route>
-          <Route exact={true} path="/addinfo-page">
-            <AddInfo />
-          </Route>
-          <Route exact={true} path="/user" >
-            <NewUser/>
-          </Route>
-          <Route exact={true} path="/event">
-            <AddEvent/>
-          </Route>
-          <Route exact={true} path="/user/:email" >
-            <ProfilePage/>
-          </Route>
+          <PublicRoute restricted={false} component={LandingPage} path='/' exact />
+          <PublicRoute restricted={true} component={UserLogin} path='/userlogin-page' exact/>
+          <PrivateRoute component={ProfilePage} path='/user/:email' exact />
+
+
         </Switch>
-        
       </div>
     </Router>
   );

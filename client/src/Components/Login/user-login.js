@@ -1,10 +1,14 @@
 // imports
 import React from "react";
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./user-login.css";
+import { login } from "../utils";
 
-//component
-function UserLogin() {
+const UserLogin = (props) => {
+  const handleLogin = () => {
+    login();
+    props.history.push("/");
+  };
+
   return (
     <div id="login-page-wrapper">
       <h1 id="log-in-header"> Log In</h1>
@@ -28,6 +32,7 @@ function UserLogin() {
         </div>
         <div id="submit-container">
           <input
+            onClick={()=>handleLogin()}
             id="login-submit-button"
             value="Log In"
             type="submit"
@@ -37,6 +42,6 @@ function UserLogin() {
       </form>
     </div>
   );
-}
+};
 
 export default UserLogin;

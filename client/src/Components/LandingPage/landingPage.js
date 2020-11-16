@@ -1,4 +1,7 @@
 import "./landingPage.css";
+import React, {Component} from 'react'
+import {logout, isLogin} from '../utils'
+import {Link} from 'react-router-dom'
 
 function LandingPage() {
   return (

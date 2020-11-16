@@ -4,7 +4,7 @@ import "./profilePage.css";
 function ProfilePage() {
   const [profile, setProfile] = useState("");
 
-  const fetchUser = async () => {
+  const fetchUser = () => {
     fetch("/user/hopeswanke@gmail.com")
       .then((response) => response.json())
       .then((userProfile) => {
