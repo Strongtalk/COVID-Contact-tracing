@@ -29,6 +29,9 @@ function App() {
               <Link to="/userlogin-page">
                 <h1 className="userLogin">Log In</h1>
               </Link>
+              <Link to="/map">
+                <h1 className="covidMap">Covid Map</h1>
+              </Link>
               <Link to="/addinfo-page">
                 <h1 className="navLinks">Add Event Participant</h1>
               </Link>
@@ -46,6 +49,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={LandingPage} />
+            <Route exact path="/map" component={CovidMap} />
             <PrivateLogSign exact path="/userlogin-page" component={UserLogin} />
             <PrivatePage exact path="/addinfo-page" component={AddInfo} />
             <PrivateLogSign exact path="/user" component={NewUser} />
