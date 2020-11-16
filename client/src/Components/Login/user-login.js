@@ -1,14 +1,8 @@
 // imports
 import React from "react";
 import "./user-login.css";
-import { login } from "../utils";
 
-const UserLogin = (props) => {
-  const handleLogin = () => {
-    login();
-    props.history.push("/");
-  };
-
+function UserLogin() {
   return (
     <div id="login-page-wrapper">
       <h1 id="log-in-header"> Log In</h1>
@@ -32,7 +26,6 @@ const UserLogin = (props) => {
         </div>
         <div id="submit-container">
           <input
-            onClick={()=>handleLogin()}
             id="login-submit-button"
             value="Log In"
             type="submit"
@@ -42,6 +35,6 @@ const UserLogin = (props) => {
       </form>
     </div>
   );
-};
+}
 
 export default UserLogin;

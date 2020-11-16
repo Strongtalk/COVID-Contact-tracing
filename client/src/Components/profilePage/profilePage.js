@@ -23,7 +23,7 @@ function ProfilePage() {
           <b>Email:</b> {profile.email}
         </p>
         <p className="profileDisplay">
-          <b>Phone: </b> {profile.cell} (my cell is null in the database)
+          <b>Phone: </b> {profile.cell} 
         </p>
         <p className="profileDisplay">
           <b>Address: </b>
