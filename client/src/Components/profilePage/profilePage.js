@@ -6,22 +6,16 @@ import firebaseApp from "../auth/firebase.js";
 import { AuthContext } from "../auth/authorize.js";
 
 function ProfilePage() {
-  const[ currentEmail, setCurrentEmail ]  = useState(null)
-  // console.log(currentEmail)
+  const [profile, setProfile] = useState("");
 
-  // let profileEmail = currentEmail
  
   const currentUser = localStorage.getItem("newemail")
-
-  const [profile, setProfile] = useState("");
- 
 
   const handleLogout = () => {
 
     firebaseApp.auth().signOut();
     <Redirect to="/"/>
   }
-
 
   const fetchUser = async () => {
     fetch(`/user/${currentUser}`)
@@ -30,9 +24,13 @@ function ProfilePage() {
         setProfile(userProfile[0]);
       });
   };
+
+
   useEffect(() => {
     fetchUser();
   }, []);
+
+
 
   return (
     

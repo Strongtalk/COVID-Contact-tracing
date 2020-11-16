@@ -1,6 +1,6 @@
 import React,{useState, useCallback } from "react";
 import "./newUser.css";
-import { withRouter } from "react-router";
+import { withRouter, Redirect } from "react-router";
 import firebaseApp from "../auth/firebase.js";
 
 // component creation
@@ -9,18 +9,22 @@ const NewUser= ({history}) =>{
   const onChangeHandler = (event) => {
     setUserValue(event.target.value);
   };
+
   function storedata() {
     localStorage.setItem("newemail", user);
   }
+console.log(user)
+
   storedata();
 
   const handleSignUp = useCallback(
     async (event) => {
-      // event.preventDefault();
       const { email, password } = event.target.elements;
       try {
         await firebaseApp.auth().createUserWithEmailAndPassword(email.value, password.value)
+        firebaseApp.auth().signOut();
         history.push("/");
+        <Redirect to="/userprofile"/>
       } catch (error) {
         alert(error);
       }

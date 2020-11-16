@@ -12,6 +12,7 @@ import AddEvent from "./addEvent/addEvent.js";
 import ProfilePage from "./profilePage/profilePage.js";
 import { AuthProvider } from "./auth/authorize.js";
 import PrivatePage from "./auth/privatePage.js";
+import PrivateLogSign from "./auth/privateLogSign.js";
 
 function App() {
   return (
@@ -43,10 +44,10 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Route exact path="/userlogin-page" component={UserLogin} />
-            <Route exact path="/addinfo-page" component={AddInfo} />
-            <Route exact path="/user" component={NewUser} />
-            <Route exact path="/event" component={AddEvent} />
+            <PrivateLogSign exact path="/userlogin-page" component={UserLogin} />
+            <PrivatePage exact path="/addinfo-page" component={AddInfo} />
+            <PrivateLogSign exact path="/user" component={NewUser} />
+            <PrivatePage exact path="/event" component={AddEvent} />
               {/** pass "userid={userid}" after userid is defined in state on this page */}
             <PrivatePage exact path="/userprofile" component={ProfilePage} />
           </Switch>
