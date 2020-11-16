@@ -12,7 +12,7 @@ const UserLogin = (props) => {
   return (
     <div id="login-page-wrapper">
       <h1 id="log-in-header"> Log In</h1>
-      <form id="login-form-container">
+      <form id="login-form-container" method="POST" action="/login">
         <div id="username-container">
           <label id="labelUsername" htmlFor="username">
             Username:

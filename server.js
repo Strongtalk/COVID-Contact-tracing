@@ -6,7 +6,29 @@ const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
+///////////////////////////////////////////////////////////testing
+const firebase = require("firebase/app");
+require("firebase/auth");
+
 const staticDir = process.env.DEV ? "./client/public" : "./client/build";
+
+//////////////////////////////////////////////////////testing
+//initalize firebase app
+const firebaseConfig = {
+  apiKey: "AIzaSyCw26Py2yhWince6o1B_Xp-lDY2tDDpABM",
+  authDomain: "login-auth-3bd43.firebaseapp.com",
+  databaseURL: "https://login-auth-3bd43.firebaseio.com",
+  projectId: "login-auth-3bd43",
+  storageBucket: "login-auth-3bd43.appspot.com",
+  messagingSenderId: "796099292644",
+  appId: "1:796099292644:web:28c5a0c9624cc04054ebf1",
+  measurementId: "G-C67SR115V0",
+};
+
+//////////////////////////////////////////////////////testing
+const fireApp = firebase.initializeApp(firebaseConfig);
+
+////////////////////////////////////////////testing
 
 // Define DB parameters
 const DataStore = require("./data.js");
@@ -31,23 +53,57 @@ app.get("/", (req, res) => {
   res.send("Test of Covid Server");
 });
 
+///////////////////////////////////////////////////////TESTING
+app.post("/login", async (req, res) => {
+  let email = req.body.username;
+  let password = req.body.pass;
+
+  try {
+    await fireApp
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(async (result) => {
+        if (result.user) {
+          await res.send("WELCOME TO YOUR USER PAGE");
+        } 
+        console.log("result is", result);
+      });
+  } catch (error) {
+    console.log(error);
+    res.redirect("/user");
+  }
+});
+
+ app.get("/userlogedin", (req, res) => {
+  if (fireApp.auth().currentUser) {
+   res.send("YOU ARE LOGGED IN");
+  } else {
+    res.status(401).send("ACCESS DENIEDDDDDDD");
+  }
+ });
+
+//////////////////////////////////////////////////////////TESTING
+
 // Route to read a user based on email
 app.get("/user/:email", async (request, response) => {
-  let data = await userCollection.readData(request.params.email)
-  response.send(data)
-})
+  let data = await userCollection.readData(request.params.email);
+  response.send(data);
+});
 
-// get all events coordinating to a specific user id 
+// get all events coordinating to a specific user id
 app.get("/event/:userid", async (request, response) => {
-  let data = await eventCollection.readDataEvt(request.params.userid)
-  response.send(data)
-})
+  let data = await eventCollection.readDataEvt(request.params.userid);
+  response.send(data);
+});
 
 // get specific event parameters per user based on date
-app.get("/events/:userid/:date", async (request, response) =>{
-  let data = await eventCollection.readDataEvtDate(request.params.userid, request.params.date)
-  response.send(data)
-})
+app.get("/events/:userid/:date", async (request, response) => {
+  let data = await eventCollection.readDataEvtDate(
+    request.params.userid,
+    request.params.date
+  );
+  response.send(data);
+});
 
 // Route to read ALL users
 app.get("/user", async (request, response) => {
@@ -100,22 +156,22 @@ app.post("/event", async (request, response) => {
 });
 
 app.post("/eventcontact", async (request, response) => {
-    let newEventContact = {
-        eventid: ObjectId(request.body.eventid),
-        name: request.body.name,
-        type: request.body.type,
-        email: request.body.email,
-        phone: request.body.phone
-    }
+  let newEventContact = {
+    eventid: ObjectId(request.body.eventid),
+    name: request.body.name,
+    type: request.body.type,
+    email: request.body.email,
+    phone: request.body.phone,
+  };
 
-    let statusObj = await eventContactCollection.insert(newEventContact);
-    if (statusObj.status === "ok") {
-        //if it work send over a 200/ OK STATUS
-        response.status(200).send(statusObj.data);
-      } else {
-        //if it doesn't work send over a 400 and let us know what the error was pls
-        response.status(400).send(statusObj.error);
-      }
-})
+  let statusObj = await eventContactCollection.insert(newEventContact);
+  if (statusObj.status === "ok") {
+    //if it work send over a 200/ OK STATUS
+    response.status(200).send(statusObj.data);
+  } else {
+    //if it doesn't work send over a 400 and let us know what the error was pls
+    response.status(400).send(statusObj.error);
+  }
+});
 
 module.exports = DataStore;
