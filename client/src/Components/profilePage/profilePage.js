@@ -5,7 +5,9 @@ import firebaseApp from "../auth/firebase.js";
 
 function ProfilePage() {
   const [profile, setProfile] = useState("");
+
   const currentUser = localStorage.getItem("newemail");
+
   const handleLogout = () => {
     firebaseApp.auth().signOut();
     <Redirect to="/" />;
@@ -20,7 +22,7 @@ function ProfilePage() {
 
   useEffect(() => {
     fetchUser();
-  });
+  }, []);
 
   return (
     <div id="profilePageContainer">
