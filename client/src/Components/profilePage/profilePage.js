@@ -1,21 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
 import "./profilePage.css";
-import UserLogin from "../Login/user-login";
 import firebaseApp from "../auth/firebase.js";
-import { AuthContext } from "../auth/authorize.js";
 
 function ProfilePage() {
   const [profile, setProfile] = useState("");
 
- 
-  const currentUser = localStorage.getItem("newemail")
+  const currentUser = localStorage.getItem("newemail");
 
   const handleLogout = () => {
-
     firebaseApp.auth().signOut();
-    <Redirect to="/"/>
-  }
+    <Redirect to="/" />;
+  };
 
   const fetchUser = async () => {
     fetch(`/user/${currentUser}`)
@@ -25,17 +21,12 @@ function ProfilePage() {
       });
   };
 
-
   useEffect(() => {
     fetchUser();
   }, []);
 
-
-
   return (
-    
     <div id="profilePageContainer">
-     
       <h1 id="profileName">Hello {profile.name} !</h1>
       <div id="profileContainer">
         <p className="profileDisplay">

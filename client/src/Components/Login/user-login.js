@@ -4,7 +4,7 @@ import { withRouter, Redirect } from "react-router";
 //import { Link } from "react-router-dom";
 import "./user-login.css";
 import firebaseApp from "../auth/firebase.js";
-import { AuthContext } from "../auth/authorize.js";
+
 
 //component
 function UserLogin({ history }) {
@@ -16,13 +16,10 @@ function UserLogin({ history }) {
     localStorage.setItem("newemail", user);
   }
   storedata();
-  console.log(localStorage.getItem("newemail"));
-
 
   const handleLogin = useCallback(
     async (event) => {
       event.preventDefault();
-      //cool gimme these elements
       const { username, pass } = event.target.elements;
 
       try {
@@ -36,17 +33,7 @@ function UserLogin({ history }) {
     },
     //only use this callback if this changes
     [history]
-  )
-
-  //see if that user is there if it is
-  const { currentUser } = useContext(AuthContext)
-
-  //render login component
-   if (currentUser){
-        return <Redirect to="/userprofile"/>
-  }
-
-  console.log(currentUser)
+  );
 
   return (
     <div id="login-page-wrapper">
