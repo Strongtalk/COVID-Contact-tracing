@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Map, Polygon, TileLayer } from "react-leaflet";
-import './App.css';
+import { MapContainer, Polygon, TileLayer } from "react-leaflet";
+import './map.css';
 import borderData from './border-data'
 
 // Makes adding CSS needed for leaflet much easier
@@ -14,13 +14,14 @@ const mapZoom = '7'
 // set map center
 const center = [mapLat, mapLong]
 
-// location of geoJSON file for VT county data
-const vtGeoDataURL = "https://opendata.arcgis.com/datasets/2f289dbae90347c58cd1765db84bd09e_29.geojson"
+// location of Covid case data by VT county
+const vtCaseDataURL = 'https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/VIEW_EPI_CountyDailyCount_GEO_PUBLIC/FeatureServer/0/query?where=1%3D1&outFields=CNTYNAME,C_Total,date,D_Total,C_New,C_10k&outSR=4326&f=json'
 
 function CovidMap() {
 
   const [countyData, setCountyData] = useState(null)
 
+  // Use map function to extract coordinates that correspond to border of VT
   let vtBorder = borderData.geometry.coordinates[0].map(coordSet => {
     return [coordSet[1], coordSet[0]]
   })
@@ -31,9 +32,12 @@ function CovidMap() {
 
     // If data not fetched, read VT County geoJSON Data
     if (!countyData) {
-      fetch(vtGeoDataURL)
+        fetch(vtCaseDataURL)
         .then((res) => res.json())
         .then((data) => {
+          // Pop last element out of data returned.  
+          // Last element contains Pending case count info and no geometry data
+          data.features.pop()
           dataObj = data
           setCountyData(dataObj)
         })
@@ -52,7 +56,7 @@ function CovidMap() {
         />
       </Helmet>
 
-      <Map center={center} zoom={mapZoom} scrollWheelZoom={false}>
+      <MapContainer center={center} zoom={mapZoom} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -63,8 +67,8 @@ function CovidMap() {
         <div>
           {countyData ? (
             countyData.features.map((points) => {
-              var borders = points.geometry.coordinates[0].map(coordSet => {
-                return [coordSet[1], coordSet[0]]
+                  let borders = points.geometry.rings[0].map(coordSet => { return [coordSet[1], coordSet[0]]
+                    
               })
               return(
                 <Polygon positions={borders}></Polygon>
@@ -74,7 +78,7 @@ function CovidMap() {
               <p>...Loading</p>
             )}
         </div>
-      </Map>
+      </MapContainer>
     </div>
   );
 }

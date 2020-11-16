@@ -5,6 +5,7 @@ import "./App.css";
 // page imports
 import LandingPage from "./LandingPage/landingPage.js";
 import AddInfo from "./AddInfo/add-info.js";
+import CovidMap from "./Map/covidMap.js";
 import UserLogin from "./Login/user-login";
 import NewUser from "./newUser/newUser.js";
 import Navbar from "./Nav/Navbar.jsx"
@@ -25,6 +26,7 @@ function App() {
             <Link to="/userlogin-page">
               <h1 className="userLogin">Log In</h1>
             </Link>
+            <Link to="/map"><h1 className='navLinks' >VT Covid Map</h1></Link>
             <Link to="/addinfo-page"><h1 className='navLinks' >Add Event Participant</h1></Link>
             <Link to="/user"><h1 className="navLinks">Sign Up</h1></Link>
             <Link to="/event"><h1 className="navLinks">Add Event</h1></Link>
@@ -38,6 +40,9 @@ function App() {
           </Route>
           <Route exact={true} path="/userlogin-page">
             <UserLogin />
+          </Route>
+          <Route exact={true} path="/map">
+            <CovidMap />
           </Route>
           <Route exact={true} path="/addinfo-page">
             <AddInfo />
