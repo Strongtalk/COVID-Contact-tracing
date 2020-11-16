@@ -1,13 +1,41 @@
-import React from "react";
+import React,{useState, useCallback } from "react";
 import "./newUser.css";
+import { withRouter, Redirect } from "react-router";
+import firebaseApp from "../auth/firebase.js";
 
 // component creation
-function NewUser() {
+const NewUser= ({history}) =>{
+  const [user, setUserValue] = useState("");
+  const onChangeHandler = (event) => {
+    setUserValue(event.target.value);
+  };
+
+  function storedata() {
+    localStorage.setItem("newemail", user);
+  }
+console.log(user)
+
+  storedata();
+
+  const handleSignUp = useCallback(
+    async (event) => {
+      const { email, password } = event.target.elements;
+      try {
+        await firebaseApp.auth().createUserWithEmailAndPassword(email.value, password.value)
+        firebaseApp.auth().signOut();
+        history.push("/");
+        <Redirect to="/userprofile"/>
+      } catch (error) {
+        alert(error);
+      }
+    }, [history]
+  )
+
   return (
     //general wrapper for page
     <div id="pageContainer">
       <h1>Sign Up</h1>
-      <form id="inputContainer" method="POST" action="/user">
+      <form id="inputContainer" method="POST" action="/user" onSubmit={handleSignUp}>
         <input
           className="newUserInput"
           type="text"
@@ -21,6 +49,7 @@ function NewUser() {
           placeholder="Email: "
           name="email"
           required
+          onChange={onChangeHandler}
         />
         <input
           className="newUserInput"
@@ -70,4 +99,4 @@ function NewUser() {
     </div>
   );
 }
-export default NewUser;
+export default withRouter(NewUser);
