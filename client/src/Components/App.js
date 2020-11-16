@@ -5,6 +5,7 @@ import "./App.css";
 // page imports
 import LandingPage from "./LandingPage/landingPage.js";
 import AddInfo from "./AddInfo/add-info.js";
+import CovidMap from "./Map/covidMap.js";
 import UserLogin from "./Login/user-login.js";
 import NewUser from "./newUser/newUser.js";
 import Navbar from "./Nav/Navbar.jsx";
