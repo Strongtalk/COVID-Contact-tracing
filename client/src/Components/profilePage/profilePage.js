@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect} from "react";
 import { withRouter, Redirect } from "react-router";
 import "./profilePage.css";
 import firebaseApp from "../auth/firebase.js";
