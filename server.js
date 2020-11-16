@@ -6,27 +6,9 @@ const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
-///////////////////////////////////////////////////////////testing
-const firebase = require("firebase/app");
-require("firebase/auth");
 
 const staticDir = process.env.DEV ? "./client/public" : "./client/build";
 
-//////////////////////////////////////////////////////testing
-//initalize firebase app
-const firebaseConfig = {
-  apiKey: "AIzaSyCw26Py2yhWince6o1B_Xp-lDY2tDDpABM",
-  authDomain: "login-auth-3bd43.firebaseapp.com",
-  databaseURL: "https://login-auth-3bd43.firebaseio.com",
-  projectId: "login-auth-3bd43",
-  storageBucket: "login-auth-3bd43.appspot.com",
-  messagingSenderId: "796099292644",
-  appId: "1:796099292644:web:28c5a0c9624cc04054ebf1",
-  measurementId: "G-C67SR115V0",
-};
-
-//////////////////////////////////////////////////////testing
-const fireApp = firebase.initializeApp(firebaseConfig);
 
 ////////////////////////////////////////////testing
 
@@ -52,37 +34,6 @@ app.listen(port, () => console.log(`Example app listening port ${port}`));
 app.get("/", (req, res) => {
   res.send("Test of Covid Server");
 });
-
-///////////////////////////////////////////////////////TESTING
-app.post("/login", async (req, res) => {
-  let email = req.body.username;
-  let password = req.body.pass;
-
-  try {
-    await fireApp
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(async (result) => {
-        if (result.user) {
-          await res.send("WELCOME TO YOUR USER PAGE");
-        } 
-        console.log("result is", result);
-      });
-  } catch (error) {
-    console.log(error);
-    res.redirect("/user");
-  }
-});
-
- app.get("/userlogedin", (req, res) => {
-  if (fireApp.auth().currentUser) {
-   res.send("YOU ARE LOGGED IN");
-  } else {
-    res.status(401).send("ACCESS DENIEDDDDDDD");
-  }
- });
-
-//////////////////////////////////////////////////////////TESTING
 
 // Route to read a user based on email
 app.get("/user/:email", async (request, response) => {
@@ -127,9 +78,11 @@ app.post("/user", async (request, response) => {
   };
   // call on our insert method to connect to the user collection and create new user
   let statusObj = await userCollection.insert(newUser);
+  response.redirect("/userlogin-page")
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
+
   } else {
     //if it doesn't work send over a 400 and let us know what the error was pls
     response.status(400).send(statusObj.error);
@@ -149,6 +102,7 @@ app.post("/event", async (request, response) => {
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
+   
   } else {
     //if it doesn't work send over a 400 and let us know what the error was pls
     response.status(400).send(statusObj.error);
