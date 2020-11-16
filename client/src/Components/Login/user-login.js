@@ -1,25 +1,61 @@
 // imports
-import React from "react";
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import React, { useCallback, useState, useContext } from "react";
+import { withRouter, Redirect } from "react-router";
+//import { Link } from "react-router-dom";
 import "./user-login.css";
+import firebaseApp from "../auth/firebase.js";
+
 
 //component
-function UserLogin() {
+function UserLogin({ history }) {
+  const [user, setUserValue] = useState("");
+  const onChangeHandler = (event) => {
+    setUserValue(event.target.value);
+  };
+  function storedata() {
+    localStorage.setItem("newemail", user);
+  }
+  storedata();
+
+  const handleLogin = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const { username, pass } = event.target.elements;
+
+      try {
+        await firebaseApp
+          .auth()
+          .signInWithEmailAndPassword(username.value, pass.value);
+        history.push("/userprofile");
+      } catch (error) {
+        alert(error);
+      }
+    },
+    //only use this callback if this changes
+    [history]
+  );
+
   return (
     <div id="login-page-wrapper">
       <h1 id="log-in-header"> Log In</h1>
-      <form id="login-form-container" method="POST" action="/login">
+      <form id="login-form-container" onSubmit={handleLogin}>
         <div id="username-container">
           <label id="labelUsername" htmlFor="username">
             Username:
           </label>
-          <input id="user-name" type="text" name="username" />
+          <input
+            id="user-name"
+            type="text"
+            name="username"
+            onChange={onChangeHandler}
+            value={user}
+          />
         </div>
         <div id="password-container">
           <label id="labelPassword" htmlFor="pass">
             Password:
           </label>
-          <input id="user-pass" type="text" name="pass" />
+          <input id="user-pass" type="password" name="pass" />
         </div>
         <div id="login-link-paraContainer">
           <a id="login-link-anchor" href="/user">
@@ -39,4 +75,4 @@ function UserLogin() {
   );
 }
 
-export default UserLogin;
+export default withRouter(UserLogin);
