@@ -12,10 +12,6 @@ function UserLogin({ history }) {
   const onChangeHandler = (event) => {
     setUserValue(event.target.value);
   };
-  function storedata() {
-    localStorage.setItem("newemail", user);
-  }
-  storedata();
 
   const handleLogin = useCallback(
     async (event) => {
