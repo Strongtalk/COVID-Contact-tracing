@@ -1,6 +1,6 @@
 import React from "react";
 import "./landingPage.css";
-import ContactFooter from "../Contact/Footer.js";
+import Footer from "../Contact/newFooter.js";
 
 
 function LandingPage() {
@@ -22,7 +22,7 @@ function LandingPage() {
           </div>
           <button className="continueReadingButton">Continue Reading</button>
         </div>
-        <ContactFooter />
+        <Footer />
     </div>
   );
 }
