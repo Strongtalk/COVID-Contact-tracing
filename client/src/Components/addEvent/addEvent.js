@@ -4,32 +4,33 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 // This function is for displaying event info on selected date based on user info.
-//Needs to be updated when we have auth for users 
+//Needs to be updated when we have auth for users
 function AddEvent(props) {
   const [eventInfo, setEventInfo] = useState(null);
   const [eventDate, setEventDate] = useState(null);
-  // This should be living in APP.js 
-  const [userid, setUserid] = useState(null)
+  // This should be living in APP.js
+  let objectId = localStorage.getItem("id");
 
-  useEffect(() => {
-    showEvents();
-  });
- 
   const showEvents = () => {
     // when line 12 is on App.js your user id would change to "props.userid"
-    fetch('#')
+    fetch(`/event/${objectId}`)
       .then((response) => response.json())
       .then((userEvent) => {
         console.log(userEvent);
-        setEventInfo(userEvent);
+        setEventInfo(eventInfo);
       });
     // when data is click it will setSTATE to be the date that was clicked
   };
+
+  useEffect(() => {
+    showEvents();
+  }, []);
 
   return (
     <div>
       <h1>Add Event</h1>
       <form id="eventContainer" method="POST" action="/event">
+        <input type="hidden" name="userid" value={objectId} />
         <input
           className="eventInput"
           type="text"
