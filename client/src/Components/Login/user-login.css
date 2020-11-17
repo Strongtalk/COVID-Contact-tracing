@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 #labelUsername {
     margin-right: 10px;
@@ -38,9 +39,12 @@
 }
 
 #login-link-anchor {
+    margin-top: 10px;
     text-decoration: none;
     color: black;
     font-size: 10px;
+    position: relative;
+    right: -7px;
 }
 
 #login-link-paraContainer {

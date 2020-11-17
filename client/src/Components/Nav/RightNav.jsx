@@ -46,8 +46,7 @@ const RightNav = ({ open }) => {
       <a href="/" ><li>News</li></a>      
       <a href="/userlogin-page"><li>Log In</li></a>
       <a href="/user"><li>Sign up</li></a>
-      <a href="/event"><li>Add Event</li></a>
-      <a href="/addinfo-page"><li>Add Event Participant</li></a>  
+      <a href="/event"><li>Add Event</li></a>  
       <a href="/map"><li>VT Covid Map</li></a> 
     </Ul>
   );

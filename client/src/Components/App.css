@@ -29,6 +29,9 @@
   .userLogin {
     display: none;
   }
+  .covidMap {
+    display: none;
+  }
   .App {
     background-color: white;
     height: 0vh;
