@@ -17,19 +17,20 @@ function ProfilePage() {
   const handleLogout = () => {
     firebaseApp.auth().signOut();
     <Redirect to="/" />;
+    
   };
 
   //grab information for user based on email match in database
   //this is a route set up in the server
-  const fetchUser = async () => {
-    fetch(`/user/${userEmail}`)
-      .then((response) => response.json())
-      .then((userProfile) => {
-        setProfile(userProfile[0]);
-      });
-  };
-
   useEffect(() => {
+    const fetchUser = async () => {
+      fetch(`/user/${userEmail}`)
+        .then((response) => response.json())
+        .then((userProfile) => {
+          setProfile(userProfile[0]);
+        });
+    };
+
     fetchUser();
   }, []);
 
