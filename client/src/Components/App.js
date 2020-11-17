@@ -51,9 +51,9 @@ function App() {
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/map" component={CovidMap} />
             <PrivateLogSign exact path="/userlogin-page" component={UserLogin} />
-            <PrivatePage exact path="/addinfo-page" component={AddInfo} />
+            <Route exact path="/addinfo-page" component={AddInfo} />
             <PrivateLogSign exact path="/user" component={NewUser} />
-            <PrivatePage exact path="/event" component={AddEvent} />
+            <Route exact path="/event" component={AddEvent} />
               {/** pass "userid={userid}" after userid is defined in state on this page */}
             <PrivatePage exact path="/userprofile" component={ProfilePage} />
           </Switch>
