@@ -99,6 +99,7 @@ app.post("/event", async (request, response) => {
   };
 
   let statusObj = await eventCollection.insert(newEvent);
+  response.redirect("/addinfo-page")
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
@@ -119,6 +120,7 @@ app.post("/eventcontact", async (request, response) => {
   };
 
   let statusObj = await eventContactCollection.insert(newEventContact);
+  response.redirect("/userprofile")
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);

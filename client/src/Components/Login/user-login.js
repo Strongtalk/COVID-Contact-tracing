@@ -1,6 +1,6 @@
 // imports
-import React, { useCallback, useState, useContext } from "react";
-import { withRouter, Redirect } from "react-router";
+import React, { useCallback, useState } from "react";
+import { withRouter } from "react-router";
 //import { Link } from "react-router-dom";
 import "./user-login.css";
 import firebaseApp from "../auth/firebase.js";
