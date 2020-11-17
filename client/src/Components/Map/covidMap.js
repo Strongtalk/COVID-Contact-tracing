@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, Polygon, TileLayer } from "react-leaflet";
+import { MapContainer, Polygon, TileLayer, Tooltip } from "react-leaflet";
 import './map.css';
 import borderData from './border-data'
 
@@ -32,7 +32,7 @@ function CovidMap() {
 
     // If data not fetched, read VT County geoJSON Data
     if (!countyData) {
-        fetch(vtCaseDataURL)
+      fetch(vtCaseDataURL)
         .then((res) => res.json())
         .then((data) => {
           // Pop last element out of data returned.  
@@ -67,13 +67,21 @@ function CovidMap() {
         <div>
           {countyData ? (
             countyData.features.map((points) => {
-                  let borders = points.geometry.rings[0].map(coordSet => { return [coordSet[1], coordSet[0]]
-                    
+              let borders = points.geometry.rings[0].map(coordSet => {
+                return [coordSet[1], coordSet[0]]
               })
-              return(
-                <Polygon positions={borders}></Polygon>
 
-              )})
+              return (
+
+                <Polygon positions={borders}>
+                  <Tooltip><div>{points.attributes.CNTYNAME}</div>
+                          <div>Total Cases To Date: {points.attributes.C_Total}</div> 
+                          <div>New Cases: {points.attributes.D_Total}</div> 
+                  </Tooltip>
+                </Polygon>
+
+              )
+            })
           ) : (
               <p>...Loading</p>
             )}
