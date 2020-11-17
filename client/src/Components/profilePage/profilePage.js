@@ -1,41 +1,40 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect} from "react";
 import { withRouter, Redirect } from "react-router";
 import "./profilePage.css";
-import UserLogin from "../Login/user-login";
 import firebaseApp from "../auth/firebase.js";
-import { AuthContext } from "../auth/authorize.js";
 
 function ProfilePage() {
   const [profile, setProfile] = useState("");
 
- 
-  const currentUser = localStorage.getItem("newemail")
+  //testing this id stuff now
+  const userId = profile._id;
+  localStorage.setItem("id", userId);
 
+  //call this method on firebase to get email and throw into fetch to retrievd the user info from our database
+  const userEmail = firebaseApp.auth().currentUser.email;
+
+  //logout and redirect to home/ landing page
   const handleLogout = () => {
-
     firebaseApp.auth().signOut();
-    <Redirect to="/"/>
-  }
+    <Redirect to="/" />;
+  };
 
+  //grab information for user based on email match in database
+  //this is a route set up in the server
   const fetchUser = async () => {
-    fetch(`/user/${currentUser}`)
+    fetch(`/user/${userEmail}`)
       .then((response) => response.json())
       .then((userProfile) => {
         setProfile(userProfile[0]);
       });
   };
 
-
   useEffect(() => {
     fetchUser();
   }, []);
 
-
-
   return (
-    
     <div id="profilePageContainer">
-     
       <h1 id="profileName">Hello {profile.name} !</h1>
       <div id="profileContainer">
         <p className="profileDisplay">
