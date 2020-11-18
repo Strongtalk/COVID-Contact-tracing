@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 const Ul = styled.ul`
   justify-content: flex-start;
@@ -41,13 +42,13 @@ const RightNav = ({ open }) => {
   return (
     <Ul open={open}>
       <div className="navList-bubble">
-      <a href="/" ><li>Home</li></a>
+      <Link to="/" ><li>Home</li></Link>
       </div>
-      <a href="/" ><li>News</li></a>      
-      <a href="/userlogin-page"><li>Log In</li></a>
-      <a href="/user"><li>Sign up</li></a>
-      <a href="/userprofile"><li>User Profile</li></a>  
-      <a href="/map"><li>VT Covid Map</li></a> 
+      <Link to="/" ><li>News</li></Link>      
+      <Link to="/userlogin-page"><li>Log In</li></Link>
+      <Link to="/user"><li>Sign up</li></Link>
+      <Link to="/userprofile"><li>User Profile</li></Link>  
+      <Link to="/map"><li>VT Covid Map</li></Link> 
     </Ul>
   );
 };
