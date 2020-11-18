@@ -8,18 +8,21 @@ import "react-calendar/dist/Calendar.css";
 function AddEvent(props) {
   const [eventInfo, setEventInfo] = useState(null);
   const [eventDate, setEventDate] = useState(null);
-  // This should be living in APP.js
+
+  console.log(eventInfo);
+
   let objectId = localStorage.getItem("id");
 
+  //TESTING will probably add an iterator and transfer to profile page//
   const showEvents = () => {
-    // when line 12 is on App.js your user id would change to "props.userid"
+    // this grabs all of the events for a user and returns it as an object
+    //local storage is called upon which is where objectId comes from
     fetch(`/event/${objectId}`)
       .then((response) => response.json())
       .then((userEvent) => {
         console.log(userEvent);
-        setEventInfo(eventInfo);
+        setEventInfo(userEvent);
       });
-    // when data is click it will setSTATE to be the date that was clicked
   };
 
   useEffect(() => {

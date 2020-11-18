@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, Redirect } from "react-router";
 import "./profilePage.css";
 import firebaseApp from "../auth/firebase.js";
@@ -17,7 +17,6 @@ function ProfilePage() {
   const handleLogout = () => {
     firebaseApp.auth().signOut();
     <Redirect to="/" />;
-    
   };
 
   //grab information for user based on email match in database
@@ -34,6 +33,7 @@ function ProfilePage() {
     fetchUser();
   }, []);
 
+  //display user info here
   return (
     <div id="profilePageContainer">
       <h1 id="profileName">Hello {profile.name} !</h1>
