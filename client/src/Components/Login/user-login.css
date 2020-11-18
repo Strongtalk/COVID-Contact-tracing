@@ -20,9 +20,11 @@
 #password-container {
     display: flex;
     justify-content: center;
+    position: relative;
+    right: 11px;
 }
 #labelPassword {
-    margin-right: 14px;
+    margin-right: 9px;
 }
 #submit-container {
     margin-top: 30px;

@@ -70,10 +70,12 @@ function AddEvent(props) {
           name="end"
         />
         <br></br>
-        <input id="eventSubmit" type="submit" value="Add Event" />
+        <input id="eventSubmit" type="submit" value="Next" />
       </form>
+      <div id="calendar-wrapper">
       <div id="calendar-container">
         <Calendar onClickDay={setEventDate} />
+      </div>
       </div>
     </div>
   );
