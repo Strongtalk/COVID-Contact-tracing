@@ -48,7 +48,7 @@ function AddEvent(props) {
         />
         <br></br>
         <label className="eventLabel" htmlFor="date">
-          Today's Date:
+          Event Date:
         </label>
         <br></br>
         <input className="eventInput" type="date" name="date" />
