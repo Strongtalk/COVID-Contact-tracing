@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, Polygon, TileLayer, Tooltip } from "react-leaflet";
+import { MapContainer, Polygon, TileLayer, Popup, Tooltip } from "react-leaflet";
 import './map.css';
 import borderData from './border-data'
 
@@ -7,8 +7,8 @@ import borderData from './border-data'
 import { Helmet } from 'react-helmet'
 
 // set default lat, long and zoom, based on Rutland VT
-const mapLat = '43.6106'
-const mapLong = '-72.9726'
+const mapLat = '43.5106'
+const mapLong = '-72.5026'
 const mapZoom = '7'
 
 // set map center
@@ -17,9 +17,12 @@ const center = [mapLat, mapLong]
 // location of Covid case data by VT county
 const vtCaseDataURL = 'https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/VIEW_EPI_CountyDailyCount_GEO_PUBLIC/FeatureServer/0/query?where=1%3D1&outFields=CNTYNAME,C_Total,date,D_Total,C_New,C_10k&outSR=4326&f=json'
 
+
+
 function CovidMap() {
 
   const [countyData, setCountyData] = useState(null)
+  let [countyArticles, setCountyArticles] = useState([])
 
   // Use map function to extract coordinates that correspond to border of VT
   let vtBorder = borderData.geometry.coordinates[0].map(coordSet => {
@@ -43,6 +46,46 @@ function CovidMap() {
         })
     }
   })
+
+  function getNewsLink(countyName) {
+
+    console.log(countyName)
+
+    // Array to hold articles of interest for each county
+    let countyArticles = []
+
+    // Setup array for now to demo idea.  Article links could be stored in Mongo and could be fetched
+    const newsArray =
+      [
+        {
+          id: 1,
+          headline: 'Pop up Testing Center',
+          county: 'RUTLAND',
+          link: 'wwww.google.com'
+        },
+
+        {
+          id: 2,
+          headline: 'Mayor implements curfew',
+          county: 'CHITTENDEN',
+          link: 'www.cnn.com'
+        },
+
+        {
+          id: 3,
+          headline: 'Restaurant Closures',
+          county: 'RUTLAND',
+          link: 'www.theatlantic.com'
+        }
+      ]
+
+    for (const element of newsArray) {
+      if (element.county === countyName) countyArticles.push(element)
+    }
+    console.log(countyArticles)
+    setCountyArticles(countyArticles)
+    return (countyArticles)
+  }
 
   // Render the Map 
   return (
@@ -72,12 +115,28 @@ function CovidMap() {
               })
 
               return (
+                <Polygon
+                  positions={borders}
 
-                <Polygon positions={borders}>
-                  <Tooltip><div>{points.attributes.CNTYNAME}</div>
-                          <div>Total Cases To Date: {points.attributes.C_Total}</div> 
-                          <div>New Cases: {points.attributes.D_Total}</div> 
-                  </Tooltip>
+                  eventHandlers={{
+                    click: () => {
+                      getNewsLink(points.attributes.CNTYNAME)
+                    }
+                  }}
+
+                  onMouseOver={(e) => {
+                    e.target.openPopup();
+                    getNewsLink(points.attributes.CNTYNAME)
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.closePopup();
+                  }}
+                >
+                  <Popup>
+                    <div>{points.attributes.CNTYNAME}</div>
+                    <div>Total Cases To Date: {points.attributes.C_Total}</div>
+                    <div>New Cases: {points.attributes.D_Total}</div>
+                  </Popup>
                 </Polygon>
 
               )
@@ -87,6 +146,17 @@ function CovidMap() {
             )}
         </div>
       </MapContainer>
+      <div id="article-list">
+        {countyArticles ? (
+          countyArticles.map((id) => (
+            <div id="news-links">
+              <a id="article-link" href={id.link} >{id.headline}</a>
+            </div>
+          ))
+        ) : (
+            <p>...Loading</p>
+          )}
+      </div>
     </div>
   );
 }
