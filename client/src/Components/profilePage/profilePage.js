@@ -29,6 +29,7 @@ function ProfilePage() {
       fetch(`/user/${userEmail}`)
         .then((response) => response.json())
         .then((userProfile) => {
+          
           setProfile(userProfile[0]);
         });
     };
