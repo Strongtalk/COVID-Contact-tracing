@@ -90,12 +90,28 @@ app.post("/user", async (request, response) => {
 });
 
 app.post("/event", async (request, response) => {
+  //THIS IS ONLY APPLICABLE TO EST!!
+  //NEED TO REVISIT WHEN WE GO GLOBAL ;)
+  //modify the start time by five hours to offset the mongoDB UTC 
+ let formSDate=  new Date(request.body.date + "T" + request.body.start)
+ let sTime = formSDate.getTime()
+ console.log(sTime)
+ let dbTimeStart = (sTime-18000000)
+ console.log(dbTimeStart)
+
+ //modify the end time by five hours to offset the mongoDB UTC 
+ let formEDate=  new Date(request.body.date + "T" + request.body.end)
+ let eTime = formEDate.getTime()
+ console.log(eTime)
+ let dbTimeEnd = (eTime-18000000)
+ console.log(dbTimeEnd)
+
   let newEvent = {
     userid: ObjectId(request.body.userid),
     name: request.body.name.trim(),
     description: request.body.description,
-    start: new Date(request.body.start),
-    end: new Date(request.body.end),
+    start: new Date(dbTimeStart),
+    end: new Date(dbTimeEnd),
   };
 
   let statusObj = await eventCollection.insert(newEvent);
