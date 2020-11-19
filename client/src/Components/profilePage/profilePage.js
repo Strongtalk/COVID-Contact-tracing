@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, Redirect } from "react-router";
 import "./profilePage.css";
 import firebaseApp from "../auth/firebase.js";
@@ -21,18 +21,19 @@ function ProfilePage() {
 
   //grab information for user based on email match in database
   //this is a route set up in the server
-  const fetchUser = async () => {
-    fetch(`/user/${userEmail}`)
-      .then((response) => response.json())
-      .then((userProfile) => {
-        setProfile(userProfile[0]);
-      });
-  };
-
   useEffect(() => {
+    const fetchUser = async () => {
+      fetch(`/user/${userEmail}`)
+        .then((response) => response.json())
+        .then((userProfile) => {
+          setProfile(userProfile[0]);
+        });
+    };
+
     fetchUser();
   }, []);
 
+  //display user info here
   return (
     <div id="profilePageContainer">
       <h1 id="profileName">Hello {profile.name} !</h1>
@@ -49,6 +50,9 @@ function ProfilePage() {
         </p>
         <button onClick={handleLogout}>Sign Out</button>
       </div>
+      <form action="/event">
+        <input id="addEventButton" type="submit" value="Add Event"></input>
+      </form>
       <div id="calendarContainer"></div>
     </div>
   );

@@ -22,6 +22,7 @@ let userCollection = new DataStore(url, "CovidApp", "User");
 console.log("UserCollection: ", userCollection);
 let eventCollection = new DataStore(url, "CovidApp", "Event");
 let eventContactCollection = new DataStore(url, "CovidApp", "EventContact");
+let newsCollection = new DataStore(url, "CovidApp", "News");
 
 // middleware for post
 app.use(bodyParser.json());
@@ -62,6 +63,21 @@ app.get("/user", async (request, response) => {
   response.send(data);
 });
 
+// Route to read ALL News
+app.get("/news", async (request, response) => {
+  let data = await newsCollection.readData();
+  response.send(data);
+});
+
+// Route to read News for a particular geographic audience
+app.get("/news/:newsLevel", async (request, response) => {
+
+  console.log('news level ', request.params.newsLevel)
+
+  let data = await newsCollection.readNews(request.params.newsLevel, request.query);
+  response.send(data);
+});
+
 //creates new user entry to database
 app.post("/user", async (request, response) => {
   // variable assigned for every user (nonadmin role for dev)
@@ -90,17 +106,30 @@ app.post("/user", async (request, response) => {
 });
 
 app.post("/event", async (request, response) => {
+  //THIS IS ONLY APPLICABLE TO EST!!
+  //NEED TO REVISIT WHEN WE GO GLOBAL ;)
+  //modify the start time by five hours to offset the mongoDB UTC 
+ let formSDate=  new Date(request.body.date + "T" + request.body.start)
+ let sTime = formSDate.getTime()
+ let dbTimeStart = (sTime-18000000)
+
+ //modify the end time by five hours to offset the mongoDB UTC 
+ let formEDate=  new Date(request.body.date + "T" + request.body.end)
+ let eTime = formEDate.getTime()
+ let dbTimeEnd = (eTime-18000000)
+
   let newEvent = {
     userid: ObjectId(request.body.userid),
     name: request.body.name.trim(),
     description: request.body.description,
-    start: new Date(request.body.start),
-    end: new Date(request.body.end),
+    start: new Date(dbTimeStart),
+    end: new Date(dbTimeEnd),
   };
 
   let statusObj = await eventCollection.insert(newEvent);
+  response.redirect("/addinfo-page")
   if (statusObj.status === "ok") {
-    //if it work send over a 200/ OK STATUS
+    //if it works send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
    
   } else {
@@ -119,6 +148,7 @@ app.post("/eventcontact", async (request, response) => {
   };
 
   let statusObj = await eventContactCollection.insert(newEventContact);
+  response.redirect("/userprofile")
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);

@@ -1,21 +1,46 @@
+/* Container for main wrapper */
 
+#main-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 98vw;
+  height: 140vh;
+  justify-content: center;
+  align-items: center;
+}
 
 /* Container for the map */
 #map-container {
   display: flex;
   flex-direction: column;
-  width: 40/vw;
-  height: 30vh
+  width: 77vw;
+  height: 73vh;
+  border: 2px solid black;
 }
 
 #app-map{
-  width: 60vw;
+  width: 45vw;
   height: 40vh;
   float: right;
 }
 
 /* The map */
 .leaflet-container {
-  width: 40vw;
-  height: 50vw;
+  width: 75vw;
+  height: 73vh;
+  position: relative;
+}
+
+#article-container {
+  width: 75vw;
+  height: 35vh;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#news-header {
+  margin-top: 15px;
+
 }

@@ -38,7 +38,11 @@ function AddInfo() {
           <label className="checkBoxLabel" >Business: </label>
           <input className="checkBox" type="checkbox" name="type" value="individual"></input>
         </div>
-        <input id="addInfoSubmitButton" type="submit" value="ADD"/>
+        <input id="addInfoSubmitButton" type="submit" value="Add"/>
+      </form>
+      <form action="/">
+      <p id="soloEvent">Travelling solo or did not come into an unsafe distance with anyone?</p>
+        <input id="soloEventSubmit" type="submit" value="Click Here"></input>
       </form>
     </div>
   );

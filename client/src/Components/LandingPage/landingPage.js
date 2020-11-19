@@ -1,5 +1,7 @@
+import React from "react";
 import "./landingPage.css";
-import React from 'react'
+import Footer from "../Contact/newFooter.js";
+
 
 function LandingPage() {
   return (
@@ -20,9 +22,7 @@ function LandingPage() {
           </div>
           <button className="continueReadingButton">Continue Reading</button>
         </div>
-      <div id="footerContainer">
-        <h2>Contact Contact Contact</h2>
-      </div>
+        <Footer />
     </div>
   );
 }

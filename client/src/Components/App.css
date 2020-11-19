@@ -22,15 +22,19 @@
   font-size: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .navLinks {
     display: none;
   }
   .userLogin {
     display: none;
   }
+  .covidMap {
+    display: none;
+  }
   .App {
-    background-color: white; 
+    background-color: white;
+    height: 0vh;
   }
 }
 

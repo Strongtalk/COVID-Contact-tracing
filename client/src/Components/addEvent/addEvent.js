@@ -4,32 +4,36 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 // This function is for displaying event info on selected date based on user info.
-//Needs to be updated when we have auth for users 
+//Needs to be updated when we have auth for users
 function AddEvent(props) {
   const [eventInfo, setEventInfo] = useState(null);
   const [eventDate, setEventDate] = useState(null);
-  // This should be living in APP.js 
-  const [userid, setUserid] = useState(null)
 
-  useEffect(() => {
-    showEvents();
-  });
+  console.log(eventInfo);
 
+  let objectId = localStorage.getItem("id");
+
+  //TESTING will probably add an iterator and transfer to profile page//
   const showEvents = () => {
-    // when line 12 is on App.js your user id would change to "props.userid"
-    fetch('#')
+    // this grabs all of the events for a user and returns it as an object
+    //local storage is called upon which is where objectId comes from
+    fetch(`/event/${objectId}`)
       .then((response) => response.json())
       .then((userEvent) => {
         console.log(userEvent);
         setEventInfo(userEvent);
       });
-    // when data is click it will setSTATE to be the date that was clicked
   };
+
+  useEffect(() => {
+    showEvents();
+  }, []);
 
   return (
     <div>
       <h1>Add Event</h1>
       <form id="eventContainer" method="POST" action="/event">
+        <input type="hidden" name="userid" value={objectId} />
         <input
           className="eventInput"
           type="text"
@@ -44,7 +48,7 @@ function AddEvent(props) {
         />
         <br></br>
         <label className="eventLabel" htmlFor="date">
-          Today's Date:
+          Event Date:
         </label>
         <br></br>
         <input className="eventInput" type="date" name="date" />
@@ -66,10 +70,12 @@ function AddEvent(props) {
           name="end"
         />
         <br></br>
-        <input id="eventSubmit" type="submit" value="Add Event" />
+        <input id="eventSubmit" type="submit" value="Next" />
       </form>
+      <div id="calendar-wrapper">
       <div id="calendar-container">
         <Calendar onClickDay={setEventDate} />
+      </div>
       </div>
     </div>
   );

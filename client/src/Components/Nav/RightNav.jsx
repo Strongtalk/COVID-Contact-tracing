@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 const Ul = styled.ul`
   justify-content: flex-start;
@@ -13,7 +14,7 @@ const Ul = styled.ul`
     padding: 18px 0;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     flex-flow: column nowrap;
     background-color: #57738C;
     position: fixed;
@@ -23,7 +24,11 @@ const Ul = styled.ul`
     height: 60vh;
     width: 85px;
     padding-top: 1rem;
+    border-radius: 3%;
+    border-bottom-right-radius: 3%;
+    border-top-right-radius: 0%;
     transition: transform 0.3s ease-in-out;
+    z-index: 500 !important;
     
 
     li {
@@ -41,14 +46,13 @@ const RightNav = ({ open }) => {
   return (
     <Ul open={open}>
       <div className="navList-bubble">
-      <a href="/" ><li>Home</li></a>
+      <Link to="/" ><li>Home</li></Link>
       </div>
-      <a href="/" ><li>News</li></a>      
-      <a href="/userlogin-page"><li>Log In</li></a>
-      <a href="/user"><li>Sign up</li></a>
-      <a href="/event"><li>Add Event</li></a>
-      <a href="/addinfo-page"><li>Add Event Participant</li></a>  
-      <a href="/map"><li>VT Covid Map</li></a> 
+      <Link to="/" ><li>News</li></Link>      
+      <Link to="/userlogin-page"><li>Log In</li></Link>
+      <Link to="/user"><li>Sign up</li></Link>
+      <Link to="/userprofile"><li>User Profile</li></Link>  
+      <Link to="/map"><li>VT Covid Map</li></Link> 
     </Ul>
   );
 };

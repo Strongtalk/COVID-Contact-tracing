@@ -4,15 +4,11 @@ import Burger from './Hamburger';
 
 const Nav = styled.nav`
   width: 85vw;
-  height: 55px;
-  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   background-color: #fff;
+  position: abosolute;
   
-  .logo {
-    padding: 15px 0;
-  }
   @media (min-width: 768px) {
     display: none;
   }
