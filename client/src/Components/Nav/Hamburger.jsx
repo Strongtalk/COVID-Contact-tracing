@@ -11,7 +11,7 @@ const AnimatedBurger = styled.div`
   position: fixed;
   top: 4px;
   right: 5px;
-  z-index: 20;
+  z-index: 520;
   display: none;
   @media (max-width: 767px) {
     display: flex;

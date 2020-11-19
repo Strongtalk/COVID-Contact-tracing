@@ -28,6 +28,7 @@ const Ul = styled.ul`
     border-bottom-right-radius: 3%;
     border-top-right-radius: 0%;
     transition: transform 0.3s ease-in-out;
+    z-index: 500 !important;
     
 
     li {

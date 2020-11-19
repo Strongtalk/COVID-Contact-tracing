@@ -22,6 +22,7 @@ let userCollection = new DataStore(url, "CovidApp", "User");
 console.log("UserCollection: ", userCollection);
 let eventCollection = new DataStore(url, "CovidApp", "Event");
 let eventContactCollection = new DataStore(url, "CovidApp", "EventContact");
+let newsCollection = new DataStore(url, "CovidApp", "News");
 
 // middleware for post
 app.use(bodyParser.json());
@@ -59,6 +60,21 @@ app.get("/events/:userid/:date", async (request, response) => {
 // Route to read ALL users
 app.get("/user", async (request, response) => {
   let data = await userCollection.readData();
+  response.send(data);
+});
+
+// Route to read ALL News
+app.get("/news", async (request, response) => {
+  let data = await newsCollection.readData();
+  response.send(data);
+});
+
+// Route to read News for a particular geographic audience
+app.get("/news/:newsLevel", async (request, response) => {
+
+  console.log('news level ', request.params.newsLevel)
+
+  let data = await newsCollection.readNews(request.params.newsLevel, request.query);
   response.send(data);
 });
 
@@ -113,7 +129,7 @@ app.post("/event", async (request, response) => {
   let statusObj = await eventCollection.insert(newEvent);
   response.redirect("/addinfo-page")
   if (statusObj.status === "ok") {
-    //if it work send over a 200/ OK STATUS
+    //if it works send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
    
   } else {
