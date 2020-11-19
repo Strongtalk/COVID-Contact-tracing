@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { withRouter, Redirect } from "react-router";
 import "./profilePage.css";
 import firebaseApp from "../auth/firebase.js";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+
 
 function ProfilePage() {
   const [profile, setProfile] = useState("");
@@ -35,25 +38,37 @@ function ProfilePage() {
 
   //display user info here
   return (
+    <div id="profilePageWrapper">
     <div id="profilePageContainer">
-      <h1 id="profileName">Hello {profile.name} !</h1>
       <div id="profileContainer">
-        <p className="profileDisplay">
-          <b>Email:</b> {profile.email}
-        </p>
-        <p className="profileDisplay">
-          <b>Phone: </b> {profile.cell}
-        </p>
-        <p className="profileDisplay">
-          <b>Address: </b>
-          {profile.street}, {profile.city}, {profile.zip}
-        </p>
-        <button onClick={handleLogout}>Sign Out</button>
+      <h2 id="profileName"> Hello {profile.name} !</h2>
+        <button id="signOut" onClick={handleLogout}>Sign Out</button>
+        <button id="updateInfo">Update Info</button>
       </div>
-      <form action="/event">
+     <div id="eventListContainer">
+     <h4 id="eventListTitle">Your Events</h4>
+     <div name="eventList" id="eventListBox"></div>
+     </div>
+     <div id="buttonContainer">
+      <form className="profileButtons" action="/event">
         <input id="addEventButton" type="submit" value="Add Event"></input>
-      </form>
-      <div id="calendarContainer"></div>
+        </form>
+        <form className="profileButtons">
+        <input id="updateEventButton" type="submit" value="Update Event"></input>
+        </form>
+        </div>
+        <div id="calendarWrapper">
+     <div id="calendarContainer">
+       <Calendar />
+     </div>
+     </div>
+     <p id="currentStatus"><mark id="statusBox">Condition:</mark></p>
+     <div id="statusButtonContainer">
+     <button type='submit' className="statusButtons">Tested Positive</button>
+     <button type='submit' className="statusButtons">Feeling Unwell</button>
+     <button type='submit' className="statusButtons">Tested Negative</button>
+     </div>
+    </div>
     </div>
   );
 }
