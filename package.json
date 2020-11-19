@@ -23,6 +23,6 @@
     "react": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-leaflet": "^3.0.2",
-    "morgan": "^1.10.0",
+    "morgan": "^1.10.0"
   }
 }
