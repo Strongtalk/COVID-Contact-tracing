@@ -48,11 +48,11 @@ function ProfilePage() {
           <b>Address: </b>
           {profile.street}, {profile.city}, {profile.zip}
         </p>
-        <a id="add-event-anchor" href="/event">
-          <p>Add an event</p>
-        </a>
         <button onClick={handleLogout}>Sign Out</button>
       </div>
+      <form action="/event">
+        <input id="addEventButton" type="submit" value="Add Event"></input>
+      </form>
       <div id="calendarContainer"></div>
     </div>
   );

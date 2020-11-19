@@ -33,7 +33,7 @@ function UserLogin({ history }) {
       <form id="login-form-container" onSubmit={handleLogin}>
         <div id="username-container">
           <label id="labelUsername" htmlFor="username">
-            Username:
+            Email:
           </label>
           <input id="user-name" type="text" name="username" />
         </div>
