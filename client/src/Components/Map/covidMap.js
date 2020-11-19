@@ -49,8 +49,6 @@ function CovidMap() {
 
   function getNewsLink(countyName) {
 
-    console.log(countyName)
-
     // Array to hold articles of interest for each county
     let countyArticles = []
 
