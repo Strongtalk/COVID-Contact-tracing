@@ -14,6 +14,7 @@ import ProfilePage from "./profilePage/profilePage.js";
 import { AuthProvider } from "./auth/authorize.js";
 import PrivatePage from "./auth/privatePage.js";
 import PrivateLogSign from "./auth/privateLogSign.js";
+import SendAlert from "./sendAlert"
 
 
 function App() {
@@ -44,12 +45,16 @@ function App() {
               <Link to="/userprofile">
                 <h1 className="navLinks">Profile</h1>
               </Link>
+              <Link to='/send-alert' >
+              <h1 className="navLinks">send Alert</h1>
+              </Link>
             </div>
           </nav>
           <Navbar />
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/map" component={CovidMap} />
+            <Route exact path='/send-alert'> <SendAlert/> </Route>
             <PrivateLogSign exact path="/userlogin-page" component={UserLogin} />
             <PrivatePage exact path="/addinfo-page" component={AddInfo} />
             <PrivateLogSign exact path="/user" component={NewUser} />
