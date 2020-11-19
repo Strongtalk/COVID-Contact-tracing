@@ -7,7 +7,7 @@ import borderData from './border-data'
 import { Helmet } from 'react-helmet'
 
 // set default lat, long and zoom, based on Rutland VT
-const mapLat = '43.5106'
+const mapLat = '44.0000'
 const mapLong = '-72.5026'
 const mapZoom = '7'
 
@@ -99,63 +99,72 @@ function CovidMap() {
         />
       </Helmet>
 
-      <MapContainer center={center} zoom={mapZoom} scrollWheelZoom={false}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+      <h2>VT COVID Cases</h2>
+      <div id='map-container'>
+        <MapContainer center={center} zoom={mapZoom} scrollWheelZoom={false}>
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-        <Polygon positions={vtBorder} />
+          <Polygon positions={vtBorder} />
 
-        <div>
-          {countyData ? (
-            countyData.features.map((points) => {
-              let borders = points.geometry.rings[0].map(coordSet => {
-                return [coordSet[1], coordSet[0]]
-              })
+          <div>
+            {countyData ? (
+              countyData.features.map((points) => {
+                let borders = points.geometry.rings[0].map(coordSet => {
+                  return [coordSet[1], coordSet[0]]
+                })
 
-              return (
-                <Polygon
-                  positions={borders}
+                return (
+                  <Polygon
+                    positions={borders}
 
-                  eventHandlers={{
-                    click: () => {
+                    eventHandlers={{
+                      click: () => {
+                        getNewsLink(points.attributes.CNTYNAME)
+                      }
+                    }}
+
+                    onMouseOver={(e) => {
+                      e.target.openPopup();
                       getNewsLink(points.attributes.CNTYNAME)
-                    }
-                  }}
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.closePopup();
+                    }}
+                  >
+                    <Popup>
+                      <div>{points.attributes.CNTYNAME}</div>
+                      <div>Total Cases To Date: {points.attributes.C_Total}</div>
+                      <div>New Cases: {points.attributes.D_Total}</div>
+                    </Popup>
+                  </Polygon>
 
-                  onMouseOver={(e) => {
-                    e.target.openPopup();
-                    getNewsLink(points.attributes.CNTYNAME)
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.closePopup();
-                  }}
-                >
-                  <Popup>
-                    <div>{points.attributes.CNTYNAME}</div>
-                    <div>Total Cases To Date: {points.attributes.C_Total}</div>
-                    <div>New Cases: {points.attributes.D_Total}</div>
-                  </Popup>
-                </Polygon>
+                )
+              })
+            ) : (
+                <p>...Loading</p>
+              )}
+          </div>
+        </MapContainer>
 
-              )
-            })
+      </div>
+      <h4 id='news-header'>News of Interest</h4>
+
+      <div>
+      
+        <div id="article-container">
+          {countyArticles ? (
+            countyArticles.map((id) => (
+              <div id="news-links">
+                <a id="article-link" href={id.link} >{id.headline}</a>
+              </div>
+            ))
           ) : (
               <p>...Loading</p>
             )}
         </div>
-      </MapContainer>
-      <div id="article-list">
-        {countyArticles ? (
-          countyArticles.map((id) => (
-            <div id="news-links">
-              <a id="article-link" href={id.link} >{id.headline}</a>
-            </div>
-          ))
-        ) : (
-            <p>...Loading</p>
-          )}
       </div>
     </div>
   );

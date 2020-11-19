@@ -52,7 +52,6 @@ class DataStore {
     return users;
   }
 
-
   //reads all events in database for a user
   async readDataEvt(userid) {
     let events = [];
@@ -85,9 +84,7 @@ class DataStore {
     let response = { status: null, error: null };
     try {
       let collection = await this.collection();
-      console.log("inserting item");
       await collection.insertOne(object);
-      console.log("Success adding item");
       response.status = "ok";
     } catch (error) {
       response.error = error.toString();
@@ -95,6 +92,46 @@ class DataStore {
     }
     return response;
   }
+
+  //reads all news in database 
+  async readNews() {
+    let events = [];
+    let collection = await this.collection();
+    await collection.find({}).forEach((event) => {
+      events.push(event);
+    });
+    return events;
+  }
+
+  //reads all news in database 
+  async readNews() {
+    let events = [];
+    let collection = await this.collection();
+    await collection.find({}).forEach((event) => {
+      events.push(event);
+    });
+    return events;
+  }
+
+   // reads all news for a particular geographic area
+   // geographic area is based on audienceScope - e.g. county, state, country
+   // and audienceTarget - e.g array that identifies one or more counties, states, countries
+   // where the news article would be of potential interest
+   async readNews(newsLevel, newsAudience) {
+    let newsArticles = [];
+
+    console.log('newsLevel: ' + newsAudience)
+    console.log(newsAudience[newsLevel])
+
+    let collection = await this.collection();
+    await collection.find({"newsLevel": {$eq: newsLevel}, "newsAudience": {$in: newsAudience[newsLevel] } }).forEach((article) => {
+      newsArticles.push(article);
+    });
+    
+    return newsArticles;
+  }
+
+
 }
 
 module.exports = DataStore;
