@@ -107,6 +107,7 @@ app.post("/user", async (request, response) => {
   }
 });
 
+
 app.post("/event", async (request, response) => {
   //THIS IS ONLY APPLICABLE TO EST!!
   //NEED TO REVISIT WHEN WE GO GLOBAL ;)
@@ -141,8 +142,17 @@ app.post("/event", async (request, response) => {
   }
 });
 
+app.post("/eventcontact", async (request, response) => {
+  let newEventContact = {
+    eventid: ObjectId(request.body.eventid),
+    name: request.body.name,
+    type: request.body.type,
+    email: request.body.email,
+    phone: request.body.phone,
+  };
+
   let statusObj = await eventContactCollection.insert(newEventContact);
-  response.redirect("/userprofile")
+  response.redirect("/userprofile");
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
@@ -153,6 +163,7 @@ app.post("/event", async (request, response) => {
 });
 
 module.exports = DataStore;
+
 
 ////////////////////////////////////////////////////////////////////////////
 var session = require('express-session');
