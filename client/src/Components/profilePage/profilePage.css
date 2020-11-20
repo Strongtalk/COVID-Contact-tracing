@@ -7,6 +7,7 @@
     color: white;
     font-weight: bolder;
     font-size: 19px;
+    margin-right: 5px;
 }
 
 #eventListTitle {
@@ -67,7 +68,7 @@ margin-left: 10px;
 
 #addEventButton {
 text-align: center;
-font-size: 15px;
+font-size: 14px;
 padding: 4px 15px;
 border-radius: 8px;
 }
@@ -84,8 +85,20 @@ left: 15px;
 #statusButtonContainer {
     display: flex;
     width: 99vw;
-    height: 4vh;
-    justify-content: space-between;}
+    height: 40vh;
+    justify-content: space-evenly;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.statusButtons {
+text-align: center;
+font-size: 14px;
+height: 9vh;
+width: 40vw;
+padding: 4px 16px;
+border-radius: 8px;
+}
 
 
 /* Calendar and it's container*/
@@ -107,4 +120,6 @@ left: 15px;
 /*User's status*/
 #currentStatus {
     text-align: start;
+    height: 5vh;
+    border-bottom: 4px double rgb(202, 107, 18);
 }

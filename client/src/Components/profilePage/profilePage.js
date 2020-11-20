@@ -63,7 +63,7 @@ function ProfilePage() {
        <Calendar />
      </div>
      </div>
-     <p id="currentStatus"><mark id="statusBox">Condition:</mark></p>
+     <p id="currentStatus"><mark id="statusBox">Condition:</mark>*Your current status here*</p>
      <div id="statusButtonContainer">
      <button type='submit' className="statusButtons">Tested Positive</button>
      <button type='submit' className="statusButtons">Feeling Unwell</button>
