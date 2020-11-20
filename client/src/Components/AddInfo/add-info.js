@@ -4,6 +4,7 @@ import "./add-info.css";
 
 // component creation
 function AddInfo() {
+  
   const cookies = document.cookie;
   const cookieSlice = cookies.slice(15, 39);
   console.log(cookieSlice);
