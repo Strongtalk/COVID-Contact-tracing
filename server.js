@@ -227,6 +227,12 @@ app.use(function(err, request, response, next) {
   response.send("send-alert")
 });
 
+
+app.post('/send-alert', sendSMS, (request, response)=>{
+  response.send(path.resolve('./client/src/Components/sendAlert.js'))
+
+})
+
 /////////////////////////////////////////////////////////////
 // from index.js
 // var http = require('http');
