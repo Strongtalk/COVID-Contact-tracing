@@ -5,6 +5,7 @@ const port = process.env.PORT || 8000;
 const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+const cookieParser = require("cookie-parser");
 
 
 const staticDir = process.env.DEV ? "./client/public" : "./client/build";
@@ -25,6 +26,7 @@ let eventContactCollection = new DataStore(url, "CovidApp", "EventContact");
 let newsCollection = new DataStore(url, "CovidApp", "News");
 
 // middleware for post
+app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
