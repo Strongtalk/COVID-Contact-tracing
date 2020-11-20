@@ -108,15 +108,15 @@ app.post("/user", async (request, response) => {
 app.post("/event", async (request, response) => {
   //THIS IS ONLY APPLICABLE TO EST!!
   //NEED TO REVISIT WHEN WE GO GLOBAL ;)
-  //modify the start time by five hours to offset the mongoDB UTC 
- let formSDate=  new Date(request.body.date + "T" + request.body.start)
- let sTime = formSDate.getTime()
- let dbTimeStart = (sTime-18000000)
+  //modify the start time by five hours to offset the mongoDB UTC
+  let formSDate = new Date(request.body.date + "T" + request.body.start);
+  let sTime = formSDate.getTime();
+  let dbTimeStart = sTime - 18000000;
 
- //modify the end time by five hours to offset the mongoDB UTC 
- let formEDate=  new Date(request.body.date + "T" + request.body.end)
- let eTime = formEDate.getTime()
- let dbTimeEnd = (eTime-18000000)
+  //modify the end time by five hours to offset the mongoDB UTC
+  let formEDate = new Date(request.body.date + "T" + request.body.end);
+  let eTime = formEDate.getTime();
+  let dbTimeEnd = eTime - 18000000;
 
   let newEvent = {
     userid: ObjectId(request.body.userid),
@@ -127,25 +127,17 @@ app.post("/event", async (request, response) => {
   };
 
   let statusObj = await eventCollection.insert(newEvent);
-  response.redirect("/addinfo-page")
+  console.log("event ID cookie being sent to browser MMMmmmMMMmm cookies", statusObj);
+  response.cookie("eventId", statusObj)
+  response.redirect("/addinfo-page");
   if (statusObj.status === "ok") {
-    //if it works send over a 200/ OK STATUS
+    //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
-   
   } else {
     //if it doesn't work send over a 400 and let us know what the error was pls
     response.status(400).send(statusObj.error);
   }
 });
-
-app.post("/eventcontact", async (request, response) => {
-  let newEventContact = {
-    eventid: ObjectId(request.body.eventid),
-    name: request.body.name,
-    type: request.body.type,
-    email: request.body.email,
-    phone: request.body.phone,
-  };
 
   let statusObj = await eventContactCollection.insert(newEventContact);
   response.redirect("/userprofile")
