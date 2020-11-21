@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+function sendTheAlert() {
+  fetch(`/send-alert`, {method:'POST'});
+}
 
 function SendAlert() {
-  return (
-    <form method="GET" action="/send-alert">
-      <input type="submit" />
-    </form>
-  );
+  return <button onClick={sendTheAlert}>SEND ALERT</button>;
 }
 
 export default SendAlert;

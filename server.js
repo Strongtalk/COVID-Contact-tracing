@@ -5,6 +5,11 @@ const port = process.env.PORT || 8000;
 const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+const session = require('express-session');
+const flash = require('connect-flash');
+const morgan = require('morgan');
+const csurf = require('csurf');
+const sendSMS = require('./sendSMS.js')
 
 
 const staticDir = process.env.DEV ? "./client/public" : "./client/build";
@@ -158,15 +163,21 @@ app.post("/eventcontact", async (request, response) => {
   }
 });
 
+app.post("/send-alert", (request, response)=>{
+  console.log('this is getting hit')
+  userCollection.insert({phone: request.body.phoneNumber})
+  sendSMS(request.body.phoneNumber, 'Alert');
+  
+
+  response.send({ok: true})
+
+})
+
 module.exports = DataStore;
 
 ////////////////////////////////////////////////////////////////////////////
-var session = require('express-session');
-var flash = require('connect-flash');
-var morgan = require('morgan');
-var csurf = require('csurf');
 
-var notification = require('./middleware/message');
+
 
 // Use morgan for HTTP request logging in dev and prod
 if (process.env.NODE_ENV !== 'test') {
@@ -191,77 +202,22 @@ app.use(session({
 // Use connect-flash to persist informational messages across redirects
 app.use(flash());
 
-// Configure application routes
-var router = express.Router();
-
-var routes = function(router) {
-  router.get('/send-alert', function(request, response) {
-    throw new Error('*** Error: ****');
-  });
-};
-
-// Add CSRF protection for web routes
-if (process.env.NODE_ENV !== 'test') {
-  app.use(csurf());
-  app.use(function(request, response, next) {
-    response.locals.csrftoken = request.csrfToken();
-    next();
-  });
-}
-
-routes(router);
-app.use(router);
-
 // Handle 404
 app.use(function(request, response, next) {
   response.status(404);
-  response.sendFile(path.join(__dirname, 'client', 'sendAlert.js'));
+  response.sendFile(path.join(__dirname, 'client', "public", "index.html"));
 });
-
-// Mount middleware to notify Twilio of errors
-app.use(notification.notifyOnError);
-
 
 app.use(function(err, request, response, next) {
   response.status(500);
-  response.send("send-alert")
+  response.send(err)
 });
-
-
-app.post('/send-alert', sendSMS, (request, response)=>{
-  response.send(path.resolve('./client/src/Components/sendAlert.js'))
-
-})
-
-/////////////////////////////////////////////////////////////
-// from index.js
-// var http = require('http');
-// const { response } = require('express');
-// var server = http.createServer(app);
-// server.listen(4000, function() {
-//   console.log('Express server listening on *:' + process.env.PORT);
-// });
 
 ///////////////////////////////////////////////////////////
 // from sendSMS
-function sendSMS (to, message) {
-  var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-  console.log(client.api.messages.create())
-  return client.api.messages
-    .create({
-      body: message,
-      to: to,
-      from: process.env.TWILIO_NUMBER,
-    }).then(function(data) {
-      console.log('Message Sent');
-    }).catch(function(err) {
-      console.error('Could not notify administrator');
-      console.error(err);
-    });
-};
+
 //////////////////////////////////////////////////////////////
 // from config.js
-require('dotenv').config();
 
 var requiredConfig = [process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN, process.env.TWILIO_NUMBER];
 var isConfigured = requiredConfig.every(function(configValue) {

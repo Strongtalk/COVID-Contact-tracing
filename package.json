@@ -20,9 +20,10 @@
     "helmet": "^4.2.0",
     "leaflet": "^1.7.1",
     "mongodb": "^3.6.3",
+    "morgan": "^1.10.0",
     "react": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-leaflet": "^3.0.2",
-    "morgan": "^1.10.0"
+    "twilio": "^3.52.0"
   }
 }
