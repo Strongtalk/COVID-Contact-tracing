@@ -1,28 +1,125 @@
 #profileContainer{
-    border: 1px solid black;
-    margin: 20px;
+    margin: 10px;
+}
+
+#statusBox {
+    background-color: rgb(18, 48, 129);
+    color: white;
+    font-weight: bolder;
+    font-size: 19px;
+    margin-right: 5px;
+}
+
+#eventListTitle {
+    display: flex;
+
 }
 
 .profileDisplay{
     margin: 0;
-    padding: 5px;
-    font-size: 20px;
-}
-#profileName{
-    margin-bottom: 10px;
+    font-size: 17px;
+    justify-self: flex-start;
 }
 
-#calendar-container {
-    display: flex; 
+#profileName{
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+#eventListContainer {
+    display: flex;
+    height: 70vh;
+    width: 99vw;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 2px;
-    background-color: rgb(30, 30, 37);
 }
+
+#eventListBox {
+display: flex;
+height: 55vh;
+width: 78vw;
+border: 1px solid red;
+}
+
+
+/* Buttons on the page*/
+
+#signOut {
+
+}
+
+#updateInfo {
+margin-left: 10px;
+}
+
+/* These buttons listed below are in a container*/
+/* This is the Event buttons' container*/
+#buttonContainer {
+   display: flex;
+   justify-content: center;
+   position: relative;
+   top: -20px;
+}
+
+.profileButtons {
+    display: flex;
+ }
+
 #addEventButton {
 text-align: center;
-border: 1px solid black;
-font-size: 15px;
-padding: 6px 15px;
-border-radius: 8%;
+font-size: 14px;
+padding: 4px 15px;
+border-radius: 8px;
+}
+
+#updateEventButton {
+text-align: center;
+font-size: 14px;
+padding: 4px 15px;
+border-radius: 8px;
+position: relative;
+left: 15px;
+}
+/*User status buttons and container (Tested Positive//Feeling unwell)*/
+#statusButtonContainer {
+    display: flex;
+    width: 99vw;
+    height: 40vh;
+    justify-content: space-evenly;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.statusButtons {
+text-align: center;
+font-size: 14px;
+height: 9vh;
+width: 40vw;
+padding: 4px 16px;
+border-radius: 8px;
+}
+
+
+/* Calendar and it's container*/
+#calendarWrapper {
+    display: flex;
+    height: 55vh;
+    width: 99vw;
+    justify-content: center;
+    align-items: center;
+}
+
+#calendarContainer {
+    display: flex;
+    height: 48vh;
+    width: 75vw;
+    border: 1px solid green;
+}
+
+/*User's status*/
+#currentStatus {
+    text-align: start;
+    height: 5vh;
+    border-bottom: 4px double rgb(202, 107, 18);
 }

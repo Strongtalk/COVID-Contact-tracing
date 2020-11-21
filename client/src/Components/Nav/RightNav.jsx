@@ -24,9 +24,9 @@ const Ul = styled.ul`
     height: 60vh;
     width: 85px;
     padding-top: 1rem;
-    border-radius: 3%;
-    border-bottom-right-radius: 3%;
-    border-top-right-radius: 0%;
+    border-radius: 24px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
     transition: transform 0.3s ease-in-out;
     z-index: 500 !important;
     
