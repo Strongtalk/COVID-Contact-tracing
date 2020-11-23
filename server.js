@@ -170,18 +170,12 @@ app.post("/eventcontact", async (request, response) => {
 app.post("/send-alert", (request, response)=>{
   // hard coded number and message //
   sendSMS('8023388026', 'Alert');
-  
-
   response.send({ok: true})
-
 })
 
 module.exports = DataStore;
 
-
 ////////////////////////////////////////////////////////////////////////////
-
-
 
 // Use morgan for HTTP request logging in dev and prod
 if (process.env.NODE_ENV !== 'test') {
@@ -212,16 +206,13 @@ app.use(function(request, response, next) {
   response.sendFile(path.join(__dirname, 'client', "public", "index.html"));
 });
 
+// handle error
 app.use(function(err, request, response, next) {
   response.status(500);
   response.send(err)
 });
 
-
-
-//////////////////////////////////////////////////////////////
-// from config.js
-
+// config
 var requiredConfig = [process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN, process.env.TWILIO_NUMBER];
 var isConfigured = requiredConfig.every(function(configValue) {
   return configValue || false;
