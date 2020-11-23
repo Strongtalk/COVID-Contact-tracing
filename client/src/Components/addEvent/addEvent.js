@@ -31,7 +31,7 @@ function AddEvent(props) {
 
   return (
     <div>
-      <h1>Add Event</h1>
+      <h1 id="addEventTitle" >Add Event:</h1>
       <form id="eventContainer" method="POST" action="/event">
         <input type="hidden" name="userid" value={objectId} />
         <input
@@ -72,11 +72,6 @@ function AddEvent(props) {
         <br></br>
         <input id="eventSubmit" type="submit" value="Next" />
       </form>
-      <div id="calendar-wrapper">
-      <div id="calendar-container">
-        <Calendar onClickDay={setEventDate} />
-      </div>
-      </div>
     </div>
   );
 }

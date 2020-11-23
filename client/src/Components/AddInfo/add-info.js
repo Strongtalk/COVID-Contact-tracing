@@ -12,7 +12,7 @@ function AddInfo() {
   return (
     //general wrapper for page
     <div className="pageContainer">
-      <h1>Add Event Participant</h1>
+      <h1 id="addInfoTitle" >Add Event Participant: </h1>
       <form method="POST" action="/eventcontact">
         <div id="typeInputContainer">
           <input type="hidden" name="eventid" value={cookieSlice} />
@@ -58,10 +58,7 @@ function AddInfo() {
         <input id="addInfoSubmitButton" type="submit" value="Add" />
       </form>
       <form action="/">
-        <p id="soloEvent">
-          Travelling solo or did not come into an unsafe distance with anyone?
-        </p>
-        <input id="soloEventSubmit" type="submit" value="Click Here"></input>
+        <input id="soloEventSubmit" type="submit" value="I was Alone"></input>
       </form>
     </div>
   );

@@ -1,43 +1,71 @@
-#eventContainer{
+/* --------------------- Mobile View ---------------- */
+
+@media (max-width: 768px) {
+  #eventContainer {
     text-align: center;
+  }
 }
-.eventInput{
+@media (max-width: 768px) {
+  .eventInput {
     border: 1px solid black;
     margin: 5px 0;
     width: 75vw;
     height: 35px;
     font-size: 25px;
+  }
 }
-
-#eventSubmit{
+@media (max-width: 768px) {
+  #eventSubmit {
     text-align: center;
     font-size: 20px;
     border: 1px solid black;
     margin-top: 10px;
     padding: 6px 15px;
     border-radius: 15%;
+  }
 }
-
-.eventLabel{
+@media (max-width: 768px) {
+  .eventLabel {
     font-size: 25px;
+  }
+}
+/* --------------------------- Desktop View --------- */
+@media (min-width: 770px) {
+  #eventContainer {
+    text-align: left;
+  }
 }
 
-/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-/* This calendar CSS only deals with the box and wrapper holding the calendar for all calendar CSS changes please visit the path /react-calendar/dist/Calendar.css in node_modules*/
-
-#calendar-container {
-    display: flex;
-    height: 40vh;
-    width: 40vh;
-    position: relative;
-    top: -12px;  
+@media (min-width: 770px) {
+  #addEventTitle {
+    text-align: left;
+    font-size: 75px;
+    margin-left: 20px;
+  }
 }
 
-#calendar-wrapper {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    align-items: center;
-    height: 55vh;
-    width: 56vh;
+@media (min-width: 770px) {
+  .eventInput {
+    border: 1px solid black;
+    margin: 5px 20px;
+    width: 75vw;
+    height: 45px;
+    font-size: 35px;
+  }
+}
+@media (min-width: 770px) {
+  .eventLabel {
+    font-size: 35px;
+    margin-left:20px;
+  }
+}
+@media (min-width: 770px) {
+  #eventSubmit {
+      text-align: center;
+      font-size: 30px;
+      border: 1px solid black;
+      margin-top: 10px;
+      padding: 6px 15px;
+      margin-left: 68vw;
+    }
 }

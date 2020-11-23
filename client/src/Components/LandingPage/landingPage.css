@@ -1,42 +1,46 @@
-/* ---------------------- Header -------------------------- */
-#headerTitle{
-  text-align: center;
-  margin: 0;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  background-color: rgb(216, 178, 252);
-  height: 5vh;
-}
+/* ------------------ Mobile View */
 
-/* ----------------- Main Page Article Section -------------- */
-#articleContainer{
-  background-color: rgb(199, 199, 199);
-  padding: 10px;
-  height: 50vh;
-  text-align: left;
+@media (max-width: 768px) {
+  #articleContainer{
+    padding: 10px;
+    height: 50vh;
+    text-align: left;
+  }
 }
-/* individual article container, title, and button formatting */
-.continueReadingButton{
-  background-color: white;
+@media (max-width: 768px) {
+  .continueReadingButton{
+    background-color: white;
+  }
 }
-.individualArticleContainer{
-  border: 1px solid black;
-  height: 50vh;
-  margin: 5px 0;
-  background-color: white;
+@media (max-width: 768px) {
+  .individualArticleContainer{
+    border: 1px solid black;
+    height: 50vh;
+    margin: 5px 0;
+    background-color: white;
+  }
 }
-.newsTitle{
-  margin: 0;
+@media (max-width: 768px) {
+  .newsTitle{
+    margin: 0;
+  }
 }
-
-.article-text {
-  font-size: 14pt;
+@media (max-width: 768px) {
+  .article-text {
+    font-size: 14pt;
+  }
 }
-.article-image {
-  width: 10vw;
-  height: 10vh;
+@media (max-width: 768px) {
+  .article-image {
+    width: 10vw;
+    height: 10vh;
+  }
 }
-
-/* ----------------- Main Page Article Section -------------- */
-
+/* ------------------ Desktop View ----- */
+@media (min-width: 770px) {
+  
+}
+@media (min-width: 770px) {
+ 
+}
 
