@@ -78,16 +78,8 @@ app.get("/user", async (request, response) => {
 
 // Route to read ALL News
 app.get("/news", async (request, response) => {
-  let data = await newsCollection.readData();
-  response.send(data);
-});
-
-// Route to read News for a particular geographic audience
-app.get("/news/:newsLevel", async (request, response) => {
-
-  console.log('news level ', request.params.newsLevel)
-
-  let data = await newsCollection.readNews(request.params.newsLevel, request.query);
+  console.log('hitting news endpoint')
+  let data = await newsCollection.readNews();
   response.send(data);
 });
 
@@ -172,23 +164,16 @@ app.post("/eventcontact", async (request, response) => {
     response.status(400).send(statusObj.error);
   }
 });
-
+// sends alert 
 app.post("/send-alert", (request, response)=>{
-  console.log('this is getting hit')
-  userCollection.insert({phone: request.body.phoneNumber})
-  sendSMS(request.body.phoneNumber, 'Alert');
-  
-
+  // hard coded number and message //
+  sendSMS('8023388026', 'Alert');
   response.send({ok: true})
-
 })
 
 module.exports = DataStore;
 
-
 ////////////////////////////////////////////////////////////////////////////
-
-
 
 // Use morgan for HTTP request logging in dev and prod
 if (process.env.NODE_ENV !== 'test') {
@@ -219,17 +204,13 @@ app.use(function(request, response, next) {
   response.sendFile(path.join(__dirname, 'client', "public", "index.html"));
 });
 
+// handle error
 app.use(function(err, request, response, next) {
   response.status(500);
   response.send(err)
 });
 
-///////////////////////////////////////////////////////////
-// from sendSMS
-
-//////////////////////////////////////////////////////////////
-// from config.js
-
+// config
 var requiredConfig = [process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN, process.env.TWILIO_NUMBER];
 var isConfigured = requiredConfig.every(function(configValue) {
   return configValue || false;

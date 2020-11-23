@@ -37,6 +37,10 @@ function ProfilePage() {
     fetchUser();
   }, []);
 
+  // redirects to positive test warning 
+  function positiveOfPositive() {
+    document.location = '/send-alert'
+  }
   //display user info here
   return (
     <div id="profilePageWrapper">
@@ -65,7 +69,7 @@ function ProfilePage() {
      </div>
      <p id="currentStatus"><mark id="statusBox">Condition:</mark>*Your current status here*</p>
      <div id="statusButtonContainer">
-     <button type='submit' className="statusButtons">Tested Positive</button>
+     <button  onClick={positiveOfPositive} type='submit' className="statusButtons">Tested Positive</button>
      <button type='submit' className="statusButtons">Feeling Unwell</button>
      <button type='submit' className="statusButtons">Tested Negative</button>
      </div>

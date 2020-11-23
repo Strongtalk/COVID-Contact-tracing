@@ -1,4 +1,5 @@
 const { ObjectId, MongoClient } = require("mongodb");
+const opengraph = require('opengraph-io')({ appId: '0cf4e9d0-e165-4cc8-8cd7-c20f1dd7cc29' });
 
 class DataStore {
   constructor(url, dbName, collectionName) {
@@ -56,7 +57,7 @@ class DataStore {
   async readDataEvt(userid) {
     let events = [];
     let collection = await this.collection();
-    await collection.find({ userid: ObjectId(userid) } ).forEach((event) => {
+    await collection.find({ userid: ObjectId(userid) }).forEach((event) => {
       events.push(event);
     });
     return events;
@@ -81,9 +82,9 @@ class DataStore {
     let searchDate = new Date(date)
     console.log(searchDate)
     let collection = await this.collection();
-    await collection.find({"start": {$gte: searchDate}, userid: ObjectId(userid) }).forEach((event) => {
+    await collection.find({ "start": { $gte: searchDate }, userid: ObjectId(userid) }).forEach((event) => {
       events.push(event);
-     
+
     });
     console.log(events)
     return events;
@@ -107,39 +108,41 @@ class DataStore {
 
   //reads all news in database 
   async readNews() {
-    let events = [];
-    let collection = await this.collection();
-    await collection.find({}).forEach((event) => {
-      events.push(event);
-    });
-    return events;
+    let client = await this.connect();
+    let db = await client.db(this.dbName);
+    const collection = db.collection(this.collName);
+    let dataArr = await collection.find({}).toArray();
+
+    let articleSummary = []
+    for (const article of dataArr) {
+      let siteUrl = article.url;
+
+      // Call open graph endpoint to get summary info for a particlar URL
+      // Add elements to new array that is ultimately returned containing summary info
+      await opengraph.getSiteInfo(siteUrl)
+        .then(function (result) {
+          articleSummary.push(result.hybridGraph)
+        });
+    }
+
+    return articleSummary;
   }
 
-  //reads all news in database 
-  async readNews() {
-    let events = [];
-    let collection = await this.collection();
-    await collection.find({}).forEach((event) => {
-      events.push(event);
-    });
-    return events;
-  }
-
-   // reads all news for a particular geographic area
-   // geographic area is based on audienceScope - e.g. county, state, country
-   // and audienceTarget - e.g array that identifies one or more counties, states, countries
-   // where the news article would be of potential interest
-   async readNews(newsLevel, newsAudience) {
+  // reads all news for a particular geographic area
+  // geographic area is based on audienceScope - e.g. county, state, country
+  // and audienceTarget - e.g array that identifies one or more counties, states, countries
+  // where the news article would be of potential interest
+  async readNewsAudience(newsLevel, newsAudience) {
     let newsArticles = [];
 
     console.log('newsLevel: ' + newsAudience)
     console.log(newsAudience[newsLevel])
 
     let collection = await this.collection();
-    await collection.find({"newsLevel": {$eq: newsLevel}, "newsAudience": {$in: newsAudience[newsLevel] } }).forEach((article) => {
+    await collection.find({ "newsLevel": { $eq: newsLevel }, "newsAudience": { $in: newsAudience[newsLevel] } }).forEach((article) => {
       newsArticles.push(article);
     });
-    
+
     return newsArticles;
   }
 

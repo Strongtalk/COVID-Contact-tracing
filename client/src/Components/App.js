@@ -14,8 +14,8 @@ import ProfilePage from "./profilePage/profilePage.js";
 import { AuthProvider } from "./auth/authorize.js";
 import PrivatePage from "./auth/privatePage.js";
 import PrivateLogSign from "./auth/privateLogSign.js";
-import SendAlert from "./sendAlert"
 import firebaseApp from "./auth/firebase.js";
+import SendAlert from "./sendAlert/sendAlert"
 
 
 function App() {
