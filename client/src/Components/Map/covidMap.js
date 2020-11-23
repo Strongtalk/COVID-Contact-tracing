@@ -49,8 +49,6 @@ function CovidMap() {
 
   function getNewsLink(countyName) {
 
-    console.log(countyName)
-
     // Array to hold articles of interest for each county
     let countyArticles = []
 
@@ -82,7 +80,6 @@ function CovidMap() {
     for (const element of newsArray) {
       if (element.county === countyName) countyArticles.push(element)
     }
-    console.log(countyArticles)
     setCountyArticles(countyArticles)
     return (countyArticles)
   }
