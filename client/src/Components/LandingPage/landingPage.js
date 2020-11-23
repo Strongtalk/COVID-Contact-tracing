@@ -2,43 +2,63 @@ import React, { useState, useEffect } from "react";
 import "./landingPage.css";
 import Footer from "../Contact/newFooter.js";
 
-
 function LandingPage() {
 
-  const [newsArticles, setNewsArticles] = useState([])
-
+  const [isArticlesLoading, setArticlesLoading] = useState(false);
+  const [newsArticles, setNewsArticles] = useState(null)
+  
+  // useEffect to read news links from app data store
   useEffect(() => {
-    console.log('in use effect')
 
-    let dataObj = []
+    // endpoint for retrieving relevant news stored in App data store
     const newsDataURL = '/news'
 
     // If data not fetched, read news links from DB
-    if (newsArticles.length === 0) {
+    if (!newsArticles) {
+      setArticlesLoading(true);
       fetch(newsDataURL)
         .then((res) => res.json())
         .then((data) => {
-          dataObj = data  
-          console.log('Data is" ', data)
-          setNewsArticles(dataObj)
+          console.log(data)
+          setNewsArticles(data)
+          setArticlesLoading(false)
         })
     }
-  })
+    
+  }, [newsArticles])
 
+  // Render the page
   return (
-      <div id="articleContainer">
-        <h1>COVID-19 News</h1>
-        <div className="individualArticleContainer">
-
-          <p>{newsArticles.length > 0 ? newsArticles.map((article) => {
-            console.log('articles.url: ', article.url)
-          return <ul href={article.url}>{article.headline}</ul>;
-        }) : null}
-          </p>
-          <button className="continueReadingButton">Continue Reading</button>
+    <div id="articleContainer">
+      <h1>COVID-19 News</h1>
+      <div className="individualArticleContainer">
+        {isArticlesLoading && (
+          <div>
+            <p>...Loading</p>
+          </div>
+        )}
+        {!isArticlesLoading && newsArticles && newsArticles.length === 0 && (
+          <div>
+            <p>No current news ...</p>
+          </div>
+        )}
+        {!isArticlesLoading && newsArticles && newsArticles.length > 0 && (
+          <div>{newsArticles.map((article, index) => {
+            console.log(newsArticles)
+            console.log('render article is: ' , article)
+            return (
+              <div key={index}>
+              <h3 className="newsTitle">{article.title}</h3>
+              <p>{article.description}</p>
+              <a className="continueReadingButton" href={article.url}>Continue Reading</a>
+            </div>
+          )
+        })}
         </div>
-        <Footer />
+        )}
       </div>
+      <Footer />
+    </div>
   );
 }
 

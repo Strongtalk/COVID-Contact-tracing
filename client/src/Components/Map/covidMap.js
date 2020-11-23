@@ -80,7 +80,6 @@ function CovidMap() {
     for (const element of newsArray) {
       if (element.county === countyName) countyArticles.push(element)
     }
-    console.log(countyArticles)
     setCountyArticles(countyArticles)
     return (countyArticles)
   }
