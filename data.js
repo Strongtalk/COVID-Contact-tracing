@@ -56,7 +56,7 @@ class DataStore {
   async readDataEvt(userid) {
     let events = [];
     let collection = await this.collection();
-    await collection.find({ userid: ObjectId(userid) } ).forEach((event) => {
+    await collection.find({ userid: ObjectId(userid) }).forEach((event) => {
       events.push(event);
     });
     return events;
@@ -67,35 +67,53 @@ class DataStore {
     let events = [];
     //did hardcode this will probably have to modify
     // REMINDER *months start at 0 if they are put in as number!!!!*
-    console.log(date)
-    let searchDate = new Date(date)
-    console.log(searchDate)
+    
+    let searchDate = new Date(date);
+    let endDate = new Date(date);
+    endDate = endDate.setDate(searchDate.getDate() + 1);
+    let newEndDate = new Date(endDate);
+    
+   
     let collection = await this.collection();
-    await collection.find({"start": {$gte: searchDate}, userid: ObjectId(userid) }).forEach((event) => {
-      events.push(event);
-     
-    });
-    console.log(events)
+   
+    await collection
+      .find({
+        $and: [
+          {
+            $and: [
+              { start: { $gte: searchDate } },
+              { start: { $lt: newEndDate } },
+            ],
+          },
+          { $or: [{ userid: ObjectId(userid) }] },
+        ],
+      })
+      .forEach((event) => {
+        events.push(event);
+      });
+   
     return events;
   }
 
   //write to database- user collection
   async insert(object) {
-    let response = { status: null, error: null, id:null };
+    let response = { status: null, error: null, id: null };
     try {
       let collection = await this.collection();
       console.log("inserting item");
-      await collection.insertOne(object).then((res)=> response.id= res.insertedId)
+      await collection
+        .insertOne(object)
+        .then((res) => (response.id = res.insertedId));
       console.log("Success adding item");
       response.status = "ok";
     } catch (error) {
       response.error = error.toString();
       console.log(error.toString());
     }
-    return response.id
+    return response.id;
   }
 
-  //reads all news in database 
+  //reads all news in database
   async readNews() {
     let events = [];
     let collection = await this.collection();
@@ -105,7 +123,7 @@ class DataStore {
     return events;
   }
 
-  //reads all news in database 
+  //reads all news in database
   async readNews() {
     let events = [];
     let collection = await this.collection();
@@ -115,25 +133,28 @@ class DataStore {
     return events;
   }
 
-   // reads all news for a particular geographic area
-   // geographic area is based on audienceScope - e.g. county, state, country
-   // and audienceTarget - e.g array that identifies one or more counties, states, countries
-   // where the news article would be of potential interest
-   async readNews(newsLevel, newsAudience) {
+  // reads all news for a particular geographic area
+  // geographic area is based on audienceScope - e.g. county, state, country
+  // and audienceTarget - e.g array that identifies one or more counties, states, countries
+  // where the news article would be of potential interest
+  async readNews(newsLevel, newsAudience) {
     let newsArticles = [];
 
-    console.log('newsLevel: ' + newsAudience)
-    console.log(newsAudience[newsLevel])
+    console.log("newsLevel: " + newsAudience);
+    console.log(newsAudience[newsLevel]);
 
     let collection = await this.collection();
-    await collection.find({"newsLevel": {$eq: newsLevel}, "newsAudience": {$in: newsAudience[newsLevel] } }).forEach((article) => {
-      newsArticles.push(article);
-    });
-    
+    await collection
+      .find({
+        newsLevel: { $eq: newsLevel },
+        newsAudience: { $in: newsAudience[newsLevel] },
+      })
+      .forEach((article) => {
+        newsArticles.push(article);
+      });
+
     return newsArticles;
   }
-
-
 }
 
 module.exports = DataStore;

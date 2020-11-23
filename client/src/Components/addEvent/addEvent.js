@@ -17,6 +17,7 @@ function AddEvent(props) {
   const showEvents = () => {
     // this grabs all of the events for a user and returns it as an object
     //local storage is called upon which is where objectId comes from
+    // objectId = userID
     fetch(`/event/${objectId}`)
       .then((response) => response.json())
       .then((userEvent) => {

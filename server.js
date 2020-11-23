@@ -52,10 +52,12 @@ app.get("/event/:userid", async (request, response) => {
 
 // get specific event parameters per user based on date
 app.get("/events/:userid/:date", async (request, response) => {
+  console.log("We're in events: ", request.params.date)
   let data = await eventCollection.readDataEvtDate(
     request.params.userid,
     request.params.date
   );
+  console.log(data)
   response.send(data);
 });
 

@@ -100,6 +100,10 @@ padding: 4px 16px;
 border-radius: 8px;
 }
 
+#calendarTutorial {
+    width: 98vw;
+    margin-block-end: 0;
+}
 
 /* Calendar and it's container*/
 #calendarWrapper {
@@ -121,5 +125,6 @@ border-radius: 8px;
 #currentStatus {
     text-align: start;
     height: 5vh;
+    width: 99vw;
     border-bottom: 4px double rgb(202, 107, 18);
 }
