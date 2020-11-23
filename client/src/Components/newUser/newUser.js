@@ -83,6 +83,7 @@ console.log(user)
           className="newUserInput"
           type="text"
           placeholder="Phone Number: "
+          maxLength='7'
           name="cell"
           required
         />

@@ -55,6 +55,13 @@ app.get("/event/:userid", async (request, response) => {
   response.send(data);
 });
 
+// get individual event based on event id
+app.get('/individual-event', async(request, response) => {
+  let event = await eventCollection.readDataEvt(request.params._id)
+  response.send(event)
+  console.log("backend ", event)
+})
+
 // get specific event parameters per user based on date
 app.get("/events/:userid/:date", async (request, response) => {
   let data = await eventCollection.readDataEvtDate(

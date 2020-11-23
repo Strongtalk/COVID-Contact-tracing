@@ -37,6 +37,9 @@ function ProfilePage() {
     fetchUser();
   }, []);
 
+function showIndividualEvent() {
+  document.location = '/individual-event'
+}  
   // redirects to positive test warning 
   function positiveOfPositive() {
     document.location = '/send-alert'
@@ -52,7 +55,9 @@ function ProfilePage() {
       </div>
      <div id="eventListContainer">
      <h4 id="eventListTitle">Your Events</h4>
-     <div name="eventList" id="eventListBox"></div>
+     <div name="eventList" id="eventListBox">
+       <button onClick={showIndividualEvent}>Individual Event</button>
+     </div>
      </div>
      <div id="buttonContainer">
       <form className="profileButtons" action="/event">

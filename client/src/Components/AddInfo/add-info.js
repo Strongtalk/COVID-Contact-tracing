@@ -33,6 +33,7 @@ function AddInfo() {
           <input
             type="text"
             placeholder="Phone Number:"
+            maxLength='7'
             name="phone"
             className="addInfoInput"
             required
