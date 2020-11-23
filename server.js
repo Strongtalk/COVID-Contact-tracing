@@ -72,16 +72,8 @@ app.get("/user", async (request, response) => {
 
 // Route to read ALL News
 app.get("/news", async (request, response) => {
-  let data = await newsCollection.readData();
-  response.send(data);
-});
-
-// Route to read News for a particular geographic audience
-app.get("/news/:newsLevel", async (request, response) => {
-
-  console.log('news level ', request.params.newsLevel)
-
-  let data = await newsCollection.readNews(request.params.newsLevel, request.query);
+  console.log('hitting news endpoint')
+  let data = await newsCollection.readNews();
   response.send(data);
 });
 
