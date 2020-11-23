@@ -20,7 +20,6 @@ import SendAlert from "./sendAlert/sendAlert"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  console.log(currentUser)
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
