@@ -55,6 +55,12 @@ app.get("/event/:userid", async (request, response) => {
   response.send(data);
 });
 
+// get all event contacts coordinating to a specific event
+app.get("/eventcontact/:eventid", async (request, response) => {
+  let data = await eventContactCollection.readEvtContact(request.params.eventid);
+  response.send(data);
+});
+
 // get specific event parameters per user based on date
 app.get("/events/:userid/:date", async (request, response) => {
   let data = await eventCollection.readDataEvtDate(
@@ -149,7 +155,7 @@ app.post("/eventcontact", async (request, response) => {
   };
 
   let statusObj = await eventContactCollection.insert(newEventContact);
-  response.redirect("/userprofile");
+  response.redirect("/addinfo-page");
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);

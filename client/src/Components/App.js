@@ -1,5 +1,5 @@
 // global imports
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 // page imports
@@ -14,10 +14,19 @@ import ProfilePage from "./profilePage/profilePage.js";
 import { AuthProvider } from "./auth/authorize.js";
 import PrivatePage from "./auth/privatePage.js";
 import PrivateLogSign from "./auth/privateLogSign.js";
+import firebaseApp from "./auth/firebase.js";
 import SendAlert from "./sendAlert/sendAlert"
 
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+  console.log(currentUser)
+  useEffect(() => {
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
+  }, [])
+
   return (
     <AuthProvider>
       <Router>
@@ -27,24 +36,27 @@ function App() {
               <Link to="/">
                 <h1 className="navLinks">COVID App</h1>
               </Link>
+          {!currentUser ? 
               <Link to="/userlogin-page">
                 <h1 className="userLogin">Log In</h1>
-              </Link>
+          </Link> : null }
               <Link to="/map">
                 <h1 className="covidMap">Covid Map</h1>
               </Link>
               <Link to="/addinfo-page">
                 <h1 className="navLinks">Add Event Participant</h1>
               </Link>
+              {!currentUser ?
               <Link to="/user">
                 <h1 className="navLinks">Sign Up</h1>
-              </Link>
+              </Link> : null}
               <Link to="/event">
                 <h1 className="navLinks">Add Event</h1>
               </Link>
+              {currentUser ?
               <Link to="/userprofile">
                 <h1 className="navLinks">Profile</h1>
-              </Link>
+              </Link> : null}
               <Link to='/send-alert' >
               <h1 className="navLinks">send Alert</h1>
               </Link>
