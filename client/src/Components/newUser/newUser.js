@@ -93,7 +93,8 @@ console.log(user)
           name="password"
           required
         />
-        <br></br>
+        <br></br><br></br>
+        <p><b>WE USE COOKIES:</b><br></br> By creating an account you agree to our use of cookies to deliver a better site experience</p> <br></br>
         <input id="createAccountButton" type="submit" value="Create Account" />
       </form>
     </div>

@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import firebaseApp from "../auth/firebase.js"
 
 const Ul = styled.ul`
   justify-content: flex-start;
@@ -43,16 +44,38 @@ const Ul = styled.ul`
 `;
 
 const RightNav = ({ open }) => {
+
+  
+
+  const [user, setCurrentUser] = useState(null);
+
+
+  useEffect(() => {
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
+  }, [])
+
+
+  //let userEmail = "marco@gmail.com"
+  
+
   return (
+    
     <Ul open={open}>
       <div className="navList-bubble">
       <Link to="/" ><li>Home</li></Link>
       </div>
-      <Link to="/" ><li>News</li></Link>      
-      <Link to="/userlogin-page"><li>Log In</li></Link>
-      <Link to="/user"><li>Sign up</li></Link>
-      <Link to="/userprofile"><li>User Profile</li></Link>  
+      <Link to="/" ><li>News</li></Link>  
+      {!user    ?
+      <Link to="/userlogin-page"><li>Log In</li></Link> : null }
+      {!user    ?
+      <Link to="/user"><li>Sign up</li></Link> : null }
+      {user ?
+      <Link to="/userprofile"><li>User Profile</li></Link>  : null }
       <Link to="/map"><li>VT Covid Map</li></Link> 
+      {/* {userEmail === "emilysaber13@gmail.com" ?
+      <Link to="/admin"><li>ADMIN THINGS</li></Link> : null } */}
     </Ul>
   );
 };

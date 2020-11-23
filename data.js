@@ -62,6 +62,16 @@ class DataStore {
     return events;
   }
 
+    //reads all events in database for a user
+    async readEvtContact(eventid) {
+      let events = [];
+      let collection = await this.collection();
+      await collection.find({ eventid: ObjectId(eventid) } ).forEach((event) => {
+        events.push(event);
+      });
+      return events;
+    }
+
   //search for user events within a specific date frame
   async readDataEvtDate(userid, date) {
     let events = [];
