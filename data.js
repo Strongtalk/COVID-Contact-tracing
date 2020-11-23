@@ -82,16 +82,18 @@ class DataStore {
 
   //write to database- user collection
   async insert(object) {
-    let response = { status: null, error: null };
+    let response = { status: null, error: null, id:null };
     try {
       let collection = await this.collection();
-      await collection.insertOne(object);
+      console.log("inserting item");
+      await collection.insertOne(object).then((res)=> response.id= res.insertedId)
+      console.log("Success adding item");
       response.status = "ok";
     } catch (error) {
       response.error = error.toString();
       console.log(error.toString());
     }
-    return response;
+    return response.id
   }
 
   //reads all news in database 
