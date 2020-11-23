@@ -12,8 +12,8 @@ function AddInfo() {
 
 
   const showContacts = () => {
-    // this grabs all of the events for a user and returns it as an object
-    //local storage is called upon which is where objectId comes from
+    // this grabs all of the event participants for a specific event and returns it as an object
+    // right now just in console log but will eventually get this displaying on the page ?
     fetch(`/eventcontact/${cookieSlice}`)
       .then((response) => response.json())
       .then((contact) => {
@@ -25,7 +25,9 @@ function AddInfo() {
     showContacts();
   }, []);
  
+  console.log(contactInfo)
 
+  
   return (
     //general wrapper for page
     <div className="pageContainer">
