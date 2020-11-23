@@ -166,11 +166,10 @@ app.post("/eventcontact", async (request, response) => {
     response.status(400).send(statusObj.error);
   }
 });
-
+// sends alert 
 app.post("/send-alert", (request, response)=>{
-  console.log('this is getting hit')
-  userCollection.insert({phone: request.body.phoneNumber})
-  sendSMS(request.body.phoneNumber, 'Alert');
+  // hard coded number and message //
+  sendSMS('8023388026', 'Alert');
   
 
   response.send({ok: true})
@@ -218,8 +217,7 @@ app.use(function(err, request, response, next) {
   response.send(err)
 });
 
-///////////////////////////////////////////////////////////
-// from sendSMS
+
 
 //////////////////////////////////////////////////////////////
 // from config.js
