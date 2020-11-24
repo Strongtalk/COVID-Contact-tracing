@@ -29,9 +29,9 @@ function LandingPage() {
 
   // Render the page
   return (
-    <div id="articleContainer">
-      <h1>COVID-19 News</h1>
-      <div className="individualArticleContainer">
+    <div id="landingPageContainer">
+      <h1 id='landingPageTitle' >COVID-19 News</h1>
+      <div>
         {isArticlesLoading && (
           <div>
             <p>...Loading</p>
@@ -43,14 +43,15 @@ function LandingPage() {
           </div>
         )}
         {!isArticlesLoading && newsArticles && newsArticles.length > 0 && (
-          <div>{newsArticles.map((article, index) => {
+          <div className="articleContainer" >{newsArticles.map((article, index) => {
             console.log(newsArticles)
             console.log('render article is: ' , article)
             return (
-              <div key={index}>
+              <div className='individualArticleContainers' key={index}>
               <h3 className="newsTitle">{article.title}</h3>
-              <p>{article.description}</p>
-              <a className="continueReadingButton" href={article.url}>Continue Reading</a>
+              <p className='newsText' >{article.description}</p>
+              <a className='aTag' href={article.url}><h2 
+              className="continueReadingButton" >Continue Reading</h2></a>
             </div>
           )
         })}
