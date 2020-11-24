@@ -64,58 +64,52 @@ function ProfilePage() {
     setEventDate(evt);
   }
 
+function showIndividualEvent() {
+  document.location = '/individual-event'
+}  
+  // redirects to positive test warning 
+  function positiveOfPositive() {
+    document.location = '/send-alert'
+  }
   //display user info here
   return (
     <div id="profilePageWrapper">
-      <div id="profilePageContainer">
-        <div id="profileContainer">
-          <h2 id="profileName"> Hello {profile.name} !</h2>
-          <button id="signOut" onClick={handleLogout}>
-            Sign Out
-          </button>
-          <button id="updateInfo">Update Info</button>
-        </div>
-        <div id="eventListContainer">
-          <h4 id="eventListTitle">Your Events</h4>
-          <div name="eventList" id="eventListBox">
-            {eventInfo.map((evt) => {
+    <div id="profilePageContainer">
+      <div id="profileContainer">
+      <h2 id="profileName"> Hello {profile.name} !</h2>
+        <button id="signOut" onClick={handleLogout}>Sign Out</button>
+        <button id="updateInfo">Update Info</button>
+      </div>
+     <div id="eventListContainer">
+     <h4 id="eventListTitle">Your Events</h4>
+     <div name="eventList" id="eventListBox">
+     {eventInfo.map((evt) => {
               return <p className="eventListItem">{evt.name}</p>;
             })}
-          </div>
-        </div>
-        <div id="buttonContainer">
-          <form className="profileButtons" action="/event">
-            <input id="addEventButton" type="submit" value="Add Event"></input>
-          </form>
-          <form className="profileButtons">
-            <input
-              id="updateEventButton"
-              type="submit"
-              value="Update Event"
-            ></input>
-          </form>
+       <button onClick={showIndividualEvent}>Individual Event</button>
+     </div>
+     </div>
+     <div id="buttonContainer">
+      <form className="profileButtons" action="/event">
+        <input id="addEventButton" type="submit" value="Add Event"></input>
+        </form>
+        <form className="profileButtons">
+        <input id="updateEventButton" type="submit" value="Update Event"></input>
+        </form>
         </div>
         <p id="calendarTutorial">Please select a date to see your events!</p>
         <div id="calendarWrapper">
-          <div id="calendarContainer">
-            <Calendar onClickDay={(evt) => test(evt)} />
-          </div>
-        </div>
-        <p id="currentStatus">
-          <mark id="statusBox">Condition:</mark>*Your current status here*
-        </p>
-        <div id="statusButtonContainer">
-          <button type="submit" className="statusButtons">
-            Tested Positive
-          </button>
-          <button type="submit" className="statusButtons">
-            Feeling Unwell
-          </button>
-          <button type="submit" className="statusButtons">
-            Tested Negative
-          </button>
-        </div>
-      </div>
+     <div id="calendarContainer">
+       <Calendar onClickDay={(evt) => test(evt)} />
+     </div>
+     </div>
+     <p id="currentStatus"><mark id="statusBox">Condition:</mark>*Your current status here*</p>
+     <div id="statusButtonContainer">
+     <button  onClick={positiveOfPositive} type='submit' className="statusButtons">Tested Positive</button>
+     <button type='submit' className="statusButtons">Feeling Unwell</button>
+     <button type='submit' className="statusButtons">Tested Negative</button>
+     </div>
+    </div>
     </div>
   );
 }

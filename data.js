@@ -1,4 +1,5 @@
 const { ObjectId, MongoClient } = require("mongodb");
+const opengraph = require('opengraph-io')({ appId: '0cf4e9d0-e165-4cc8-8cd7-c20f1dd7cc29' });
 
 class DataStore {
   constructor(url, dbName, collectionName) {
@@ -62,6 +63,16 @@ class DataStore {
     return events;
   }
 
+    //reads all events in database for a user
+    async readEvtContact(eventid) {
+      let events = [];
+      let collection = await this.collection();
+      await collection.find({ eventid: ObjectId(eventid) } ).forEach((event) => {
+        events.push(event);
+      });
+      return events;
+    }
+
   //search for user events within a specific date frame
   async readDataEvtDate(userid, date) {
     let events = [];
@@ -75,6 +86,7 @@ class DataStore {
     
    
     let collection = await this.collection();
+<<<<<<< HEAD
    
     await collection
       .find({
@@ -92,6 +104,13 @@ class DataStore {
         events.push(event);
       });
    
+=======
+    await collection.find({ "start": { $gte: searchDate }, userid: ObjectId(userid) }).forEach((event) => {
+      events.push(event);
+
+    });
+    console.log(events)
+>>>>>>> 15bca442adbbe4535f8dc4b187992e534315b7f6
     return events;
   }
 
@@ -115,14 +134,12 @@ class DataStore {
 
   //reads all news in database
   async readNews() {
-    let events = [];
-    let collection = await this.collection();
-    await collection.find({}).forEach((event) => {
-      events.push(event);
-    });
-    return events;
-  }
+    let client = await this.connect();
+    let db = await client.db(this.dbName);
+    const collection = db.collection(this.collName);
+    let dataArr = await collection.find({}).toArray();
 
+<<<<<<< HEAD
   //reads all news in database
   async readNews() {
     let events = [];
@@ -131,19 +148,39 @@ class DataStore {
       events.push(event);
     });
     return events;
+=======
+    let articleSummary = []
+    for (const article of dataArr) {
+      let siteUrl = article.url;
+
+      // Call open graph endpoint to get summary info for a particlar URL
+      // Add elements to new array that is ultimately returned containing summary info
+      await opengraph.getSiteInfo(siteUrl)
+        .then(function (result) {
+          articleSummary.push(result.hybridGraph)
+        });
+    }
+
+    return articleSummary;
+>>>>>>> 15bca442adbbe4535f8dc4b187992e534315b7f6
   }
 
   // reads all news for a particular geographic area
   // geographic area is based on audienceScope - e.g. county, state, country
   // and audienceTarget - e.g array that identifies one or more counties, states, countries
   // where the news article would be of potential interest
+<<<<<<< HEAD
   async readNews(newsLevel, newsAudience) {
+=======
+  async readNewsAudience(newsLevel, newsAudience) {
+>>>>>>> 15bca442adbbe4535f8dc4b187992e534315b7f6
     let newsArticles = [];
 
     console.log("newsLevel: " + newsAudience);
     console.log(newsAudience[newsLevel]);
 
     let collection = await this.collection();
+<<<<<<< HEAD
     await collection
       .find({
         newsLevel: { $eq: newsLevel },
@@ -152,6 +189,11 @@ class DataStore {
       .forEach((article) => {
         newsArticles.push(article);
       });
+=======
+    await collection.find({ "newsLevel": { $eq: newsLevel }, "newsAudience": { $in: newsAudience[newsLevel] } }).forEach((article) => {
+      newsArticles.push(article);
+    });
+>>>>>>> 15bca442adbbe4535f8dc4b187992e534315b7f6
 
     return newsArticles;
   }

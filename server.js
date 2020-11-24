@@ -5,6 +5,11 @@ const port = process.env.PORT || 8000;
 const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+const session = require('express-session');
+const flash = require('connect-flash');
+const morgan = require('morgan');
+const csurf = require('csurf');
+const sendSMS = require('./sendSMS.js')
 const cookieParser = require("cookie-parser");
 
 
@@ -50,6 +55,19 @@ app.get("/event/:userid", async (request, response) => {
   response.send(data);
 });
 
+// get individual event based on event id
+app.get('/individual-event', async(request, response) => {
+  let event = await eventCollection.readDataEvt(request.params._id)
+  response.send(event)
+  console.log("backend ", event)
+})
+
+// get all event contacts coordinating to a specific event
+app.get("/eventcontact/:eventid", async (request, response) => {
+  let data = await eventContactCollection.readEvtContact(request.params.eventid);
+  response.send(data);
+});
+
 // get specific event parameters per user based on date
 app.get("/events/:userid/:date", async (request, response) => {
   console.log("We're in events: ", request.params.date)
@@ -69,16 +87,8 @@ app.get("/user", async (request, response) => {
 
 // Route to read ALL News
 app.get("/news", async (request, response) => {
-  let data = await newsCollection.readData();
-  response.send(data);
-});
-
-// Route to read News for a particular geographic audience
-app.get("/news/:newsLevel", async (request, response) => {
-
-  console.log('news level ', request.params.newsLevel)
-
-  let data = await newsCollection.readNews(request.params.newsLevel, request.query);
+  console.log('hitting news endpoint')
+  let data = await newsCollection.readNews();
   response.send(data);
 });
 
@@ -154,7 +164,7 @@ app.post("/eventcontact", async (request, response) => {
   };
 
   let statusObj = await eventContactCollection.insert(newEventContact);
-  response.redirect("/userprofile");
+  response.redirect("/addinfo-page");
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
@@ -163,17 +173,16 @@ app.post("/eventcontact", async (request, response) => {
     response.status(400).send(statusObj.error);
   }
 });
+// sends alert 
+app.post("/send-alert", (request, response)=>{
+  // hard coded number and message //
+  sendSMS('8023388026', 'Alert');
+  response.send({ok: true})
+})
 
 module.exports = DataStore;
 
-
 ////////////////////////////////////////////////////////////////////////////
-var session = require('express-session');
-var flash = require('connect-flash');
-var morgan = require('morgan');
-var csurf = require('csurf');
-
-var notification = require('./middleware/message');
 
 // Use morgan for HTTP request logging in dev and prod
 if (process.env.NODE_ENV !== 'test') {
@@ -198,78 +207,19 @@ app.use(session({
 // Use connect-flash to persist informational messages across redirects
 app.use(flash());
 
-// Configure application routes
-var router = express.Router();
-
-var routes = function(router) {
-  router.get('/send-alert', function(request, response) {
-    throw new Error('*** Error: ****');
-  });
-};
-
-// Add CSRF protection for web routes
-if (process.env.NODE_ENV !== 'test') {
-  app.use(csurf());
-  app.use(function(request, response, next) {
-    response.locals.csrftoken = request.csrfToken();
-    next();
-  });
-}
-
-routes(router);
-app.use(router);
-
 // Handle 404
 app.use(function(request, response, next) {
   response.status(404);
-  response.sendFile(path.join(__dirname, 'client', 'sendAlert.js'));
+  response.sendFile(path.join(__dirname, 'client', "public", "index.html"));
 });
 
-// Mount middleware to notify Twilio of errors
-app.use(notification.notifyOnError);
-
-
+// handle error
 app.use(function(err, request, response, next) {
   response.status(500);
-  response.send("send-alert")
+  response.send(err)
 });
 
-
-app.post('/send-alert', sendSMS, (request, response)=>{
-  response.send(path.resolve('./client/src/Components/sendAlert.js'))
-
-})
-
-/////////////////////////////////////////////////////////////
-// from index.js
-// var http = require('http');
-// const { response } = require('express');
-// var server = http.createServer(app);
-// server.listen(4000, function() {
-//   console.log('Express server listening on *:' + process.env.PORT);
-// });
-
-///////////////////////////////////////////////////////////
-// from sendSMS
-function sendSMS (to, message) {
-  var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-  console.log(client.api.messages.create())
-  return client.api.messages
-    .create({
-      body: message,
-      to: to,
-      from: process.env.TWILIO_NUMBER,
-    }).then(function(data) {
-      console.log('Message Sent');
-    }).catch(function(err) {
-      console.error('Could not notify administrator');
-      console.error(err);
-    });
-};
-//////////////////////////////////////////////////////////////
-// from config.js
-require('dotenv').config();
-
+// config
 var requiredConfig = [process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN, process.env.TWILIO_NUMBER];
 var isConfigured = requiredConfig.every(function(configValue) {
   return configValue || false;

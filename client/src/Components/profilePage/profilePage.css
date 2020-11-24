@@ -21,10 +21,33 @@
     justify-self: flex-start;
 }
 
-#profileName{
+
+#profileName {
     margin-bottom: 10px;
     font-size: 22px;
-}
+  
+    animation: fadeInAnimation ease-in-out 5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+  @keyframes fadeInAnimation {
+    0% {
+      opacity: 0;
+    }
+    50%{
+        opacity: .6;
+    }
+    100% {
+      opacity: 1;
+    }
+      from {
+          margin-left: -30%;
+        }
+        to {
+          margin-left: 0;
+        }
+    
+  }
 
 #eventListContainer {
     display: flex;
