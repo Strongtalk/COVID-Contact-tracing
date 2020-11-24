@@ -83,11 +83,13 @@ function showIndividualEvent() {
      <div id="eventListContainer">
      <h4 id="eventListTitle">Your Events</h4>
      <div name="eventList" id="eventListBox">
+       <ul>
      {eventInfo.map((evt) => {
-              return <p className="eventListItem">{evt.name}</p>;
+              return <a href="/individual-event"><li key={evt._id} className="eventListItem">{evt.name}</li></a>;
             })}
-       <button onClick={showIndividualEvent}>Individual Event</button>
+            </ul>
      </div>
+     <button onClick={showIndividualEvent}>Individual Event</button>
      </div>
      <div id="buttonContainer">
       <form className="profileButtons" action="/event">
