@@ -85,7 +85,6 @@ app.get("/user", async (request, response) => {
 
 // Route to read ALL News
 app.get("/news", async (request, response) => {
-  console.log('hitting news endpoint')
   let data = await newsCollection.readNews();
   response.send(data);
 });
