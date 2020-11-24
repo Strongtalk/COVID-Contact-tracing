@@ -105,11 +105,8 @@ function showIndividualEvent() {
        <Calendar onClickDay={(evt) => test(evt)} />
      </div>
      </div>
-     <p id="currentStatus"><mark id="statusBox">Condition:</mark>*Your current status here*</p>
      <div id="statusButtonContainer">
      <button  onClick={positiveOfPositive} type='submit' className="statusButtons">Tested Positive</button>
-     <button type='submit' className="statusButtons">Feeling Unwell</button>
-     <button type='submit' className="statusButtons">Tested Negative</button>
      </div>
     </div>
     </div>
