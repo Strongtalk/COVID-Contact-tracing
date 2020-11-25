@@ -5,6 +5,7 @@ import "./App.css";
 // page imports
 import LandingPage from "./LandingPage/landingPage.js";
 import AddInfo from "./AddInfo/add-info.js";
+import UpdateEvent from "./addEvent/updateEvent.js";
 import CovidMap from "./Map/covidMap.js";
 import UserLogin from "./Login/user-login.js";
 import NewUser from "./newUser/newUser.js";
@@ -72,6 +73,7 @@ function App() {
             <Route exact path="/addinfo-page" component={AddInfo} />
             <PrivateLogSign exact path="/user" component={NewUser} />
             <Route exact path="/event" component={AddEvent} />
+            <Route exact path="/update-event" component={UpdateEvent} />
               {/** pass "userid={userid}" after userid is defined in state on this page */}
             <PrivatePage exact path="/userprofile" component={ProfilePage} />
           </Switch>

@@ -4,7 +4,7 @@ import "./add-info.css";
 
 // component creation
 function AddInfo() {
-  const [contactInfo, setContactInfo] = useState(null);
+  const [contactInfo, setContactInfo] = useState([]);
 
   //this is to retrieve the event ID added on the last page and associate it with the contact that are about to be entered
   const cookies = document.cookie;
@@ -28,10 +28,11 @@ function AddInfo() {
 
   return (
     //general wrapper for page
-    <div className="pageContainer">
+    <div className="pageContainer"><br></br>
       <h1 id="addInfoTitle">Add Event Participant</h1>
-      <h2 id='addInfoSubtitle' >Complete For Each Participant:</h2>
-      <form method="POST" action="/eventcontact" id="formContainer" >
+      <p>Please complete and submit this form for each individual contact associated with your event</p>
+      <br></br>
+      <form method="POST" action="/eventcontact">
         <div id="typeInputContainer">
           <input type="hidden" name="eventid" value={cookieSlice} />
           <input
@@ -50,8 +51,8 @@ function AddInfo() {
           ></input>
           <input
             type="text"
-            placeholder="Phone Number"
-            maxLength="7"
+            placeholder="Phone Number:"
+            maxLength="10"
             name="phone"
             className="addInfoInput"
             required
@@ -75,12 +76,24 @@ function AddInfo() {
         </div>
         <input className="addInfoSubmitButton" type="submit" value="ADD CONTACT" />
       </form>
-      <form action="/" id="soloFormContainer" >
-        <p id="soloEvent">
-          Finished or did not come within 6ft of someone during this event instance?
+      <form action="/">
+        <p id="soloEvent"><br></br><br></br>
+          Finished with event entry or did not come in close contact with anyone
+          during this event instance?<br></br>
         </p>
-        <input className="addInfoSubmitButton" type="submit" value="HOME"></input>
-      </form>
+        <input id="addInfoSubmitButton" type="submit" value="HOME"></input>
+      </form><br></br>
+      <h3>CONTACT(S) ADDED FOR EVENT:</h3>
+      {contactInfo.length === 0 && (<div><p>No contacts added</p> </div>)} 
+      {contactInfo.map((contact, index) => {
+        return (
+          <div key={index}> 
+          <h3 className="contactName">
+            {contact.name} 
+          </h3>
+          </div>
+        )
+      })}
     </div>
   );
 }
