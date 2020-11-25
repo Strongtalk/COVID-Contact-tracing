@@ -30,27 +30,27 @@ function AddInfo() {
     //general wrapper for page
     <div className="pageContainer">
       <h1 id="addInfoTitle">Add Event Participant</h1>
-      <h2 id='addInfoSubtitle' >Add Contact for Event:</h2>
-      <form method="POST" action="/eventcontact">
+      <h2 id='addInfoSubtitle' >Complete For Each Participant:</h2>
+      <form method="POST" action="/eventcontact" id="formContainer" >
         <div id="typeInputContainer">
           <input type="hidden" name="eventid" value={cookieSlice} />
           <input
             type="text"
-            placeholder="Name:"
+            placeholder="Name"
             name="name"
             className="addInfoInput"
             required
           ></input>
           <input
             type="text"
-            placeholder="Email:"
+            placeholder="Email"
             name="email"
             className="addInfoInput"
             required
           ></input>
           <input
             type="text"
-            placeholder="Phone Number:"
+            placeholder="Phone Number"
             maxLength="7"
             name="phone"
             className="addInfoInput"
@@ -58,14 +58,14 @@ function AddInfo() {
           ></input>
         </div>
         <div id="checkboxInputContainer">
-          <label className="checkBoxLabel">Person: </label>
+          <label className="checkBoxLabel">Person </label>
           <input
             className="checkBox"
             type="checkbox"
             name="type"
             value="individual"
           ></input>
-          <label className="checkBoxLabel">Business: </label>
+          <label className="checkBoxLabel">Business </label>
           <input
             className="checkBox"
             type="checkbox"
@@ -73,14 +73,13 @@ function AddInfo() {
             value="individual"
           ></input>
         </div>
-        <input id="addInfoSubmitButton" type="submit" value="ADD CONTACT" />
+        <input className="addInfoSubmitButton" type="submit" value="ADD CONTACT" />
       </form>
-      <form action="/">
+      <form action="/" id="soloFormContainer" >
         <p id="soloEvent">
-          Finished with event entry or did not come in close contact with anyone
-          during this event instance?
+          Finished or did not come within 6ft of someone during this event instance?
         </p>
-        <input id="soloEventSubmit" type="submit" value="HOME"></input>
+        <input className="addInfoSubmitButton" type="submit" value="HOME"></input>
       </form>
     </div>
   );

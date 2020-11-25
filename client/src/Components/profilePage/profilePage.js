@@ -5,7 +5,6 @@ import firebaseApp from "../auth/firebase.js";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
-
 function ProfilePage() {
   const [profile, setProfile] = useState("");
 
@@ -29,7 +28,6 @@ function ProfilePage() {
       fetch(`/user/${userEmail}`)
         .then((response) => response.json())
         .then((userProfile) => {
-          
           setProfile(userProfile[0]);
         });
     };
@@ -37,48 +35,51 @@ function ProfilePage() {
     fetchUser();
   }, []);
 
-function showIndividualEvent() {
-  document.location = '/individual-event'
-}  
-  // redirects to positive test warning 
+  function showIndividualEvent() {
+    document.location = "/individual-event";
+  }
+  // redirects to positive test warning
   function positiveOfPositive() {
-    document.location = '/send-alert'
+    document.location = "/send-alert";
   }
   //display user info here
   return (
-    <div id="profilePageWrapper">
     <div id="profilePageContainer">
       <div id="profileContainer">
-      <h2 id="profileName"> Hello {profile.name} !</h2>
-        <button id="signOut" onClick={handleLogout}>Sign Out</button>
-        <button id="updateInfo">Update Info</button>
+        <h2 id="profileName"> Hello {profile.name} !</h2>
+        <form id="buttonContainer" action="/event">
+          <input
+            className="profileButtons"
+            type="submit"
+            value="Add Event"
+          ></input>
+          <input
+            className="profileButtons"
+            type="submit"
+            value="Update Event"
+          ></input>
+          <input
+            className="profileButtons"
+            type="submit"
+            value="Sign Out"
+            onClick={handleLogout}
+          ></input>
+        </form>
       </div>
-     <div id="eventListContainer">
-     <h4 id="eventListTitle">Your Events</h4>
-     <div name="eventList" id="eventListBox">
-       <button onClick={showIndividualEvent}>Individual Event</button>
-     </div>
-     </div>
-     <div id="buttonContainer">
-      <form className="profileButtons" action="/event">
-        <input id="addEventButton" type="submit" value="Add Event"></input>
-        </form>
-        <form className="profileButtons">
-        <input id="updateEventButton" type="submit" value="Update Event"></input>
-        </form>
-        </div>
-        <div id="calendarWrapper">
-     <div id="calendarContainer">
-       <Calendar />
-     </div>
-     </div>
-     <p id="currentStatus"><mark id="statusBox">Condition:</mark>*Your current status here*</p>
-     <div id="statusButtonContainer">
-     <button  onClick={positiveOfPositive} type='submit' className="statusButtons">Tested Positive</button>
-     <button type='submit' className="statusButtons">Feeling Unwell</button>
-     <button type='submit' className="statusButtons">Tested Negative</button>
-     </div>
-    </div>
+      <div id="calendarWrapper">
+          <Calendar />
+      </div>
+      <h4 id="eventListTitle">Your Events</h4>
+      <div id="eventListContainer">
+        
+      </div>
+      <button
+        onClick={positiveOfPositive}
+        type="submit"
+        className="statusButtons"
+      >
+        Tested Positive
+      </button>
     </div>
   );
 }

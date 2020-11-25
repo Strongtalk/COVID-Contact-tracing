@@ -28,20 +28,20 @@ function AddEvent(props) {
   }, []);
 
   return (
-    <div>
-      <h1 id="addEventTitle" >Add Event:</h1>
+    <div id='addEventContainer' >
+      <h1 id="addEventTitle" >Add Event</h1>
       <form id="eventContainer" method="POST" action="/event">
         <input type="hidden" name="userid" value={objectId} />
         <input
           className="eventInput"
           type="text"
-          placeholder="Establishment Name: "
+          placeholder="Establishment Name "
           name="name"
         />
         <input
           className="eventInput"
           type="text"
-          placeholder="Description: "
+          placeholder="Description "
           name="description"
         />
         <br></br>

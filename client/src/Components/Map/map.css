@@ -3,10 +3,11 @@
 #main-wrapper {
   display: flex;
   flex-direction: column;
-  width: 98vw;
+  width: 100vw;
   height: 140vh;
   justify-content: center;
   align-items: center;
+  background-color: #BF856D
 }
 
 /* Container for the map */
@@ -15,7 +16,6 @@
   flex-direction: column;
   width: 77vw;
   height: 73vh;
-  border: 2px solid black;
 }
 
 #app-map{
