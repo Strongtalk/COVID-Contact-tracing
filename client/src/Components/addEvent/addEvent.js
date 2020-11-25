@@ -52,17 +52,16 @@ function AddEvent(props) {
 
   // Helper function to format time in user friendly format
   function formatTime(eventTime) {
-    console.log(eventTime)
+    console.log("event time is:" , eventTime.substr(11,5))
     if (eventTime != null) {
-      let time = new Date(eventTime).toISOString().substr(0, 10)
-      console.log('Time is:', time)
+      let time = eventTime.substr(11,5)
+      console.log("Time is:", time)
       return (time);
     }
     else {
       return null;
     }
   }
-
   
   const showContacts = () => {
     // this grabs all of the event participants for a specific event and returns it as an object
@@ -163,9 +162,10 @@ function AddEvent(props) {
           />
           <input
             className="eventInput"
-            type="time"
+                        type="time"
             placeholder="End Time: "
             name="end"
+            defaultValue={formatTime(eventInfo.end)}
             onChange={setEventEndTime}
           />
           <br></br>
