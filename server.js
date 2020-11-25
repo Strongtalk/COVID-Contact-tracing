@@ -87,7 +87,6 @@ app.get("/user", async (request, response) => {
 
 // Route to read ALL News
 app.get("/news", async (request, response) => {
-  console.log('hitting news endpoint')
   let data = await newsCollection.readNews();
   response.send(data);
 });
@@ -178,6 +177,7 @@ app.post("/eventcontact", async (request, response) => {
 app.post("/send-alert", (request, response)=>{
   // hard coded number and message //
   sendSMS('8023388026', 'Alert');
+  sendSMS('9782219788', 'Alert')
   response.send({ok: true})
 })
 

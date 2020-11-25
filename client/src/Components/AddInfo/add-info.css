@@ -1,114 +1,58 @@
-/* ----------------------- Mobile View ------------ */
-@media (max-width: 768px) {
-  #addInfoSubmitButton {
-    text-align: center;
-    border: 1px solid black;
-    font-size: 15px;
-    padding: 6px 15px;
-    border-radius: 8%;
-  }
-}
-@media (max-width: 768px) {
-  .checkBox {
-    height: 20px;
-    width: 20px;
-    margin: 0 5px;
-  }
-}
-@media (max-width: 768px) {
-  .checkBoxLabel {
-    margin-bottom: 0;
-    font-size: 25px;
-    padding-left: 5px;
-  }
-}
-@media (max-width: 768px) {
-  #checkboxInputContainer {
-    margin: 10px 0;
-  }
-}
-@media (max-width: 768px) {
-  .addInfoInput {
-    border: 1px solid black;
-    margin: 5px 0;
-    width: 75vw;
-    height: 35px;
-    font-size: 25px;
-  }
-}
-@media (max-width: 768px) {
-  #typeInputContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-@media (max-width: 768px) {
-  h1 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-}
-@media (max-width: 768px) {
-  .pageContainer {
-    text-align: center;
-  }
-}
-/* -------------------- Desktop View --------------- */
-@media (min-width: 770px) {
-    #soloEventSubmit{
-    text-align: center;
-    font-size: 30px;
-    border: 1px solid black;
-    margin-top: 20px;
-    padding: 6px 15px;
-    margin-left: 20px;
-    }
-}
-@media (min-width: 770px) {
-  #addInfoSubmitButton {
-    text-align: center;
-    font-size: 30px;
-    border: 1px solid black;
-    margin-top: 10px;
-    padding: 6px 15px;
-    margin-left: 20px;
-  }
-}
-@media (min-width: 770px) {
-  .checkBox {
-    height: 35px;
-    width: 35px;
-    margin-right: 15px;
-  }
+.pageContainer {
+  text-align: center;
 }
 
-@media (min-width: 770px) {
-  #checkboxInputContainer {
-    margin-left: 20px;
-    font-size: 35px;
-  }
+#addInfoTitle {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
-@media (min-width: 770px) {
-  .pageContainer {
-    text-align: left;
-  }
+#typeInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@media (min-width: 770px) {
-  #addInfoTitle {
-    font-size: 75px;
-    margin-left: 20px;
-  }
+.addInfoInput {
+  border: 1px solid black;
+  margin: 5px 0;
+  width: 75vw;
+  height: 35px;
+  font-size: 25px;
 }
 
-@media (min-width: 770px) {
-  .addInfoInput {
-    border: 1px solid black;
-    margin: 5px 20px;
-    width: 75vw;
-    height: 45px;
-    font-size: 35px;
-  }
+#checkboxInputContainer {
+  margin: 10px 0;
 }
+
+.checkBoxLabel {
+  margin-bottom: 0;
+  font-size: 25px;
+  padding-left: 5px;
+}
+.checkBox {
+  height: 20px;
+  width: 20px;
+  margin: 0 5px;
+}
+
+#addInfoSubmitButton {
+  text-align: center;
+  border: 1px solid black;
+  font-size: 15px;
+  padding: 6px 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
