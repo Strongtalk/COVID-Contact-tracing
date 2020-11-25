@@ -63,50 +63,81 @@ class DataStore {
     return events;
   }
 
-    //reads all events in database for a user
-    async readEvtContact(eventid) {
-      let events = [];
-      let collection = await this.collection();
-      await collection.find({ eventid: ObjectId(eventid) } ).forEach((event) => {
-        events.push(event);
-      });
-      return events;
-    }
+  //reads event data for a specific event
+  async readEventData(eventid) {
+    let event = null;
+    let collection = await this.collection();
+    event = await collection.findOne({ _id: ObjectId(eventid) });
+    return event;
+  }
+
+  //reads all events in database for a user
+  async readEvtContact(eventid) {
+    let events = [];
+    let collection = await this.collection();
+    await collection.find({ eventid: ObjectId(eventid) }).forEach((event) => {
+      events.push(event);
+    });
+    return events;
+  }
 
   //search for user events within a specific date frame
   async readDataEvtDate(userid, date) {
     let events = [];
-    //did hardcode this will probably have to modify
-    // REMINDER *months start at 0 if they are put in as number!!!!*
-    console.log(date)
-    let searchDate = new Date(date)
-    console.log(searchDate)
-    let collection = await this.collection();
-    await collection.find({ "start": { $gte: searchDate }, userid: ObjectId(userid) }).forEach((event) => {
-      events.push(event);
+    
 
-    });
-    console.log(events)
+    // Setup search dates for query;
+    let startDate = new Date(date);
+    let endDate = new Date(date);
+    endDate = endDate.setDate(startDate.getDate() + 1);
+    let newEndDate = new Date(endDate);
+
+    console.log('userid: ', userid)
+    console.log('start/end dates: ', startDate, newEndDate)
+
+    let collection = await this.collection();
+
+    // Execute query to obtain events between startDate and End Date (start date + 1 day)
+    await collection
+      .find({
+        $or: [
+          {
+            $and: [
+              { start: { $gte: startDate } },
+              { start: { $lt: newEndDate } },
+            ],
+          },
+          { $or: [{ userid: ObjectId(userid) }] },
+        ],
+      })
+      .forEach((event) => {
+        events.push(event);
+      });
+
+      console.log('Events found = ', events)
+
     return events;
   }
 
   //write to database- user collection
   async insert(object) {
-    let response = { status: null, error: null, id:null };
+    let response = { status: null, error: null, id: null };
     try {
       let collection = await this.collection();
       console.log("inserting item");
-      await collection.insertOne(object).then((res)=> response.id= res.insertedId)
+      await collection
+        .insertOne(object)
+        .then((res) => (response.id = res.insertedId));
       console.log("Success adding item");
       response.status = "ok";
     } catch (error) {
       response.error = error.toString();
       console.log(error.toString());
     }
-    return response.id
+    return response.id;
   }
 
-  //reads all news in database 
+  //reads all news in database
   async readNews() {
     let client = await this.connect();
     let db = await client.db(this.dbName);
@@ -135,8 +166,8 @@ class DataStore {
   async readNewsAudience(newsLevel, newsAudience) {
     let newsArticles = [];
 
-    console.log('newsLevel: ' + newsAudience)
-    console.log(newsAudience[newsLevel])
+    console.log("newsLevel: " + newsAudience);
+    console.log(newsAudience[newsLevel]);
 
     let collection = await this.collection();
     await collection.find({ "newsLevel": { $eq: newsLevel }, "newsAudience": { $in: newsAudience[newsLevel] } }).forEach((article) => {
@@ -145,8 +176,6 @@ class DataStore {
 
     return newsArticles;
   }
-
-
 }
 
 module.exports = DataStore;

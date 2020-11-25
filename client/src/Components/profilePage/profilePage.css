@@ -1,3 +1,9 @@
+#profilePageContainer {
+    height: 100vh;
+    width: 80vw;
+  
+}
+
 #profileContainer{
     margin: 10px;
 }
@@ -12,7 +18,6 @@
 
 #eventListTitle {
     display: flex;
-
 }
 
 .profileDisplay{
@@ -21,11 +26,10 @@
     justify-self: flex-start;
 }
 
-
+/* This is the animation for the header on your profile*/ 
 #profileName {
     margin-bottom: 10px;
     font-size: 22px;
-  
     animation: fadeInAnimation ease-in-out 5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -54,17 +58,34 @@
     height: 70vh;
     width: 99vw;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
+    border: 2px solid black;
+}
+
+#events {
+    display: flex;
+    height: 10vh;
+    width: 75vw;
+    }
+
+#event-entry {
+    display: flex;
+}
+
+#event {
+    flex: 1;
 }
 
 #eventListBox {
-display: flex;
-height: 55vh;
-width: 78vw;
-border: 1px solid red;
+    display: flex;
+    justify-items: center;
+    align-items: top;
 }
 
+#event-dates {
+    width: 35vw;
+}
 
 /* Buttons on the page*/
 
@@ -113,7 +134,7 @@ left: 15px;
     flex-direction: column-reverse;
     align-items: center;
 }
-
+/*Buttons for, Negative, Positive, Feeling unwell*/
 .statusButtons {
 text-align: center;
 font-size: 14px;
@@ -123,6 +144,11 @@ padding: 4px 16px;
 border-radius: 8px;
 }
 
+/*Text above calendar*/
+#calendarTutorial {
+    width: 98vw;
+    margin-block-end: 0;
+}
 
 /* Calendar and it's container*/
 #calendarWrapper {
@@ -144,5 +170,6 @@ border-radius: 8px;
 #currentStatus {
     text-align: start;
     height: 5vh;
+    width: 99vw;
     border-bottom: 4px double rgb(202, 107, 18);
 }

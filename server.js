@@ -51,13 +51,15 @@ app.get("/user/:email", async (request, response) => {
 
 // get all events coordinating to a specific user id
 app.get("/event/:userid", async (request, response) => {
+ 
   let data = await eventCollection.readDataEvt(request.params.userid);
   response.send(data);
 });
 
 // get individual event based on event id
-app.get('/individual-event', async(request, response) => {
-  let event = await eventCollection.readDataEvt(request.params._id)
+app.get('/individual-event/:eventid', async(request, response) => {
+  console.log('/event get id: ', request.params.eventid);
+  let event = await eventCollection.readEventData(request.params.eventid)
   response.send(event)
   console.log("backend ", event)
 })
@@ -119,6 +121,7 @@ app.post("/user", async (request, response) => {
 
 
 app.post("/event", async (request, response) => {
+
   //THIS IS ONLY APPLICABLE TO EST!!
   //NEED TO REVISIT WHEN WE GO GLOBAL ;)
   //modify the start time by five hours to offset the mongoDB UTC
@@ -142,7 +145,7 @@ app.post("/event", async (request, response) => {
   let statusObj = await eventCollection.insert(newEvent);
   console.log("event ID cookie being sent to browser MMMmmmMMMmm cookies", statusObj);
   response.cookie("eventId", statusObj)
-  response.redirect("/addinfo-page");
+  response.redirect("/event");
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
