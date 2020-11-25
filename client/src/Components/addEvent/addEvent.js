@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./addEvent.css";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 
 // This function is for displaying event info on selected date based on user info.
 //Needs to be updated when we have auth for users
