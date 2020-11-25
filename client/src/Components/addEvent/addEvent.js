@@ -38,11 +38,8 @@ function AddEvent(props) {
   function formatDate(eventDate) {
     console.log(eventDate)
     if (eventDate != null) {
-      let date = new Date(eventDate)
-      let month = date.getMonth()
-      let day = date.getDay()
-      let year = date.getFullYear()
-      return(month + '/' + day + '/' + year)
+      let date = new Date(eventDate).toISOString().substr(0, 10)
+      return date;
     }
     else {
       return null;
