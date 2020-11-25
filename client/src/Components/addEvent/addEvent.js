@@ -8,51 +8,84 @@ import "react-calendar/dist/Calendar.css";
 function AddEvent(props) {
   const [eventInfo, setEventInfo] = useState(null);
   const [eventDate, setEventDate] = useState(null);
-
-  console.log(eventInfo);
+  const [eventId, setEventId] = useState(null)
 
   let objectId = localStorage.getItem("id");
 
   //TESTING will probably add an iterator and transfer to profile page//
   const showEvents = () => {
-    // this grabs all of the events for a user and returns it as an object
-    //local storage is called upon which is where objectId comes from
-    // objectId = userID
-    fetch(`/event/${objectId}`)
+
+    console.log('Before fetch event id: ', [props.location.state.eventId])
+    if (!eventInfo) {
+    fetch(`/individual-event/${props.location.state.eventId}`)
       .then((response) => response.json())
       .then((userEvent) => {
-        console.log(userEvent);
+        console.log('In AddEvent: ', userEvent);
         setEventInfo(userEvent);
       });
+    }
   };
 
   useEffect(() => {
+
+    console.log('In Add Event: ', props.location.state);
+    setEventId(props.location.state);
     showEvents();
   }, []);
 
+  // Helper function to format date in user friendly format
+  function formatDate(eventDate) {
+    console.log(eventDate)
+    if (eventDate != null) {
+      let date = new Date(eventDate)
+      let month = date.getMonth()
+      let day = date.getDay()
+      let year = date.getFullYear()
+      return(month + '/' + day + '/' + year)
+    }
+    else {
+      return null;
+    }
+  }
+
   return (
     <div>
-      <h1 id="addEventTitle" >Add Event:</h1>
+      {eventInfo !== null ?
+      <h1 id="addEventTitle" >Event:</h1>
+      : null }
+
+      {eventInfo !== null ?
       <form id="eventContainer" method="POST" action="/event">
         <input type="hidden" name="userid" value={objectId} />
+        <label for="name">Event Name </label>
         <input
           className="eventInput"
           type="text"
           placeholder="Establishment Name: "
           name="name"
+          defaultValue={eventInfo.name}
         />
+       
+       <label for="name">Description </label>
         <input
           className="eventInput"
           type="text"
           placeholder="Description: "
           name="description"
+          defaultValue={eventInfo.description}
         />
         <br></br>
         <label className="eventLabel" htmlFor="date">
           Event Date:
         </label>
         <br></br>
-        <input className="eventInput" type="date" name="date" />
+        <input 
+            className="eventInput"
+            name="date"
+            type="date"
+            defaultValue={formatDate(eventInfo.start)}
+            />
+            
         <br></br>
         <label className="eventLabel" htmlFor="start">
           Start and End Time:
@@ -63,6 +96,7 @@ function AddEvent(props) {
           type="time"
           placeholder="Start Time: "
           name="start"
+          defaultValue={formatDate(eventInfo.start)}
         />
         <input
           className="eventInput"
@@ -73,8 +107,10 @@ function AddEvent(props) {
         <br></br>
         <input id="eventSubmit" type="submit" value="Next" />
       </form>
+      : null }
+
     </div>
-  );
+  )
 }
 
 export default AddEvent;

@@ -63,36 +63,47 @@ class DataStore {
     return events;
   }
 
-    //reads all events in database for a user
-    async readEvtContact(eventid) {
-      let events = [];
-      let collection = await this.collection();
-      await collection.find({ eventid: ObjectId(eventid) } ).forEach((event) => {
-        events.push(event);
-      });
-      return events;
-    }
+  //reads event data for a specific event
+  async readEventData(eventid) {
+    let event = null;
+    let collection = await this.collection();
+    event = await collection.findOne({ _id: ObjectId(eventid) });
+    return event;
+  }
+
+  //reads all events in database for a user
+  async readEvtContact(eventid) {
+    let events = [];
+    let collection = await this.collection();
+    await collection.find({ eventid: ObjectId(eventid) }).forEach((event) => {
+      events.push(event);
+    });
+    return events;
+  }
 
   //search for user events within a specific date frame
   async readDataEvtDate(userid, date) {
     let events = [];
-    //did hardcode this will probably have to modify
-    // REMINDER *months start at 0 if they are put in as number!!!!*
     
-    let searchDate = new Date(date);
+
+    // Setup search dates for query;
+    let startDate = new Date(date);
     let endDate = new Date(date);
-    endDate = endDate.setDate(searchDate.getDate() + 1);
+    endDate = endDate.setDate(startDate.getDate() + 1);
     let newEndDate = new Date(endDate);
-    
-   
+
+    console.log('userid: ', userid)
+    console.log('start/end dates: ', startDate, newEndDate)
+
     let collection = await this.collection();
-   
+
+    // Execute query to obtain events between startDate and End Date (start date + 1 day)
     await collection
       .find({
-        $and: [
+        $or: [
           {
             $and: [
-              { start: { $gte: searchDate } },
+              { start: { $gte: startDate } },
               { start: { $lt: newEndDate } },
             ],
           },
@@ -102,7 +113,9 @@ class DataStore {
       .forEach((event) => {
         events.push(event);
       });
-   
+
+      console.log('Events found = ', events)
+
     return events;
   }
 

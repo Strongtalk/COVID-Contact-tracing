@@ -51,13 +51,15 @@ app.get("/user/:email", async (request, response) => {
 
 // get all events coordinating to a specific user id
 app.get("/event/:userid", async (request, response) => {
+ 
   let data = await eventCollection.readDataEvt(request.params.userid);
   response.send(data);
 });
 
 // get individual event based on event id
-app.get('/individual-event', async(request, response) => {
-  let event = await eventCollection.readDataEvt(request.params._id)
+app.get('/individual-event/:eventid', async(request, response) => {
+  console.log('/event get id: ', request.params.eventid);
+  let event = await eventCollection.readEventData(request.params.eventid)
   response.send(event)
   console.log("backend ", event)
 })
@@ -70,12 +72,10 @@ app.get("/eventcontact/:eventid", async (request, response) => {
 
 // get specific event parameters per user based on date
 app.get("/events/:userid/:date", async (request, response) => {
-  console.log("We're in events: ", request.params.date)
   let data = await eventCollection.readDataEvtDate(
     request.params.userid,
     request.params.date
   );
-  console.log(data)
   response.send(data);
 });
 

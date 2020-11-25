@@ -64,15 +64,14 @@ const RightNav = ({ open }) => {
     
     <Ul open={open}>
       <div className="navList-bubble">
-      <Link to="/" ><li>Home</li></Link>
+      <Link to="/" ><li>News</li></Link>
       </div>
-      <Link to="/" ><li>News</li></Link>  
       {!user    ?
       <Link to="/userlogin-page"><li>Log In</li></Link> : null }
       {!user    ?
       <Link to="/user"><li>Sign up</li></Link> : null }
       {user ?
-      <Link to="/userprofile"><li>User Profile</li></Link>  : null }
+      <Link to="/userprofile"><li>My Events</li></Link>  : null }
       <Link to="/map"><li>VT Covid Map</li></Link> 
       {/* {userEmail === "emilysaber13@gmail.com" ?
       <Link to="/admin"><li>ADMIN THINGS</li></Link> : null } */}

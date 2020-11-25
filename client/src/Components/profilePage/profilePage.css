@@ -1,3 +1,9 @@
+#profilePageContainer {
+    height: 100vh;
+    width: 80vw;
+  
+}
+
 #profileContainer{
     margin: 10px;
 }
@@ -52,24 +58,33 @@
     height: 70vh;
     width: 99vw;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
+    border: 2px solid black;
+}
+
+#events {
+    display: flex;
+    height: 10vh;
+    width: 75vw;
+    }
+
+#event-entry {
+    display: flex;
+}
+
+#event {
+    flex: 1;
 }
 
 #eventListBox {
-display: flex;
-height: 55vh;
-width: 78vw;
-border: 1px solid red;
-justify-content: center;
+    display: flex;
+    justify-items: center;
+    align-items: top;
 }
 
-.eventListItem {
-    list-style: none;
-}
-
-a:link {
-    text-decoration: none;
+#event-dates {
+    width: 35vw;
 }
 
 /* Buttons on the page*/
