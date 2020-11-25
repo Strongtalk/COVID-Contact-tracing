@@ -144,7 +144,7 @@ app.post("/event", async (request, response) => {
   let statusObj = await eventCollection.insert(newEvent);
   console.log("event ID cookie being sent to browser MMMmmmMMMmm cookies", statusObj);
   response.cookie("eventId", statusObj)
-  response.redirect("/event");
+  response.redirect("/addinfo-page");
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);

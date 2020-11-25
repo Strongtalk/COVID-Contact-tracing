@@ -69,7 +69,7 @@ function ProfilePage() {
   function clickEvent(id, evt) {
     history.push(
       {
-        pathname: '/event',
+        pathname: '/update-event',
         state: {
           eventId: id
         }
@@ -79,6 +79,14 @@ function ProfilePage() {
 
   function addEvent(evt) {
     alert('adding event')
+    history.push(
+      {
+        pathname: '/event',
+        state: {
+          userId: userId
+        }
+      })
+    evt.preventDefault()
   }
 
   // Helper function to format date in user friendly format
