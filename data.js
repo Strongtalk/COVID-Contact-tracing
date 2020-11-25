@@ -100,14 +100,14 @@ class DataStore {
     // Execute query to obtain events between startDate and End Date (start date + 1 day)
     await collection
       .find({
-        $or: [
+        $and: [
           {
             $and: [
               { start: { $gte: startDate } },
               { start: { $lt: newEndDate } },
             ],
           },
-          { $or: [{ userid: ObjectId(userid) }] },
+          { $and: [{ userid: ObjectId(userid) }] },
         ],
       })
       .forEach((event) => {
