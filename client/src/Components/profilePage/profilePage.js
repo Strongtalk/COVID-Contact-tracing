@@ -103,9 +103,6 @@ function ProfilePage() {
     }
   }
 
-  function showIndividualEvent() {
-    document.location = '/individual-event'
-  }
   // redirects to positive test warning 
   function positiveOfPositive() {
     document.location = "/send-alert";
@@ -126,13 +123,12 @@ function ProfilePage() {
             type="submit"
             value="Update Event"
           ></input>
-          <input
-            className="profileButtons"
-            type="submit"
-            value="Sign Out"
-            onClick={handleLogout}
-          ></input>
+          
         </form>
+        <button
+            className="profileButtons"
+            onClick={handleLogout}
+          >SIGN OUT</button>
       </div>
       <div id="calendarWrapper">
           <Calendar />
