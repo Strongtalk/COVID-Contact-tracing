@@ -7,6 +7,7 @@ import "react-calendar/dist/Calendar.css";
 //Needs to be updated when we have auth for users
 function AddEvent(props) {
   const [eventInfo, setEventInfo] = useState(null);
+  const [contactInfo, setContactInfo] = useState([]);
   const [eventDate, setEventDate] = useState(null);
   const [eventId, setEventId] = useState(null)
 
@@ -47,6 +48,22 @@ function AddEvent(props) {
       return null;
     }
   }
+
+  
+  const showContacts = () => {
+    // this grabs all of the event participants for a specific event and returns it as an object
+    // right now just in console log but will eventually get this displaying on the page ?
+    fetch(`/eventcontact/${props.location.state.eventId}`)
+      .then((response) => response.json())
+      .then((contact) => {
+        setContactInfo(contact);
+      });
+  };
+
+  useEffect(() => {
+    showContacts();
+  }, []);
+
 
   return (
     <div>
@@ -109,6 +126,18 @@ function AddEvent(props) {
       </form>
       : null }
 
+<p>CONTACT(S) ADDED FOR EVENT:</p>
+      {contactInfo.length === 0 && (<div><p>No contacts added</p> </div>)} 
+      {contactInfo.map((contact, index) => {
+        return (
+          <div key={index}> 
+          <h3 className="contactName">
+            {contact.name} 
+          </h3>
+          </div>
+        )
+      })}
+    
     </div>
   )
 }
