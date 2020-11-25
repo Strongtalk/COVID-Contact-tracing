@@ -1,10 +1,25 @@
 .pageContainer {
   text-align: center;
+  background-color: #93BFB9;
+  height: 100vh;
 }
 
 #addInfoTitle {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  color: rgb(246, 246, 237);
+  padding-top: 35px;
+}
+#addInfoSubtitle {
+  font-size: 20px;
+  margin: 15px 0;
+}
+
+#formContainer {
+  text-align: left;
+  margin: 0 30px;
+  padding: 10px 17px;
+  background-color: rgb(246, 246, 237);
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 #typeInputContainer {
@@ -36,23 +51,25 @@
   margin: 0 5px;
 }
 
-#addInfoSubmitButton {
+.addInfoSubmitButton {
   text-align: center;
   border: 1px solid black;
   font-size: 15px;
   padding: 6px 15px;
+  background-color: #EDC3C2;
+  border-radius: 5px;
 }
 
+#soloFormContainer {
+  text-align: left;
+  margin: 20px 30px;
+  padding: 10px 17px;
+  background-color: rgb(246, 246, 237);
+  border: 1px solid black;
+  border-radius: 10px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+#soloEvent{
+  font-size: 20px;
+  margin-bottom: 10px;
+}

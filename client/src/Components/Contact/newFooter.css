@@ -27,7 +27,8 @@
 }
 #legalWords {
   margin-right: 20px;
-  font-size: 15px;
+  padding-top:2px;
+  font-size: 14px;
   height: 115px;
   width: 60vw;
   color: black;
@@ -40,7 +41,7 @@
 }
 #copyright {
   margin-left: 20px;
-  font-size: 10px;
+  font-size: 8px;
   align-self: flex-end;
   color: black;
 }
