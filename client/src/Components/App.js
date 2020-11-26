@@ -5,6 +5,7 @@ import "./App.css";
 // page imports
 import LandingPage from "./LandingPage/landingPage.js";
 import AddInfo from "./AddInfo/add-info.js";
+import UpdateInfo from "./AddInfo/updateInfo.js";
 import UpdateEvent from "./addEvent/updateEvent.js";
 import CovidMap from "./Map/covidMap.js";
 import UserLogin from "./Login/user-login.js";
@@ -71,6 +72,7 @@ function App() {
             <Route exact path='/individual-event'> <IndividualEvents/> </Route>
             <PrivateLogSign exact path="/userlogin-page" component={UserLogin} />
             <Route exact path="/addinfo-page" component={AddInfo} />
+            <Route exact path="/update-info" component={UpdateInfo} />
             <PrivateLogSign exact path="/user" component={NewUser} />
             <Route exact path="/event" component={AddEvent} />
             <Route exact path="/update-event" component={UpdateEvent} />

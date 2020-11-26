@@ -103,9 +103,6 @@ function ProfilePage() {
     }
   }
 
-  function showIndividualEvent() {
-    document.location = '/individual-event'
-  }
   // redirects to positive test warning 
   function positiveOfPositive() {
     document.location = '/send-alert'

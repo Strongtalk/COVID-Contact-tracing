@@ -51,25 +51,23 @@ function AddEvent(props) {
   }
 
   return (
-    <div>
+    <div id='addEventContainer'>
         <h1 id="addEventTitle" >Add a Event</h1>
 
         <form id="eventContainer" method="POST" onSubmit={handleSubmit} action="/event">
           <input type="hidden" name="userid" value={objectId} />
-          <label for="name">Event Name </label>
           <input
             className="eventInput"
             type="text"
-            placeholder="Establishment Name: "
+            placeholder="Establishment Name "
             name="name"
             onChange={setEventName}
           />
 
-          <label for="name">Description </label>
           <input
             className="eventInput"
             type="text"
-            placeholder="Description: "
+            placeholder="Description "
             name="description"
             onChange={setEventDescription}
           />
@@ -85,7 +83,6 @@ function AddEvent(props) {
             onChange={setEventDate}
           />
 
-          <br></br>
           <label className="eventLabel" htmlFor="start">
             Start and End Time:
         </label>
@@ -99,7 +96,7 @@ function AddEvent(props) {
           />
           <input
             className="eventInput"
-                        type="time"
+            type="time"
             placeholder="End Time: "
             name="end"
             onChange={setEventEndTime}
@@ -109,7 +106,7 @@ function AddEvent(props) {
         </form>
     
     </div>
-  )
+  </div>
 }
 
 export default AddEvent;

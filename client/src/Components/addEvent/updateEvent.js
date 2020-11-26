@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "./addEvent.css";
 
 // This function is for displaying event info on selected date based on user info.
@@ -13,6 +14,8 @@ function UpdateEvent(props) {
   const [eventStartTime, setEventStartTime] = useState(null)
   const [eventEndTime, setEventEndTime] = useState(null)
 
+  // get reference to history via useHistory hook, need this to redirect to addEvent component
+  let history = useHistory();
 
   let objectId = localStorage.getItem("id");
   console.log('id is:', objectId)
@@ -106,6 +109,18 @@ function UpdateEvent(props) {
     evt.preventDefault()
   }
 
+  function handleClick(evt) {
+    alert('in Update Event handle click')
+    history.push(
+        {
+          pathname: '/update-info',
+          state: {
+            eventId: props.location.state
+          }
+        })
+      evt.preventDefault()
+  }
+
   return (
     <div>
       {eventInfo !== null ?
@@ -178,9 +193,9 @@ function UpdateEvent(props) {
       {contactInfo.map((contact, index) => {
         return (
           <div key={index}> 
-          <h3 className="contactName">
+          <a className="contactName" href={contact.name} onClick={handleClick}>
             {contact.name} 
-          </h3>
+          </a>
           </div>
         )
       })}
