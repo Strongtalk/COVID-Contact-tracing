@@ -109,41 +109,49 @@ function ProfilePage() {
   }
   //display user info here
   return (
-    <div id="profilePageContainer">
-      <div id="profileContainer">
-        <h2 id="profileName"> Hello {profile.name} !</h2>
-        <form id="buttonContainer" action="/event">
-          <input
-            className="profileButtons"
-            type="submit"
-            value="Add Event"
-          ></input>
-          <input
-            className="profileButtons"
-            type="submit"
-            value="Update Event"
-          ></input>
-          
-        </form>
-        <button
-            className="profileButtons"
-            onClick={handleLogout}
-          >SIGN OUT</button>
+    <div id="profilePageWrapper">
+      <div id="profilePageContainer">
+        <div id="profileContainer">
+          <h2 id="profileName"> Hello {profile.name} !</h2>
+          <button id="signOut" onClick={handleLogout}>Sign Out</button>
+          <button id="updateInfo">Update Info</button>
+        </div>
+        <p id="calendarTutorial">Please select a date to see your events!</p>
+        <div id="calendarWrapper">
+          <div id="calendarContainer">
+            <Calendar onClickDay={(evt) => clickCalendarDate(evt)} />
+          </div>
+        </div>
+        <div id="eventListContainer">
+          <h4 id="eventListTitle">Your Events</h4>
+          <div name="eventList" id="eventListBox">
+            {eventInfo.length > 0 ? (
+              <ul>
+                {eventInfo.map((userEvent) => {
+                  return <div id="event-entry">
+                    <div id="event">
+                      <a key={userEvent._id} href={userEvent} onClick={(evt) => clickEvent(userEvent._id, evt)}>{userEvent.name}
+                      </a>
+                    </div>
+                    <div id="event-dates">
+                      <p>{formatDate(userEvent.start) + '-' + formatDate(userEvent.end)}</p>
+                      <p></p>
+                    </div>
+                  </div>;
+                })}
+              </ul>
+            ) : null}
+          </div>
+        </div>
+        <div id="buttonContainer">
+          <form className="profileButtons" action="/event">
+            <input id="addEventButton" type="submit" value="Add Event" onClick={addEvent}></input>
+          </form>
+        </div>
+        <div id="statusButtonContainer">
+          <button onClick={positiveOfPositive} type='submit' className="statusButtons">Tested Positive</button>
+        </div>
       </div>
-      <div id="calendarWrapper">
-          <Calendar />
-      </div>
-      <h4 id="eventListTitle">Your Events</h4>
-      <div id="eventListContainer">
-        
-      </div>
-      <button
-        onClick={positiveOfPositive}
-        type="submit"
-        className="statusButtons"
-      >
-        Tested Positive
-      </button>
     </div>
   );
 }
