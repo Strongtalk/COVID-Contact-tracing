@@ -13,7 +13,7 @@ function Footer() {
           <a className="iconContainer" href="https://www.healthvermont.gov/">
             <img
               className="icon"
-              src="/images/vermont-dpt-of-health.jpg"
+              src="/images/vermont-dpt-of-health.png"
               alt="VDOH-logo"
             />
           </a>

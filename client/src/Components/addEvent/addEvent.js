@@ -52,61 +52,59 @@ function AddEvent(props) {
 
   return (
     <div id='addEventContainer'>
-        <h1 id="addEventTitle" >Add a Event</h1>
+      <h1 id="addEventTitle" >Add a Event</h1>
 
-        <form id="eventContainer" method="POST" onSubmit={handleSubmit} action="/event">
-          <input type="hidden" name="userid" value={objectId} />
-          <input
-            className="eventInput"
-            type="text"
-            placeholder="Establishment Name "
-            name="name"
-            onChange={setEventName}
-          />
-
-          <input
-            className="eventInput"
-            type="text"
-            placeholder="Description "
-            name="description"
-            onChange={setEventDescription}
-          />
-          <br></br>
-          <label className="eventLabel" htmlFor="date">
-            Event Date:
+      <form id="eventContainer" method="POST" onSubmit={handleSubmit} action="/event">
+        <input type="hidden" name="userid" value={objectId} />
+        <input
+          className="eventInput"
+          type="text"
+          placeholder="Establishment Name "
+          name="name"
+          onChange={setEventName}
+        ></input>
+        <input
+          className="eventInput"
+          type="text"
+          placeholder="Description "
+          name="description"
+          onChange={setEventDescription}
+        />
+        <br></br>
+        <label className="eventLabel" htmlFor="date">
+          Event Date:
         </label>
-          <br></br>
-          <input
-            className="eventInput"
-            name="date"
-            type="date"
-            onChange={setEventDate}
-          />
-
-          <label className="eventLabel" htmlFor="start">
-            Start and End Time:
+        <br></br>
+        <input
+          className="eventInput"
+          name="date"
+          type="date"
+          onChange={setEventDate}
+        />
+        <label className="eventLabel" htmlFor="start">
+          Start and End Time:
         </label>
-          <br></br>
-          <input
-            className="eventInput"
-            type="time"
-            placeholder="Start Time: "
-            name="start"
-            onChange={setEventStartTime}
-          />
-          <input
-            className="eventInput"
-            type="time"
-            placeholder="End Time: "
-            name="end"
-            onChange={setEventEndTime}
-          />
-          <br></br>
-          <input id="eventSubmit" type="submit" value="Save" />
-        </form>
-    
+        <br></br>
+        <input
+          className="eventInput"
+          type="time"
+          placeholder="Start Time: "
+          name="start"
+          onChange={setEventStartTime}
+        />
+        <input
+          className="eventInput"
+          type="time"
+          placeholder="End Time: "
+          name="end"
+          onChange={setEventEndTime}
+        />
+        <br></br>
+        <input id="eventSubmit" type="submit" value="Save" />
+      </form>
+
     </div>
-  </div>
+  )
 }
 
 export default AddEvent;

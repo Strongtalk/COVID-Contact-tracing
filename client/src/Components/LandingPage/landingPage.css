@@ -1,16 +1,20 @@
-#root{
+#landingPageContainer{
   background-color: rgb(77, 115, 77);
 }
 .articleContainer {
   text-align: left;
+  margin-bottom: 30px;
 }
 #landingPageTitle{
   color: rgb(246, 246, 237);
+  padding-top: 35px;
+  margin-bottom: 20px;
 }
 
 .individualArticleContainers{
   border: 1px black solid;
   margin: 10px;
+  margin-bottom: 20px;
   padding: 10px;
   height: 35vh;
   background-color: rgb(246, 246, 237)
@@ -18,28 +22,25 @@
 .newsTitle {
   margin: 0;
   margin-bottom: 8px;
-  font-size: 25px;
+  font-size: 22px;
   border-bottom: 2px solid black;
 }
 .newsText{
-  font-size: 18px;
+  font-size: 17px;
   padding-bottom: 10px;
 }
 
 .continueReadingButton {
-  color: black;
+  color: rgb(246, 246, 237);
   border: 1px solid black;
   width: 150px;
   height: 25px;
-  font-size: 18px;
+  font-size: 17px;
   text-align: center;
-  background-color: white;
+  background-color: rgb(176, 137, 64);
+  border-radius: 3px;
 }
 .aTag{
   text-decoration: none;
 }
 
-.article-image {
-  width: 10vw;
-  height: 10vh;
-}
