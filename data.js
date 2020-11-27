@@ -25,6 +25,7 @@ class DataStore {
     }
   }
 
+  // Helper function to make it easier to connect and access specific connections
   async collection() {
     const client = await this.connect();
     const database = client.db(this.dbName);
@@ -32,11 +33,11 @@ class DataStore {
     return collection;
   }
 
+  /*--------- USER Endpoints -----------*/
+
   // Read all Users
   async readData() {
-    let client = await this.connect();
-    let db = await client.db(this.dbName);
-    const collection = db.collection(this.collName);
+    const collection = await this.collection();
     let dataArr = await collection.find({}).toArray();
     return dataArr;
   }
@@ -44,16 +45,16 @@ class DataStore {
   // Read a single user based on query criteria
   async readData(email) {
     let users = [];
-    let client = await this.connect();
-    let db = await client.db(this.dbName);
-    const collection = db.collection(this.collName);
+    const collection = await this.collection();
     await collection.find({ email: email }).forEach((user) => {
       users.push(user);
     });
     return users;
   }
 
-  //reads all events in database for a user
+  /*--------- EVENT Endpoints -----------*/
+
+  // Read all events in database for a user
   async readDataEvt(userid) {
     let events = [];
     let collection = await this.collection();
@@ -63,7 +64,7 @@ class DataStore {
     return events;
   }
 
-  //reads event data for a specific event
+  // Read event data for a specific event
   async readEventData(eventid) {
     let event = null;
     let collection = await this.collection();
@@ -71,7 +72,7 @@ class DataStore {
     return event;
   }
 
-  //reads all events in database for a user
+  // Read all events in database for a specific user
   async readEvtContact(eventid) {
     let events = [];
     let collection = await this.collection();
@@ -81,10 +82,9 @@ class DataStore {
     return events;
   }
 
-  //search for user events within a specific date frame
+  // Search for user events within a specific date frame
   async readDataEvtDate(userid, date) {
     let events = [];
-    
 
     // Setup search dates for query;
     let startDate = new Date(date);
@@ -114,28 +114,14 @@ class DataStore {
         events.push(event);
       });
 
-      console.log('Events found = ', events)
+    console.log('Events found = ', events)
 
     return events;
   }
 
-  //write to database- user collection
-  async insert(object) {
-    let response = { status: null, error: null, id: null };
-    try {
-      let collection = await this.collection();
-      console.log("inserting item");
-      await collection
-        .insertOne(object)
-        .then((res) => (response.id = res.insertedId));
-      console.log("Success adding item");
-      response.status = "ok";
-    } catch (error) {
-      response.error = error.toString();
-      console.log(error.toString());
-    }
-    return response.id;
-  }
+
+
+  /*--------- NEWS Endpoints -----------*/
 
   //reads all news in database
   async readNews() {
@@ -176,6 +162,26 @@ class DataStore {
 
     return newsArticles;
   }
+
+  // write to database- user collection
+  async insert(object) {
+    let response = { status: null, error: null, id: null };
+    try {
+      let collection = await this.collection();
+      console.log("inserting item");
+      await collection
+        .insertOne(object)
+        .then((res) => (response.id = res.insertedId));
+      console.log("Success adding item");
+      response.status = "ok";
+    } catch (error) {
+      response.error = error.toString();
+      console.log(error.toString());
+    }
+    return response.id;
+  }
+
 }
+
 
 module.exports = DataStore;
