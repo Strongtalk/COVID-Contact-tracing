@@ -22,7 +22,7 @@ function AddEvent(props) {
   }, []);
 
   function handleSubmit(evt) {
-    console.log('submitting update', evt.target.description)
+    console.log('submitting add', evt.target.description)
 
     const data =
     {
@@ -54,7 +54,7 @@ function AddEvent(props) {
     <div id='addEventContainer'>
       <h1 id="addEventTitle" >Add a Event</h1>
 
-      <form id="eventContainer" method="POST" onSubmit={handleSubmit} action="/event">
+      <form id="eventContainer" method="POST" onSubmit={handleSubmit}>
         <input type="hidden" name="userid" value={objectId} />
         <input
           className="eventInput"

@@ -66,13 +66,14 @@ class DataStore {
 
   // Read event data for a specific event
   async readEventData(eventid) {
+    console.log('reading event: ', eventid)
     let event = null;
     let collection = await this.collection();
     event = await collection.findOne({ _id: ObjectId(eventid) });
     return event;
   }
 
-  // Read all events in database for a specific user
+  // Read all event contacts in database for a specific user
   async readEvtContact(eventid) {
     let events = [];
     let collection = await this.collection();
@@ -177,6 +178,42 @@ class DataStore {
     } catch (error) {
       response.error = error.toString();
       console.log(error.toString());
+    }
+    return response.id;
+  }
+
+  // update object in db
+  async update(updateObj) {
+
+    // set option so that insert does NOT occur if specified record being updated is not found 
+    const options = {"upsert": false}
+
+    // set query object which is used to locate record that will be updated
+    const query = {'_id': updateObj._id}
+
+    // set updateRec and include $set to update record
+    const updateRec =
+    {
+      $set: updateObj
+    };
+ 
+  
+    let response = { status: null, error: null, id: null };
+    try {
+      let collection = await this.collection();
+
+      await collection
+        .updateOne(query, updateRec, options)
+        .then((result) => {
+          const {matchedCount, modifiedCount} = result;
+          if (matchedCount && modifiedCount) {
+            console.log('Record was successfully updated', matchedCount, modifiedCount)
+            response.status = 'ok';
+          }
+        }) 
+    } catch (error) {
+      response.error = error.toString();
+      console.log('Update of record failed: ', error.toString());
     }
     return response.id;
   }
