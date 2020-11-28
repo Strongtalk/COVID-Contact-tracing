@@ -51,13 +51,13 @@ app.get("/user/:email", async (request, response) => {
 
 // get all events coordinating to a specific user id
 app.get("/event/:userid", async (request, response) => {
- 
+
   let data = await eventCollection.readDataEvt(request.params.userid);
   response.send(data);
 });
 
 // get individual event based on event id
-app.get('/individual-event/:eventid', async(request, response) => {
+app.get('/individual-event/:eventid', async (request, response) => {
   console.log('/event get id: ', request.params.eventid);
   let event = await eventCollection.readEventData(request.params.eventid)
   response.send(event)
@@ -119,6 +119,37 @@ app.post("/user", async (request, response) => {
 });
 
 
+// Updates event entry to database
+app.post("/update-event", async (request, response) => {
+
+  //THIS IS ONLY APPLICABLE TO EST!!
+  //NEED TO REVISIT WHEN WE GO GLOBAL ;)
+  //modify the start time by five hours to offset the mongoDB UTC
+  let formSDate = new Date(request.body.date + "T" + request.body.start);
+  let sTime = formSDate.getTime();
+  let dbTimeStart = sTime - 18000000;
+
+  //modify the end time by five hours to offset the mongoDB UTC
+  let formEDate = new Date(request.body.date + "T" + request.body.end);
+  let eTime = formEDate.getTime();
+  let dbTimeEnd = eTime - 18000000;
+
+  let event = {
+      _id: ObjectId(request.body.eventId),
+      userid: ObjectId(request.body.userid),
+      name: request.body.name.trim(),
+      description: request.body.description,
+      start: new Date(dbTimeStart),
+      end: new Date(dbTimeEnd),
+  };
+
+  let statusObj = await eventCollection.update(event);
+  console.log('Server side event ID is ', request.body.eventId)
+  response.cookie("eventId", request.body.eventId)
+  response.redirect("/update-event");
+ });
+
+// creates new event entry to database
 app.post("/event", async (request, response) => {
 
   //THIS IS ONLY APPLICABLE TO EST!!
@@ -142,7 +173,7 @@ app.post("/event", async (request, response) => {
   };
 
   let statusObj = await eventCollection.insert(newEvent);
-  console.log("event ID cookie being sent to browser MMMmmmMMMmm cookies", statusObj);
+ 
   response.cookie("eventId", statusObj)
   response.redirect("/addinfo-page");
   if (statusObj.status === "ok") {
@@ -154,6 +185,9 @@ app.post("/event", async (request, response) => {
   }
 });
 
+
+
+// creates new event contact entry in DB
 app.post("/eventcontact", async (request, response) => {
   let newEventContact = {
     eventid: ObjectId(request.body.eventid),
@@ -174,11 +208,12 @@ app.post("/eventcontact", async (request, response) => {
   }
 });
 // sends alert 
-app.post("/send-alert", (request, response)=>{
+app.post("/send-alert", (request, response) => {
   // hard coded number and message //
   sendSMS('8023388026', 'Alert');
   sendSMS('9782219788', 'Alert')
-  response.send({ok: true})
+  sendSMS('8023530833', 'Alert')
+  response.send({ ok: true })
 })
 
 module.exports = DataStore;
@@ -209,20 +244,20 @@ app.use(session({
 app.use(flash());
 
 // Handle 404
-app.use(function(request, response, next) {
+app.use(function (request, response, next) {
   response.status(404);
   response.sendFile(path.join(__dirname, 'client', "public", "index.html"));
 });
 
 // handle error
-app.use(function(err, request, response, next) {
+app.use(function (err, request, response, next) {
   response.status(500);
   response.send(err)
 });
 
 // config
 var requiredConfig = [process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN, process.env.TWILIO_NUMBER];
-var isConfigured = requiredConfig.every(function(configValue) {
+var isConfigured = requiredConfig.every(function (configValue) {
   return configValue || false;
 });
 

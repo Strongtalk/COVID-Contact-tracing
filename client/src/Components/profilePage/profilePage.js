@@ -67,6 +67,8 @@ function ProfilePage() {
 
   // When an event is clicked, render event page passing event id that user clicked on
   function clickEvent(id, evt) {
+
+    localStorage.setItem("eventId", id);
     history.push(
       {
         pathname: '/update-event',
@@ -78,7 +80,6 @@ function ProfilePage() {
   }
 
   function addEvent(evt) {
-    alert('adding event')
     history.push(
       {
         pathname: '/event',

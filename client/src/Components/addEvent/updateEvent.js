@@ -7,201 +7,195 @@ import "./addEvent.css";
 function UpdateEvent(props) {
   const [eventInfo, setEventInfo] = useState(null);
   const [contactInfo, setContactInfo] = useState([]);
-  const [eventDate, setEventDate] = useState(null);
   const [eventId, setEventId] = useState(null)
-  const [eventName, setEventName] = useState(null)
-  const [eventDescription, setEventDescription] = useState(null)
-  const [eventStartTime, setEventStartTime] = useState(null)
-  const [eventEndTime, setEventEndTime] = useState(null)
 
   // get reference to history via useHistory hook, need this to redirect to addEvent component
   let history = useHistory();
 
-  let objectId = localStorage.getItem("id");
-  console.log('id is:', objectId)
+  // Read userId and eventId from local storage
+  let userIdLocal = localStorage.getItem("id");
+  let eventIdLocal = localStorage.getItem("eventId");
+  console.log('Storage event id ', eventIdLocal)
 
-  //TESTING will probably add an iterator and transfer to profile page//
-  const showEvents = () => {
+  // Fetch data in order to display event
+  const displayEvent = () => {
 
-    console.log('Before fetch event id: ', [props.location.state.eventId])
-    if (!eventInfo) {
-      fetch(`/individual-event/${props.location.state.eventId}`)
-        .then((response) => response.json())
-        .then((userEvent) => {
-          console.log('In AddEvent: ', userEvent);
-          setEventInfo(userEvent);
-        });
-    }
-  };
+  let URL = '/individual-event/' + eventIdLocal;
 
-  useEffect(() => {
-
-    console.log('In Add Event: ', props.location.state);
-    setEventId(props.location.state);
-    showEvents();
-  }, []);
-
-  // Helper function to format date in user friendly format
-  function formatDate(eventDate) {
-    console.log(eventDate)
-    if (eventDate != null) {
-      let date = new Date(eventDate).toISOString().substr(0, 10)
-      return date;
-    }
-    else {
-      return null;
-    }
-  }
-
-  // Helper function to format time in user friendly format
-  function formatTime(eventTime) {
-    console.log("event time is:" , eventTime.substr(11,5))
-    if (eventTime != null) {
-      let time = eventTime.substr(11,5)
-      console.log("Time is:", time)
-      return (time);
-    }
-    else {
-      return null;
-    }
-  }
-  
-  const showContacts = () => {
-    // this grabs all of the event participants for a specific event and returns it as an object
-    // right now just in console log but will eventually get this displaying on the page ?
-    fetch(`/eventcontact/${props.location.state.eventId}`)
+  if (!eventInfo) {
+    fetch(URL)
       .then((response) => response.json())
-      .then((contact) => {
-        setContactInfo(contact);
+      .then((userEvent) => {
+        setEventInfo(userEvent);
       });
+  }
+};
+
+useEffect(() => {
+
+  setEventId(eventIdLocal)
+  displayEvent();
+}, []);
+
+// Helper function to format date in user friendly format
+function formatDate(eventDate) {
+  console.log(eventDate)
+  if (eventDate != null) {
+    let date = new Date(eventDate).toISOString().substr(0, 10)
+    return date;
+  }
+  else {
+    return null;
+  }
+}
+
+// Helper function to format time in user friendly format
+function formatTime(eventTime) {
+  if (eventTime != null) {
+    let time = eventTime.substr(11, 5)
+    console.log("Time is:", time)
+    return (time);
+  }
+  else {
+    return null;
+  }
+}
+
+const showContacts = () => {
+  // this grabs all of the event participants for a specific event and returns it as an object
+  // right now just in console log but will eventually get this displaying on the page ?
+  fetch(`/eventcontact/${eventIdLocal}`)
+    .then((response) => response.json())
+    .then((contact) => {
+      setContactInfo(contact);
+    });
+};
+
+useEffect(() => {
+  showContacts();
+}, []);
+
+function handleSubmit(evt) {
+
+  const data =
+  {
+    userId: userIdLocal,
+    eventId: eventIdLocal,
+    name: evt.target.name,
+    description: evt.target.description,
+    start: evt.target.start,
+    end: evt.target.end
   };
 
-  useEffect(() => {
-    showContacts();
-  }, []);
-
-  function handleSubmit(evt) {
-    console.log('submitting update', evt.target.description)
-
-    const data =
-    {
-      name: evt.target.name,
-      description: evt.target.description,
-      start: evt.target.start,
-      end: evt.target.end
-    };
-
-    fetch('/event', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+  fetch(`/update-event/${eventIdLocal}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 
-    evt.preventDefault()
-  }
+  evt.preventDefault()
+}
 
-  function handleClick(evt) {
-    alert('in Update Event handle click')
-    history.push(
-        {
-          pathname: '/update-info',
-          state: {
-            eventId: props.location.state
-          }
-        })
-      evt.preventDefault()
-  }
+// Handler to redirect to contact page on click
+function handleClick(evt) {
+  history.push(
+    {
+      pathname: '/update-info',
+      state: {
+        eventId: props.location.state
+      }
+    })
+  evt.preventDefault()
+}
 
-  return (
-    <div>
-      {eventInfo !== null ?
-        <h1 id="addEventTitle" >Event:</h1>
-        : null}
+// Render Page
+return (
+  <div>
+    {eventInfo !== null ?
+      <h1 id="addEventTitle" >Event:</h1>
+      : null}
 
-      {eventInfo !== null ?
-        <form id="eventContainer" method="POST" onSubmit={handleSubmit} action="/event">
-          <input type="hidden" name="userid" value={objectId} />
-          <label for="name">Event Name </label>
-          <input
-            className="eventInput"
-            type="text"
-            placeholder="Establishment Name: "
-            name="name"
-            defaultValue={eventInfo.name}
-            onChange={setEventName}
-          />
+    {eventInfo !== null ?
+      <form id="eventContainer" method="POST" onSubmit={handleSubmit}>
+        <input type="hidden" name="eventId" value={eventIdLocal} />
+        <input type="hidden" name="userid" value={userIdLocal} />
 
-          <label for="name">Description </label>
-          <input
-            className="eventInput"
-            type="text"
-            placeholder="Description: "
-            name="description"
-            defaultValue={eventInfo.description}
-            onChange={setEventDescription}
-          />
-          <br></br>
-          <label className="eventLabel" htmlFor="date">
-            Event Date:
+        <label for="name">Event Name </label>
+        <input
+          className="eventInput"
+          type="text"
+          placeholder="Establishment Name: "
+          name="name"
+          defaultValue={eventInfo.name}
+        />
+
+        <label for="name">Description </label>
+        <input
+          className="eventInput"
+          type="text"
+          placeholder="Description: "
+          name="description"
+          defaultValue={eventInfo.description}
+        />
+        <br></br>
+        <label className="eventLabel" htmlFor="date">
+          Event Date:
         </label>
-          <br></br>
-          <input
-            className="eventInput"
-            name="date"
-            type="date"
-            defaultValue={formatDate(eventInfo.start)}
-            onChange={setEventDate}
-          />
+        <br></br>
+        <input
+          className="eventInput"
+          name="date"
+          type="date"
+          defaultValue={formatDate(eventInfo.start)}
+        />
 
-          <br></br>
-          <label className="eventLabel" htmlFor="start">
-            Start and End Time:
+        <br></br>
+        <label className="eventLabel" htmlFor="start">
+          Start and End Time:
         </label>
-          <br></br>
-          <input
-            className="eventInput"
-            type="time"
-            placeholder="Start Time: "
-            name="start"
-            defaultValue={formatTime(eventInfo.start)}
-            onChange={setEventStartTime}
-          />
-          <input
-            className="eventInput"
-                        type="time"
-            placeholder="End Time: "
-            name="end"
-            defaultValue={formatTime(eventInfo.end)}
-            onChange={setEventEndTime}
-          />
-          <br></br>
-          <input id="eventSubmit" type="submit" value="Update" />
-        </form>
-        : null}
+        <br></br>
+        <input
+          className="eventInput"
+          type="time"
+          placeholder="Start Time: "
+          name="start"
+          defaultValue={formatTime(eventInfo.start)}
+        />
+        <input
+          className="eventInput"
+          type="time"
+          placeholder="End Time: "
+          name="end"
+          defaultValue={formatTime(eventInfo.end)}
+        />
+        <br></br>
+        <input id="eventSubmit" type="submit" value="Update" />
+      </form>
+      : null}
 
-<p>CONTACT(S) ADDED FOR EVENT:</p>
-      {contactInfo.length === 0 && (<div><p>No contacts added</p> </div>)} 
-      {contactInfo.map((contact, index) => {
-        return (
-          <div key={index}> 
+    <p>CONTACT(S) ADDED FOR EVENT:</p>
+    {contactInfo.length === 0 && (<div><p>No contacts added</p> </div>)}
+    {contactInfo.map((contact, index) => {
+      return (
+        <div key={index}>
           <a className="contactName" href={contact.name} onClick={handleClick}>
-            {contact.name} 
+            {contact.name}
           </a>
-          </div>
-        )
-      })}
-    
-    </div>
-  )
+        </div>
+      )
+    })}
+
+  </div>
+)
 }
 
 export default UpdateEvent;
