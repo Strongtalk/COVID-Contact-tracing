@@ -41,7 +41,8 @@ const Ul = styled.ul`
 
 const RightNav = ({ open }) => {
   const [user, setCurrentUser] = useState(null);
-
+  
+//logout and redirect to home/ landing page
   const handleLogout = () => {
     firebaseApp.auth().signOut();
     <Redirect to="/" />;

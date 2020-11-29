@@ -88,7 +88,7 @@ function AddInfo() {
         )
       })}
       </div>
-      <form id="soloFormContainer" action="/">
+      <form id="soloFormContainer" action="/userprofile">
         <p id="soloEvent">
           Finished with event entry or did not come in close contact with anyone
           during this event instance?

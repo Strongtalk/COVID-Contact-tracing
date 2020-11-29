@@ -22,11 +22,6 @@ function ProfilePage() {
   //call this method on firebase to get email and throw into fetch to retrievd the user info from our database
   const userEmail = firebaseApp.auth().currentUser.email;
 
-  //logout and redirect to home/ landing page
-  const handleLogout = () => {
-    firebaseApp.auth().signOut();
-    <Redirect to="/" />;
-  };
 
   //grab information for user based on email match in database
   //this is a route set up in the server
