@@ -29,6 +29,7 @@ function UpdateInfo() {
     showContacts();
   }, []);
 
+
   console.log(contactInfo);
 
   return (

@@ -110,6 +110,29 @@ function UpdateEvent(props) {
     evt.preventDefault();
   }
 
+  function handleDelete() {
+    const data =
+    {
+      _id: props.location.state.eventId
+      };
+
+      fetch(`/remove/${props.location.state.eventId}`, {
+        
+        method: "POST",
+        headers: {
+          "content-type" : "application/json",
+        },
+        body:JSON.stringify(data)
+      });
+      console.log("YOUR ITEM HAS BEEN REMOVED THIS IS AFTER THE FETCH");  
+      history.push(
+        {
+          pathname: '/userprofile',
+          
+        })
+      
+  };
+
   // Render Page
   return (
     <div className="addEventContainer">
@@ -196,7 +219,11 @@ function UpdateEvent(props) {
             </div>
           );
         })}
+  
       </div>
+      
+      <button id="eventSubmit" onClick={handleDelete} >Delete</button>
+        
     </div>
   );
 }

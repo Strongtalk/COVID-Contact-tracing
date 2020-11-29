@@ -5,16 +5,14 @@ const port = process.env.PORT || 8000;
 const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-const session = require('express-session');
-const flash = require('connect-flash');
-const morgan = require('morgan');
-const csurf = require('csurf');
-const sendSMS = require('./sendSMS.js')
+const session = require("express-session");
+const flash = require("connect-flash");
+const morgan = require("morgan");
+const csurf = require("csurf");
+const sendSMS = require("./sendSMS.js");
 const cookieParser = require("cookie-parser");
 
-
 const staticDir = process.env.DEV ? "./client/public" : "./client/build";
-
 
 ////////////////////////////////////////////testing
 
@@ -31,7 +29,7 @@ let eventContactCollection = new DataStore(url, "CovidApp", "EventContact");
 let newsCollection = new DataStore(url, "CovidApp", "News");
 
 // middleware for post
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -51,22 +49,23 @@ app.get("/user/:email", async (request, response) => {
 
 // get all events coordinating to a specific user id
 app.get("/event/:userid", async (request, response) => {
-
   let data = await eventCollection.readDataEvt(request.params.userid);
   response.send(data);
 });
 
 // get individual event based on event id
-app.get('/individual-event/:eventid', async (request, response) => {
-  console.log('/event get id: ', request.params.eventid);
-  let event = await eventCollection.readEventData(request.params.eventid)
-  response.send(event)
-  console.log("backend ", event)
-})
+app.get("/individual-event/:eventid", async (request, response) => {
+  console.log("/event get id: ", request.params.eventid);
+  let event = await eventCollection.readEventData(request.params.eventid);
+  response.send(event);
+  console.log("backend ", event);
+});
 
 // get all event contacts coordinating to a specific event
 app.get("/eventcontact/:eventid", async (request, response) => {
-  let data = await eventContactCollection.readEvtContact(request.params.eventid);
+  let data = await eventContactCollection.readEvtContact(
+    request.params.eventid
+  );
   response.send(data);
 });
 
@@ -107,21 +106,18 @@ app.post("/user", async (request, response) => {
   };
   // call on our insert method to connect to the user collection and create new user
   let statusObj = await userCollection.insert(newUser);
-  response.redirect("/userlogin-page")
+  response.redirect("/userlogin-page");
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
     response.status(200).send(statusObj.data);
-
   } else {
     //if it doesn't work send over a 400 and let us know what the error was pls
     response.status(400).send(statusObj.error);
   }
 });
 
-
 // Updates event entry to database
 app.post("/update-event", async (request, response) => {
-
   //THIS IS ONLY APPLICABLE TO EST!!
   //NEED TO REVISIT WHEN WE GO GLOBAL ;)
   //modify the start time by five hours to offset the mongoDB UTC
@@ -135,23 +131,22 @@ app.post("/update-event", async (request, response) => {
   let dbTimeEnd = eTime - 18000000;
 
   let event = {
-      _id: ObjectId(request.body.eventId),
-      userid: ObjectId(request.body.userid),
-      name: request.body.name.trim(),
-      description: request.body.description,
-      start: new Date(dbTimeStart),
-      end: new Date(dbTimeEnd),
+    _id: ObjectId(request.body.eventId),
+    userid: ObjectId(request.body.userid),
+    name: request.body.name.trim(),
+    description: request.body.description,
+    start: new Date(dbTimeStart),
+    end: new Date(dbTimeEnd),
   };
 
   let statusObj = await eventCollection.update(event);
-  console.log('Server side event ID is ', request.body.eventId)
-  response.cookie("eventId", request.body.eventId)
+  console.log("Server side event ID is ", request.body.eventId);
+  response.cookie("eventId", request.body.eventId);
   response.redirect("/update-event");
- });
+});
 
 // creates new event entry to database
 app.post("/event", async (request, response) => {
-
   //THIS IS ONLY APPLICABLE TO EST!!
   //NEED TO REVISIT WHEN WE GO GLOBAL ;)
   //modify the start time by five hours to offset the mongoDB UTC
@@ -173,8 +168,8 @@ app.post("/event", async (request, response) => {
   };
 
   let statusObj = await eventCollection.insert(newEvent);
- 
-  response.cookie("eventId", statusObj)
+
+  response.cookie("eventId", statusObj);
   response.redirect("/addinfo-page");
   if (statusObj.status === "ok") {
     //if it work send over a 200/ OK STATUS
@@ -184,8 +179,6 @@ app.post("/event", async (request, response) => {
     response.status(400).send(statusObj.error);
   }
 });
-
-
 
 // creates new event contact entry in DB
 app.post("/eventcontact", async (request, response) => {
@@ -207,38 +200,51 @@ app.post("/eventcontact", async (request, response) => {
     response.status(400).send(statusObj.error);
   }
 });
-// sends alert 
+// sends alert
 app.post("/send-alert", (request, response) => {
   // hard coded number and message //
-  sendSMS('8023388026', 'Alert');
-  sendSMS('9782219788', 'Alert')
-  sendSMS('8023530833', 'Alert')
-  response.send({ ok: true })
-})
+  sendSMS("8023388026", "Alert");
+  sendSMS("9782219788", "Alert");
+  sendSMS("8023530833", "Alert");
+  response.send({ ok: true });
+});
+
+//remove event and contacts assocaited with event
+app.post("/remove/:id", async (req, res) => {
+  let target = req.params.id;
+  console.log(target);
+  await eventContactCollection.removeContact(target);
+  await eventCollection.remove(target);
+  console.log("REMOVED ITEM SUCCESSFULLY SERVER LINE 188");
+});
 
 module.exports = DataStore;
 
 ////////////////////////////////////////////////////////////////////////////
 
 // Use morgan for HTTP request logging in dev and prod
-if (process.env.NODE_ENV !== 'test') {
-  app.use(morgan('combined'));
+if (process.env.NODE_ENV !== "test") {
+  app.use(morgan("combined"));
 }
 
 // Serve static assets
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, "client")));
 
 // Parse incoming form-encoded HTTP bodies
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 // Create and manage HTTP sessions for all requests
-app.use(session({
-  secret: process.env.APP_SECRET || 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: process.env.APP_SECRET || "keyboard cat",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 // Use connect-flash to persist informational messages across redirects
 app.use(flash());
@@ -246,24 +252,28 @@ app.use(flash());
 // Handle 404
 app.use(function (request, response, next) {
   response.status(404);
-  response.sendFile(path.join(__dirname, 'client', "public", "index.html"));
+  response.sendFile(path.join(__dirname, "client", "public", "index.html"));
 });
 
 // handle error
 app.use(function (err, request, response, next) {
   response.status(500);
-  response.send(err)
+  response.send(err);
 });
 
 // config
-var requiredConfig = [process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN, process.env.TWILIO_NUMBER];
+var requiredConfig = [
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN,
+  process.env.TWILIO_NUMBER,
+];
 var isConfigured = requiredConfig.every(function (configValue) {
   return configValue || false;
 });
 
 if (!isConfigured) {
   var errorMessage =
-    'TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_NUMBER must be set.';
+    "TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_NUMBER must be set.";
 
   throw new Error(errorMessage);
 }
