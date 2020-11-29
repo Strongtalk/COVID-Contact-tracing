@@ -8,6 +8,7 @@
   color: rgb(246, 246, 237);
   font-size: 35px;
   text-align: left;
+  border-bottom: 5px double lightgoldenrodyellow;
 
 
   animation: fadeInAnimation ease-in-out 5s;
@@ -28,48 +29,82 @@
     margin-left: -30%;
   }
   to {
-    margin-left: 20px;
+    padding-left: 20px;
   }
 }
 #buttonContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   margin: 20px;
-  height: 50px;
 }
 .profileButtons {
   text-align: center;
   font-size: 15px;
   border: 1px solid black;
   margin-right: 10px;
+  height: 60px;
+  width: 150px;
+  border-radius: 5px;
+  background-color: #2A7369;
+  color: white;
+  font-size: 22px;
 }
+#calendarTutorial{
+  font-size: 20px;
+  color: rgb(47, 47, 47);
+}
+
 /* Calendar and it's container*/
 #calendarWrapper {
-  display: flex;
-  height: 45vh;
-  width: 75vw;
-  margin-left: 45px;
+  height: 55vh;
+  width: 95vw;
   padding: 0px;
+  background-color: rgb(246, 246, 237);
+  padding: 20px;
+  border-radius: 5px;
+  margin-left: 10px;
 }
 
 #eventListTitle {
   text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 5px double rgb(47, 47, 47);
+  ;
+  font-size: 25px;
+  color: rgb(47, 47, 47);
+  margin-bottom: 10px;
 }
 #eventListContainer {
-  display: flex;
   height: 70vh;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: rgb(246, 246, 237);
   margin: 20px;
+  border-radius: 5px;
 }
-
+#eventList{
+  text-align: left;
+}
+#eventPrintContainer{
+  margin: 10px;
+  background-color:#D9973B; 
+  padding: 10px;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: rgb(246, 246, 237);
+}
+#eventTag{
+  color: rgb(47, 47, 47);
+  text-decoration: none;
+  font-size: 18px;
+  color: rgb(246, 246, 237);
+}
 .statusButtons {
-  text-align: center;
-  font-size: 14px;
-  height: 9vh;
-  width: 40vw;
-  padding: 4px 16px;
-  border-radius: 8px;
+  height: 80px;
+  width: 250px;
+  background-color: rgb(0, 0, 0);
+  font-size: 30px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  color: red
 }

@@ -4,23 +4,24 @@
   font-family: 'Roboto Slab', sans-serif;
 }
 
-#addEventContainer{
+.addEventContainer{
   background-color:#93BFB9;
   height: 100vh;
+  padding-bottom: 150px;
 }
-#addEventTitle{
+.addEventTitle{
   color: rgb(64, 64, 64);
   padding-top: 35px;
   margin-bottom: 10px;
 }
 
-#eventContainer {
+.eventContainer {
   text-align: left;
   margin: 0 30px;
   padding: 10px 17px;
   background-color:  rgb(246, 246, 237);
   border-radius: 10px;
-  height: 67vh;
+  height: 72vh;
 }
 
 .eventInput {
@@ -47,4 +48,24 @@
 
 .eventLabel {
   font-size: 20px;
+}
+
+#contactsAddedContainer{
+  text-align: left;
+  margin: 0 30px;
+  padding: 10px 17px;
+  background-color:  rgb(246, 246, 237);
+  border-radius: 10px;
+  margin-top: 20px;
+  height: 75px;
+}
+
+#contactsAddedTitle{
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.contactName{
+  text-decoration: none;
+  color: black;
 }

@@ -36,7 +36,7 @@ function UpdateInfo() {
     <div className="pageContainer">
       <h1 id="addInfoTitle">Add Event Participant</h1>
       <h2 id='addInfoSubtitle' >Add Contact for Event:</h2>
-      <form method="POST" action="/eventcontact">
+      <form id='formContainer' method="POST" action="/eventcontact">
         <div id="typeInputContainer">
           <input type="hidden" name="eventid" value={cookieSlice} />
           <input
@@ -78,14 +78,14 @@ function UpdateInfo() {
             value="individual"
           ></input>
         </div>
-        <input id="addInfoSubmitButton" type="submit" value="ADD CONTACT" />
+        <input className="addInfoSubmitButton" type="submit" value="ADD CONTACT" />
       </form>
-      <form action="/">
+      <form id="finishedContainer" action="/">
         <p id="soloEvent">
           Finished with event entry or did not come in close contact with anyone
           during this event instance?
         </p>
-        <input id="soloEventSubmit" type="submit" value="HOME"></input>
+        <input className="addInfoSubmitButton" type="submit" value="HOME"></input>
       </form>
     </div>
   );

@@ -114,27 +114,34 @@ function ProfilePage() {
       <div id="profilePageContainer">
         <div id="profileContainer">
           <h2 id="profileName"> Hello {profile.name} !</h2>
-          <button id="signOut" onClick={handleLogout}>Sign Out</button>
-          <button id="updateInfo">Update Info</button>
+          {/* <button className='profileButtons' onClick={handleLogout}>Sign Out</button> */}
+          <div id='buttonContainer' >
+            <button className='profileButtons'>Update Info</button>
+          <form id="formCont" action="/event">
+            <input className="profileButtons" type="submit" value="Add Event" onClick={addEvent}></input>
+          </form>
+          </div>
         </div>
-        <p id="calendarTutorial">Please select a date to see your events!</p>
+       
         <div id="calendarWrapper">
+        <p id="calendarTutorial">Please select a date to see your events!</p>
           <div id="calendarContainer">
             <Calendar onClickDay={(evt) => clickCalendarDate(evt)} />
           </div>
         </div>
+        
         <div id="eventListContainer">
-          <h4 id="eventListTitle">Your Events</h4>
+        <h4 id="eventListTitle">Your Events: </h4>
           <div name="eventList" id="eventListBox">
             {eventInfo.length > 0 ? (
-              <ul>
+              <ul id='eventList' >
                 {eventInfo.map((userEvent) => {
-                  return <div id="event-entry">
-                    <div id="event">
-                      <a key={userEvent._id} href={userEvent} onClick={(evt) => clickEvent(userEvent._id, evt)}>{userEvent.name}
+                  return <div id='eventPrintContainer' >
+                    <div>
+                      <a id='eventTag' key={userEvent._id} href={userEvent} onClick={(evt) => clickEvent(userEvent._id, evt)}>{userEvent.name.toUpperCase()}
                       </a>
                     </div>
-                    <div id="event-dates">
+                    <div>
                       <p>{formatDate(userEvent.start) + '-' + formatDate(userEvent.end)}</p>
                       <p></p>
                     </div>
@@ -145,12 +152,10 @@ function ProfilePage() {
           </div>
         </div>
         <div id="buttonContainer">
-          <form className="profileButtons" action="/event">
-            <input id="addEventButton" type="submit" value="Add Event" onClick={addEvent}></input>
-          </form>
+          
         </div>
         <div id="statusButtonContainer">
-          <button onClick={positiveOfPositive} type='submit' className="statusButtons">Tested Positive</button>
+          <button onClick={positiveOfPositive} type='submit' className="statusButtons">TESTED POSITIVE</button>
         </div>
       </div>
     </div>

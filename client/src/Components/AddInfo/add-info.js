@@ -30,9 +30,8 @@ function AddInfo() {
     //general wrapper for page
     <div className="pageContainer"><br></br>
       <h1 id="addInfoTitle">Add Event Participant</h1>
-      <p>Please complete and submit this form for each individual contact associated with your event</p>
-      <br></br>
-      <form method="POST" action="/eventcontact">
+      <h2 id='addInfoSubtitle' >Please complete for each contact</h2>
+      <form id='formContainer' method="POST" action="/eventcontact">
         <div id="typeInputContainer">
           <input type="hidden" name="eventid" value={cookieSlice} />
           <input
@@ -76,24 +75,27 @@ function AddInfo() {
         </div>
         <input className="addInfoSubmitButton" type="submit" value="ADD CONTACT" />
       </form>
-      <form action="/">
-        <p id="soloEvent"><br></br><br></br>
-          Finished with event entry or did not come in close contact with anyone
-          during this event instance?<br></br>
-        </p>
-        <input id="addInfoSubmitButton" type="submit" value="HOME"></input>
-      </form><br></br>
+      <div id='contactAddedContainer' >
       <h3>CONTACT(S) ADDED FOR EVENT:</h3>
       {contactInfo.length === 0 && (<div><p>No contacts added</p> </div>)} 
       {contactInfo.map((contact, index) => {
         return (
           <div key={index}> 
           <h3 className="contactName">
-            {contact.name} 
+            {contact.name.toUpperCase()} 
           </h3>
           </div>
         )
       })}
+      </div>
+      <form id="soloFormContainer" action="/">
+        <p id="soloEvent">
+          Finished with event entry or did not come in close contact with anyone
+          during this event instance?
+        </p>
+        <input className="addInfoSubmitButton" type="submit" value="HOME"></input>
+      </form>
+      
     </div>
   );
 }
