@@ -59,6 +59,9 @@ function App() {
               <Link to="/userprofile">
                 <h1 className="navLinks">Profile</h1>
               </Link> : null}
+              {currentUser ?
+                <h1 className="navLinks">Sign Out</h1>
+               : null}
               <Link to='/send-alert' >
               <h1 className="navLinks">send Alert</h1>
               </Link>
