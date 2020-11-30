@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import "./profilePage.css";
 import firebaseApp from "../auth/firebase.js";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import "./Calendar.css";
 
 function ProfilePage() {
   const [profile, setProfile] = useState("");
