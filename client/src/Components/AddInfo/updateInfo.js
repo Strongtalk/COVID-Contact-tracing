@@ -14,10 +14,14 @@ function UpdateInfo() {
   const cookies = document.cookie;
   const cookieSlice = cookies.slice(15, 39);
 
-  const showContacts = () => {
-    // this grabs all of the event participants for a specific event and returns it as an object
-    // right now just in console log but will eventually get this displaying on the page ?
-    fetch(`/eventcontact/${cookieSlice}`)
+   // Read userId and eventId from local storage
+   let userIdLocal = localStorage.getItem("id");
+   let eventIdLocal = localStorage.getItem("eventId");
+   let contactIdLocal = localStorage.getItem("contactId");
+
+  const getContact = async () => {
+    // Read specific contact based on object Id
+    await fetch(`/contact/${contactIdLocal}`)
       .then((response) => response.json())
       .then((contact) => {
         setContactInfo(contact);
@@ -25,26 +29,55 @@ function UpdateInfo() {
   };
 
   useEffect(() => {
-    console.log('in updateInfo.js USE EFFECT', contactInfo)
-    showContacts();
+    getContact();
   }, []);
 
 
-  console.log(contactInfo);
+  function handleSubmit(evt) {
+
+    const data = {
+      contactId: contactIdLocal,
+      eventId: eventIdLocal,
+      name: evt.target.name.value,
+      email: evt.target.email.value,
+      phone: evt.target.phone.value,
+    };
+
+    fetch(`/update-contact/${contactIdLocal}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    evt.preventDefault();
+  }
+
 
   return (
     //general wrapper for page
+
     <div className="pageContainer">
-      <h1 id="addInfoTitle">Add Event Participant</h1>
-      <h2 id='addInfoSubtitle' >Add Contact for Event:</h2>
-      <form id='formContainer' method="POST" action="/eventcontact">
+      <h1 id="addInfoTitle">Update Event Participant</h1>
+      <h2 id='addInfoSubtitle' >Update Contact for Event:</h2>
+      {contactInfo !== null ? (
+      <form id='formContainer' method="POST" action="/update-contact" onSubmit={handleSubmit}>
         <div id="typeInputContainer">
-          <input type="hidden" name="eventid" value={cookieSlice} />
+          <input type="hidden" name="contactId" value={contactIdLocal} />
           <input
             type="text"
             placeholder="Name:"
             name="name"
             className="addInfoInput"
+            defaultValue={contactInfo.name}
             required
           ></input>
           <input
@@ -52,6 +85,7 @@ function UpdateInfo() {
             placeholder="Email:"
             name="email"
             className="addInfoInput"
+            defaultValue={contactInfo.email}
             required
           ></input>
           <input
@@ -60,6 +94,7 @@ function UpdateInfo() {
             maxLength="10"
             name="phone"
             className="addInfoInput"
+            defaultValue={contactInfo.phone}
             required
           ></input>
         </div>
@@ -79,8 +114,9 @@ function UpdateInfo() {
             value="individual"
           ></input>
         </div>
-        <input className="addInfoSubmitButton" type="submit" value="ADD CONTACT" />
+        <input className="addInfoSubmitButton" type="submit" value="Update" />
       </form>
+          ) : null}
       <form id="finishedContainer" action="/">
         <p id="soloEvent">
           Finished with event entry or did not come in close contact with anyone

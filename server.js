@@ -55,10 +55,8 @@ app.get("/event/:userid", async (request, response) => {
 
 // get individual event based on event id
 app.get("/individual-event/:eventid", async (request, response) => {
-  console.log("/event get id: ", request.params.eventid);
   let event = await eventCollection.readEventData(request.params.eventid);
   response.send(event);
-  console.log("backend ", event);
 });
 
 // get all event contacts coordinating to a specific event
@@ -67,6 +65,12 @@ app.get("/eventcontact/:eventid", async (request, response) => {
     request.params.eventid
   );
   response.send(data);
+});
+
+// get individual contact based on contact id
+app.get("/contact/:contactid", async (request, response) => {
+  let contact = await eventContactCollection.readContact(request.params.contactid);
+  response.send(contact);
 });
 
 // get specific event parameters per user based on date
@@ -140,7 +144,6 @@ app.post("/update-event", async (request, response) => {
   };
 
   let statusObj = await eventCollection.update(event);
-  console.log("Server side event ID is ", request.body.eventId);
   response.cookie("eventId", request.body.eventId);
   response.redirect("/update-event");
 });
@@ -200,6 +203,24 @@ app.post("/eventcontact", async (request, response) => {
     response.status(400).send(statusObj.error);
   }
 });
+
+// Updates contact entry to database
+app.post("/update-contact/:contactId", async (request, response) => {
+
+  let contact = {
+    _id: ObjectId(request.body.contactId),
+    name: request.body.name.trim(),
+    email: request.body.email,
+    phone: request.body.phone
+  };
+
+  let statusObj = await eventContactCollection.update(contact)
+  response.cookie("contactId", request.body.contactId);
+  response.redirect("/update-info");
+});
+
+
+
 // sends alert
 app.post("/send-alert", (request, response) => {
   // hard coded number and message //

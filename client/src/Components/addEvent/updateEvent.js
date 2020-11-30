@@ -15,8 +15,7 @@ function UpdateEvent(props) {
   // Read userId and eventId from local storage
   let userIdLocal = localStorage.getItem("id");
   let eventIdLocal = localStorage.getItem("eventId");
-  console.log("Storage event id ", eventIdLocal);
-
+ 
   // Fetch data in order to display event
   const displayEvent = () => {
     let URL = "/individual-event/" + eventIdLocal;
@@ -37,7 +36,7 @@ function UpdateEvent(props) {
 
   // Helper function to format date in user friendly format
   function formatDate(eventDate) {
-    console.log(eventDate);
+ 
     if (eventDate != null) {
       let date = new Date(eventDate).toISOString().substr(0, 10);
       return date;
@@ -48,9 +47,9 @@ function UpdateEvent(props) {
 
   // Helper function to format time in user friendly format
   function formatTime(eventTime) {
+
     if (eventTime != null) {
       let time = eventTime.substr(11, 5);
-      console.log("Time is:", time);
       return time;
     } else {
       return null;
@@ -100,7 +99,8 @@ function UpdateEvent(props) {
   }
 
   // Handler to redirect to contact page on click
-  function handleClick(evt) {
+  function handleContactClick(evt, contactId) {
+    localStorage.setItem('contactId', contactId )
     history.push({
       pathname: "/update-info",
       state: {
@@ -132,6 +132,14 @@ function UpdateEvent(props) {
         })
       
   };
+
+  function handleAddContact() {
+    history.push(
+      {
+        pathname: '/addinfo-page',
+      })
+
+  }
 
   // Render Page
   return (
@@ -211,8 +219,8 @@ function UpdateEvent(props) {
             <div key={index}>
               <a
                 className="contactName"
-                href={contact.name}
-                onClick={handleClick}
+                href={contact._id}
+                onClick={(evt) => handleContactClick(evt, contact._id)}
               >
                 {contact.name.toUpperCase()}
               </a>
@@ -223,6 +231,7 @@ function UpdateEvent(props) {
       </div>
       
       <button id="eventSubmit" onClick={handleDelete} >Delete</button>
+      <buton id="eventSubmit" onClick= {handleAddContact}>Add Contact</buton>
         
     </div>
   );
