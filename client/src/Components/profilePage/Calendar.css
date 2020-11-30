@@ -1,8 +1,9 @@
+/*This is the imported calendar.css stylesheet from react-calendar*/
 .react-calendar {
   width: 350px;
   max-width: 100%;
-  background: rgba(233, 140, 78, 0.959);
-  border: 5px solid #323369f1;
+  background: rgba(95, 105, 165, 0.959);
+  border: 5px solid #271626;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
 }
