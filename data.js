@@ -68,7 +68,6 @@ class DataStore {
 
   // Read event data for a specific event
   async readEventData(eventid) {
-    console.log("reading event: ", eventid);
     let event = null;
     let collection = await this.collection();
     event = await collection.findOne({ _id: ObjectId(eventid) });
@@ -82,7 +81,16 @@ class DataStore {
     await collection.find({ eventid: ObjectId(eventid) }).forEach((event) => {
       events.push(event);
     });
+
     return events;
+  }
+
+   // Read event data for a specific event
+   async readContact(contactId) {
+    let contact = null;
+    let collection = await this.collection();
+    contact = await collection.findOne({ _id: ObjectId(contactId) });
+    return contact;
   }
 
   // Search for user events within a specific date frame
@@ -94,9 +102,6 @@ class DataStore {
     let endDate = new Date(date);
     endDate = endDate.setDate(startDate.getDate() + 1);
     let newEndDate = new Date(endDate);
-
-    console.log("userid: ", userid);
-    console.log("start/end dates: ", startDate, newEndDate);
 
     let collection = await this.collection();
 
@@ -116,8 +121,6 @@ class DataStore {
       .forEach((event) => {
         events.push(event);
       });
-
-    console.log("Events found = ", events);
 
     return events;
   }
@@ -161,9 +164,6 @@ class DataStore {
   async readNewsAudience(newsLevel, newsAudience) {
     let newsArticles = [];
 
-    console.log("newsLevel: " + newsAudience);
-    console.log(newsAudience[newsLevel]);
-
     let collection = await this.collection();
     await collection
       .find({
@@ -182,7 +182,6 @@ class DataStore {
     let response = { status: null, error: null, id: null };
     try {
       let collection = await this.collection();
-      console.log("inserting item");
       await collection
         .insertOne(object)
         .then((res) => (response.id = res.insertedId));
