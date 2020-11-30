@@ -16,14 +16,19 @@ const Ul = styled.ul`
 
   @media (max-width: 767px) {
     flex-flow: column nowrap;
-    background-color: #A7C9DB;
+    background-color:  #93BFB9;
     position: fixed;
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
     top: 0;
     right: 0;
+    font-weight: bold;
+    font-size: 17px;
     height: 45vh;
     width: 85px;
     padding-top: 1rem;
+    border-left: 1px black solid;
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
     border-radius: 12px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
