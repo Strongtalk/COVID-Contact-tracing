@@ -103,7 +103,7 @@ function AddInfo() {
           Finished with event entry or did not come in close contact with anyone
           during this event instance?
         </p>
-        <button className="addInfoSubmitButton" onClick={gohome}>HOME</button>
+        <button className="addInfoSubmitButton" onClick={gohome}>Events Page</button>
       </div>
       
     </div>

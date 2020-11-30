@@ -6,8 +6,8 @@
 
 .addEventContainer{
   background-color:#93BFB9;
-  height: 100vh;
   padding-bottom: 150px;
+  text-align: center;
 }
 .addEventTitle{
   color: rgb(64, 64, 64);
