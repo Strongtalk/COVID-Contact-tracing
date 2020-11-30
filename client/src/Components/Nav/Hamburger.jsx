@@ -17,6 +17,7 @@ const AnimatedBurger = styled.div`
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
+    margin-bottom: 5px;
   };
 
   
@@ -44,15 +45,19 @@ const AnimatedBurger = styled.div`
 const Burger = () => {
   const [open, setOpen] = useState(false)
   
+  function sidebarHandler() {
+    setOpen(!open)
+  }
+
   return (
     <>
-      <AnimatedBurger open={open} onClick={() => setOpen(!open)}>
+      <AnimatedBurger open={open} onClick={sidebarHandler}>
         <div />
         <div />
         <div />
       </AnimatedBurger>
       {/** calling the right side nav bar component */}
-      <RightNav open={open}/>
+      <RightNav open={open} sidebarHandler={sidebarHandler}/>
     </>
   )
 }

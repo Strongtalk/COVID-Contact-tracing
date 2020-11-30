@@ -1,26 +1,27 @@
 #profilePageContainer {
-  background-color: #BF856D
+  background-color: #BF856D; 
+  text-align: center;
 }
 
 #profileName {
-  padding-top: 35px;
+  padding-top: 39px;
   margin-bottom: 10px;
   color: rgb(246, 246, 237);
-  font-size: 35px;
+  font-size: 32px;
   text-align: left;
   border-bottom: 5px double lightgoldenrodyellow;
 
 
-  animation: fadeInAnimation ease-in-out 5s;
+  animation: fadeInAnimation ease-in-out 3s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 @keyframes fadeInAnimation {
   0% {
-    opacity: 0;
+    opacity: 0.6;
   }
   50% {
-    opacity: 0.6;
+    opacity: 0.8;
   }
   100% {
     opacity: 1;
@@ -42,12 +43,12 @@
   font-size: 15px;
   border: 1px solid black;
   margin-right: 10px;
-  height: 60px;
-  width: 150px;
+  height: 70px;
+  width: 200px;
   border-radius: 5px;
   background-color: #2A7369;
   color: white;
-  font-size: 22px;
+  font-size: 28px;
 }
 #calendarTutorial{
   font-size: 20px;
@@ -56,7 +57,7 @@
 
 /* Calendar and it's container*/
 #calendarWrapper {
-  height: 55vh;
+  height: 60vh;
   width: 95vw;
   padding: 0px;
   background-color: rgb(246, 246, 237);
@@ -65,16 +66,20 @@
   margin-left: 10px;
 }
 
+
 #eventListTitle {
   text-align: center;
   padding-top: 20px;
-  padding-bottom: 10px;
-  border-bottom: 5px double rgb(47, 47, 47);
-  ;
+  padding-bottom: 5px;
   font-size: 25px;
   color: rgb(47, 47, 47);
-  margin-bottom: 10px;
 }
+#eventListSubtitle{
+  border-bottom: 5px double rgb(47, 47, 47);
+  ;
+  padding-bottom: 10px;
+}
+
 #eventListContainer {
   height: 70vh;
   background-color: rgb(246, 246, 237);
@@ -106,5 +111,5 @@
   font-size: 30px;
   margin-bottom: 20px;
   border-radius: 10px;
-  color: red
+  color: rgb(200, 138, 138);
 }

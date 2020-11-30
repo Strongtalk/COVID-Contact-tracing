@@ -18,7 +18,6 @@ import PrivatePage from "./auth/privatePage.js";
 import PrivateLogSign from "./auth/privateLogSign.js";
 import firebaseApp from "./auth/firebase.js";
 import SendAlert from "./sendAlert/sendAlert"
-import IndividualEvents from './individualEventPage/individualEvent'
 
 
 function App() {
@@ -72,7 +71,6 @@ function App() {
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/map" component={CovidMap} />
             <Route exact path='/send-alert'> <SendAlert/> </Route>
-            <Route exact path='/individual-event'> <IndividualEvents/> </Route>
             <PrivateLogSign exact path="/userlogin-page" component={UserLogin} />
             <Route exact path="/addinfo-page" component={AddInfo} />
             <Route exact path="/update-info" component={UpdateInfo} />

@@ -22,11 +22,9 @@ function ProfilePage() {
   //call this method on firebase to get email and throw into fetch to retrievd the user info from our database
   const userEmail = firebaseApp.auth().currentUser.email;
 
-
   //grab information for user based on email match in database
   //this is a route set up in the server
   useEffect(() => {
-
     if (!profile || priorEventDate !== eventDate) {
       setPriorEventDate(eventDate);
       const fetchUser = async () => {
@@ -62,27 +60,24 @@ function ProfilePage() {
 
   // When an event is clicked, render event page passing event id that user clicked on
   function clickEvent(id, evt) {
-
     localStorage.setItem("eventId", id);
-    history.push(
-      {
-        pathname: '/update-event',
-        state: {
-          eventId: id
-        }
-      })
-    evt.preventDefault()
+    history.push({
+      pathname: "/update-event",
+      state: {
+        eventId: id,
+      },
+    });
+    evt.preventDefault();
   }
 
   function addEvent(evt) {
-    history.push(
-      {
-        pathname: '/event',
-        state: {
-          userId: userId
-        }
-      })
-    evt.preventDefault()
+    history.push({
+      pathname: "/event",
+      state: {
+        userId: userId,
+      },
+    });
+    evt.preventDefault();
   }
 
 
@@ -96,7 +91,7 @@ function ProfilePage() {
     }
   }
 
-  // redirects to positive test warning 
+  // redirects to positive test warning
   function positiveOfPositive() {
     document.location = "/send-alert";
   }
@@ -105,14 +100,15 @@ function ProfilePage() {
     <div id="profilePageWrapper">
       <div id="profilePageContainer">
         <div id="profileContainer">
-          <h2 id="profileName"> Hello {profile.name} !</h2>
-          {/* <button className='profileButtons' onClick={handleLogout}>Sign Out</button> */}
-          <div id='buttonContainer' >
-            <button className='profileButtons'>Update Info</button>
-            <form id="formCont" action="/event">
-              <input className="profileButtons" type="submit" value="Add Event" onClick={addEvent}></input>
-            </form>
-          </div>
+          <h2 id="profileName"> Hello {profile.name}!</h2>
+          <form id="buttonContainer" action="/event">
+            <input
+              className="profileButtons"
+              type="submit"
+              value="Add Event"
+              onClick={addEvent}
+            ></input>
+          </form>
         </div>
 
         <div id="calendarWrapper">
@@ -124,9 +120,10 @@ function ProfilePage() {
 
         <div id="eventListContainer">
           <h4 id="eventListTitle">Your Events: </h4>
+          <h3 id="eventListSubtitle">Click to Edit or see Contacts</h3>
           <div name="eventList" id="eventListBox">
             {eventInfo.length > 0 ? (
-              <ul id='eventList' >
+              <ul id="eventList">
                 {eventInfo.map((userEvent) => {
                   console.log('userEvent.start ', userEvent.start)
                   return <div id='eventPrintContainer' >
@@ -144,11 +141,14 @@ function ProfilePage() {
             ) : null}
           </div>
         </div>
-        <div id="buttonContainer">
-
-        </div>
         <div id="statusButtonContainer">
-          <button onClick={positiveOfPositive} type='submit' className="statusButtons">TESTED POSITIVE</button>
+          <button
+            onClick={positiveOfPositive}
+            type="submit"
+            className="statusButtons"
+          >
+            TESTED POSITIVE
+          </button>
         </div>
       </div>
     </div>

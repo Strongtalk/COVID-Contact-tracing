@@ -11,27 +11,32 @@ const Ul = styled.ul`
   background-color: #8a7777;
 
   li {
-    padding: 18px 0;
+    padding: 18px 5px;
   }
 
   @media (max-width: 767px) {
     flex-flow: column nowrap;
-    background-color: #57738c;
+    background-color:  #93BFB9;
     position: fixed;
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
     top: 0;
     right: 0;
-    height: 60vh;
+    font-weight: bold;
+    font-size: 17px;
+    height: 45vh;
     width: 85px;
     padding-top: 1rem;
-    border-radius: 24px;
+    border-left: 1px black solid;
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+    border-radius: 12px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     transition: transform 0.3s ease-in-out;
     z-index: 500 !important;
 
     li {
-      color: #fff;
+      color: #000000;
     }
     a:link {
       text-decoration: none;
@@ -39,7 +44,7 @@ const Ul = styled.ul`
   }
 `;
 
-const RightNav = ({ open }) => {
+const RightNav = (props) => {
   const [user, setCurrentUser] = useState(null);
   
 //logout and redirect to home/ landing page
@@ -57,29 +62,29 @@ const RightNav = ({ open }) => {
   //let userEmail = "marco@gmail.com"
 
   return (
-    <Ul open={open}>
+    <Ul open={props.open}>
       <div className="navList-bubble">
-        <Link to="/">
+        <Link to="/" onClick={props.sidebarHandler}>
           <li>News</li>
         </Link>
       </div>
       {!user ? (
-        <Link to="/userlogin-page">
+        <Link to="/userlogin-page" onClick={props.sidebarHandler}>
           <li>Log In</li>
         </Link>
       ) : null}
       {!user ? (
-        <Link to="/user">
+        <Link to="/user" onClick={props.sidebarHandler}>
           <li>Sign up</li>
         </Link>
       ) : null}
       {user ? (
-        <Link to="/userprofile">
+        <Link to="/userprofile" onClick={props.sidebarHandler}>
           <li>My Events</li>
         </Link>
       ) : null}
       {user ? <li onClick={handleLogout}>Sign Out</li> : null}
-      <Link to="/map">
+      <Link to="/map" onClick={props.sidebarHandler}>
         <li>VT Covid Map</li>
       </Link>
       {/* {userEmail === "emilysaber13@gmail.com" ?

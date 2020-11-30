@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, Polygon, TileLayer, Popup, Tooltip } from "react-leaflet";
 import './map.css';
 import borderData from './border-data'
+import Footer from "../Contact/newFooter.js";
 
 // Makes adding CSS needed for leaflet much easier
 import { Helmet } from 'react-helmet'
@@ -80,7 +81,9 @@ function CovidMap() {
 
   // Render the Map 
   return (
-    <div id="main-wrapper">
+    <div id="mapPageContainer">
+      <h2 id='mapTitle' >COVID-19 Vermont Map</h2>
+      <h2 id='mapSubtitle' >Click on a County to see current case information</h2>
       <Helmet>
         <link
           rel="stylesheet"
@@ -89,9 +92,7 @@ function CovidMap() {
           crossorigin=""
         />
       </Helmet>
-
-      <h2>VT COVID Cases</h2>
-      <div id='map-container'>
+      <div id='mapContainer'>
         <MapContainer center={center} zoom={mapZoom} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -133,24 +134,20 @@ function CovidMap() {
               )}
           </div>
         </MapContainer>
-
       </div>
-      <h4 id='news-header'>News of Interest</h4>
-
-      <div>
-
-        <div id="article-container">
+      <h1 id='newsTitle'>News of Interest</h1>
+        <div id="articleContainer">
           {countyArticles ? (
             countyArticles.map((id) => (
-              <div id="news-links">
-                <a id="article-link" href={id.link} >{id.newsSummary.title}</a>
+              <div id="newsLinks">
+                <a  href={id.link} ><h4 id="articleLink" >{id.newsSummary.title}</h4></a>
               </div>
             ))
           ) : (
               <p>...Loading</p>
             )}
-        </div>
       </div>
+      <Footer />
     </div>
   );
 }
