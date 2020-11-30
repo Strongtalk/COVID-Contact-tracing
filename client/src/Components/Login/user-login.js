@@ -28,29 +28,28 @@ function UserLogin({ history }) {
   );
 
   return (
-    <div id="login-page-wrapper">
-      <h1 id="log-in-header"> Log In</h1>
-      <form id="login-form-container" onSubmit={handleLogin}>
-        <div id="username-container">
-          <label id="labelUsername" htmlFor="username">
-            Email:
-          </label>
-          <input id="user-name" type="text" name="username" />
-        </div>
-        <div id="password-container">
-          <label id="labelPassword" htmlFor="pass">
-            Password:
-          </label>
-          <input id="user-pass" type="password" name="pass" />
-        </div>
-        <div id="login-link-paraContainer">
-          <a id="login-link-anchor" href="/user">
-            <p>Don't have an account? Sign up!</p>
-          </a>
-        </div>
-        <div id="submit-container">
+    <div id="loginContainer">
+      <h1 id="loginTitle"> Log-In:</h1>
+      <form id="loginForm" onSubmit={handleLogin}>
+        <input
+          className="loginInput"
+          type="text"
+          name="username"
+          placeholder="Email:"
+        />
+        <input
+          className="loginInput"
+          type="password"
+          name="pass"
+          placeholder="Password:"
+        />
+        <a id="signUpLink" href="/user">
+          <p id="signUpText">Don't have an account? Sign up!</p>
+        </a>
+        <button id="forgotPasswordButton">Forgot Password?</button>
+        <div>
           <input
-            id="login-submit-button"
+            id="submitButton"
             value="Log In"
             type="submit"
             placeholder="submit"

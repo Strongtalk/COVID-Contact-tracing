@@ -93,7 +93,7 @@ function AddInfo() {
           Finished with event entry or did not come in close contact with anyone
           during this event instance?
         </p>
-        <input className="addInfoSubmitButton" type="submit" value="HOME"></input>
+        <input className="addInfoSubmitButton" type="submit" value="Events Page"></input>
       </form>
       
     </div>

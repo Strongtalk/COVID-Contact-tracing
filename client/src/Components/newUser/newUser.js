@@ -1,10 +1,10 @@
-import React,{useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import "./newUser.css";
 import { withRouter, Redirect } from "react-router";
 import firebaseApp from "../auth/firebase.js";
 
 // component creation
-const NewUser= ({history}) =>{
+const NewUser = ({ history }) => {
   const [user, setUserValue] = useState("");
   const onChangeHandler = (event) => {
     setUserValue(event.target.value);
@@ -13,7 +13,7 @@ const NewUser= ({history}) =>{
   function storedata() {
     localStorage.setItem("newemail", user);
   }
-console.log(user)
+  console.log(user);
 
   storedata();
 
@@ -21,21 +21,29 @@ console.log(user)
     async (event) => {
       const { email, password } = event.target.elements;
       try {
-        await firebaseApp.auth().createUserWithEmailAndPassword(email.value, password.value)
+        await firebaseApp
+          .auth()
+          .createUserWithEmailAndPassword(email.value, password.value);
         firebaseApp.auth().signOut();
         history.push("/");
-        <Redirect to="/userprofile"/>
+        <Redirect to="/userprofile" />;
       } catch (error) {
         alert(error);
       }
-    }, [history]
-  )
+    },
+    [history]
+  );
 
   return (
     //general wrapper for page
     <div id="pageContainer">
-      <h1>Sign Up</h1>
-      <form id="inputContainer" method="POST" action="/user" onSubmit={handleSignUp}>
+      <h1 id="signUpTitle">Sign Up:</h1>
+      <form
+        id="inputContainer"
+        method="POST"
+        action="/user"
+        onSubmit={handleSignUp}
+      >
         <input
           className="newUserInput"
           type="text"
@@ -83,7 +91,7 @@ console.log(user)
           className="newUserInput"
           type="text"
           placeholder="Phone Number: "
-          maxLength='7'
+          maxLength="7"
           name="cell"
           required
         />
@@ -94,11 +102,16 @@ console.log(user)
           name="password"
           required
         />
-        <br></br><br></br>
-        <p><b>WE USE COOKIES:</b><br></br> By creating an account you agree to our use of cookies to deliver a better site experience</p> <br></br>
         <input id="createAccountButton" type="submit" value="Create Account" />
       </form>
+      <div id='cookiesContainer' >
+      <h1 id='cookiesTitle' >WE USE COOKIES:</h1>
+        <p id='cookiesSubtitle' >
+          By creating an account you agree to our use of cookies to deliver a
+          better site experience
+        </p>
+      </div>
     </div>
   );
-}
+};
 export default withRouter(NewUser);
