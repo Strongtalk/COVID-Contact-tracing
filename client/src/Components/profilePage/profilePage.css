@@ -11,7 +11,7 @@
   border-bottom: 5px double lightgoldenrodyellow;
 
 
-  animation: fadeInAnimation ease-in-out 5s;
+  animation: fadeInAnimation ease-in-out 3s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
