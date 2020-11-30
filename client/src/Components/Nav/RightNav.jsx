@@ -11,7 +11,7 @@ const Ul = styled.ul`
   background-color: #8a7777;
 
   li {
-    padding: 18px 0;
+    padding: 18px 5px;
   }
 
   @media (max-width: 767px) {
@@ -24,7 +24,7 @@ const Ul = styled.ul`
     height: 45vh;
     width: 85px;
     padding-top: 1rem;
-    border-radius: 24px;
+    border-radius: 12px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     transition: transform 0.3s ease-in-out;
