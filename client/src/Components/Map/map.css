@@ -1,46 +1,55 @@
 /* Container for main wrapper */
-
-#main-wrapper {
+#mapPageContainer {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 140vh;
   justify-content: center;
   align-items: center;
-  background-color: #BF856D
+  background-color: rgb(77, 115, 77);
+  text-align: center;
+}
+
+#mapTitle{
+  color: rgb(246, 246, 237);
+  padding-top: 35px;
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+#mapSubtitle{
+  width: 350px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 /* Container for the map */
-#map-container {
-  display: flex;
-  flex-direction: column;
-  width: 77vw;
-  height: 73vh;
+#mapContainer{
+  border: 10px double rgb(246, 246, 237)
 }
 
-#app-map{
-  width: 45vw;
-  height: 40vh;
-  float: right;
-}
-
-/* The map */
 .leaflet-container {
   width: 75vw;
   height: 73vh;
   position: relative;
 }
 
-#article-container {
-  width: 75vw;
-  height: 35vh;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-#news-header {
+#newsTitle {
   margin-top: 15px;
 
+}
+#articleContainer {
+  border: 1px black solid;
+  margin-bottom: 20px;
+  padding: 10px;
+  height: 200px;
+  background-color: rgb(246, 246, 237);
+  width: 85vw;
+}
+
+
+#articleLink{
+ background-color: rgb(232, 208, 161);
+ text-align: left;
+ border: 1px solid black;
+ font-size: 18px;
+ border-radius: 2px;
+ padding: 5px;
 }
