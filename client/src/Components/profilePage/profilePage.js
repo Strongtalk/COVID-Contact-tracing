@@ -85,16 +85,13 @@ function ProfilePage() {
     evt.preventDefault()
   }
 
-  // Helper function to format date in user friendly format
-  function formatDate(eventDate) {
-    if (eventDate != null) {
-      let date = new Date(eventDate)
-      let portionOfDay = date.getHours() < 12 ? 'am' : 'pm'
-      let hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours()
-      let minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-      return hours + ':' + minutes + ' ' + portionOfDay
-    }
-    else {
+
+  // Helper function to format time in user friendly format
+  function formatTime(eventTime) {
+    if (eventTime != null) {
+      let time = eventTime.substr(11, 5);
+      return time;
+    } else {
       return null;
     }
   }
@@ -112,32 +109,33 @@ function ProfilePage() {
           {/* <button className='profileButtons' onClick={handleLogout}>Sign Out</button> */}
           <div id='buttonContainer' >
             <button className='profileButtons'>Update Info</button>
-          <form id="formCont" action="/event">
-            <input className="profileButtons" type="submit" value="Add Event" onClick={addEvent}></input>
-          </form>
+            <form id="formCont" action="/event">
+              <input className="profileButtons" type="submit" value="Add Event" onClick={addEvent}></input>
+            </form>
           </div>
         </div>
-       
+
         <div id="calendarWrapper">
-        <p id="calendarTutorial">Please select a date to see your events!</p>
+          <p id="calendarTutorial">Please select a date to see your events!</p>
           <div id="calendarContainer">
             <Calendar onClickDay={(evt) => clickCalendarDate(evt)} />
           </div>
         </div>
-        
+
         <div id="eventListContainer">
-        <h4 id="eventListTitle">Your Events: </h4>
+          <h4 id="eventListTitle">Your Events: </h4>
           <div name="eventList" id="eventListBox">
             {eventInfo.length > 0 ? (
               <ul id='eventList' >
                 {eventInfo.map((userEvent) => {
+                  console.log('userEvent.start ', userEvent.start)
                   return <div id='eventPrintContainer' >
                     <div>
                       <a id='eventTag' key={userEvent._id} href={userEvent} onClick={(evt) => clickEvent(userEvent._id, evt)}>{userEvent.name.toUpperCase()}
                       </a>
                     </div>
                     <div>
-                      <p>{formatDate(userEvent.start) + '-' + formatDate(userEvent.end)}</p>
+                      <p>{formatTime(userEvent.start) + '-' + formatTime(userEvent.end)}</p>
                       <p></p>
                     </div>
                   </div>;
@@ -147,7 +145,7 @@ function ProfilePage() {
           </div>
         </div>
         <div id="buttonContainer">
-          
+
         </div>
         <div id="statusButtonContainer">
           <button onClick={positiveOfPositive} type='submit' className="statusButtons">TESTED POSITIVE</button>
