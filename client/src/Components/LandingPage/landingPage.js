@@ -48,9 +48,9 @@ function LandingPage() {
             console.log('render article is: ' , article)
             return (
               <div className='individualArticleContainers' key={index}>
-              <h3 className="newsTitle">{article.title.toUpperCase()} </h3>
-              <p className='newsText' >{article.description}</p>
-              <a className='aTag' href={article.url}><h2 
+              <h3 className="newsTitle">{article.newsSummary.title.toUpperCase()} </h3>
+              <p className='newsText' >{article.newsSummary.escription}</p>
+              <a className='aTag' href={article.newsSummary.url}><h2 
               className="continueReadingButton" >Continue Reading</h2></a>
             </div>
           )
