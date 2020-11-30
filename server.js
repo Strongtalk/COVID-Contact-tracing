@@ -161,6 +161,7 @@ app.post("/event", async (request, response) => {
   let formEDate = new Date(request.body.date + "T" + request.body.end);
   let eTime = formEDate.getTime();
   let dbTimeEnd = eTime - 18000000;
+  let expireTime = dbTimeEnd + 5270400000;
 
   let newEvent = {
     userid: ObjectId(request.body.userid),
@@ -168,6 +169,7 @@ app.post("/event", async (request, response) => {
     description: request.body.description,
     start: new Date(dbTimeStart),
     end: new Date(dbTimeEnd),
+    expireAt: new Date(expireTime),
   };
 
   let statusObj = await eventCollection.insert(newEvent);
