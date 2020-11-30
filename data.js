@@ -129,20 +129,29 @@ class DataStore {
     let client = await this.connect();
     let db = await client.db(this.dbName);
     const collection = db.collection(this.collName);
+
+    // query DB and retrieve all covid news
     let dataArr = await collection.find({}).toArray();
 
-    let articleSummary = [];
-    for (const article of dataArr) {
-      let siteUrl = article.url;
+    let newsCollection = [] 
 
+    // Using OpenGraph endpoint, get article summary for each article
+    for (const article of dataArr) {
+      
       // Call open graph endpoint to get summary info for a particlar URL
       // Add elements to new array that is ultimately returned containing summary info
-      await opengraph.getSiteInfo(siteUrl).then(function (result) {
-        articleSummary.push(result.hybridGraph);
+      await opengraph.getSiteInfo(article.url).then(function (result) {
+        let news = 
+        {
+          newsLevel : article.newsLevel,
+          newsAudience : article.newsAudience,
+          newsSummary : result.hybridGraph
+        }
+        newsCollection.push(news);
       });
     }
 
-    return articleSummary;
+    return   newsCollection;
   }
 
   // reads all news for a particular geographic area

@@ -17,8 +17,6 @@ const center = [mapLat, mapLong]
 // location of Covid case data by VT county
 const vtCaseDataURL = 'https://services1.arcgis.com/BkFxaEFNwHqX3tAw/arcgis/rest/services/VIEW_EPI_CountyDailyCount_GEO_PUBLIC/FeatureServer/0/query?where=1%3D1&outFields=CNTYNAME,C_Total,date,D_Total,C_New,C_10k&outSR=4326&f=json'
 
-
-
 function CovidMap() {
 
   const [countyData, setCountyData] = useState(null)
@@ -47,41 +45,37 @@ function CovidMap() {
     }
   })
 
-  function getNewsLink(countyName) {
+  async function getNewsLink(countyName) {
 
-    // Array to hold articles of interest for each county
-    let countyArticles = []
+    let dataObj = null
 
-    // Setup array for now to demo idea.  Article links could be stored in Mongo and could be fetched
-    const newsArray =
-      [
-        {
-          id: 1,
-          headline: 'Pop up Testing Center',
-          county: 'RUTLAND',
-          link: 'wwww.google.com'
-        },
+    setCountyArticles([])
+    // Read news articles
+      await fetch('/news')
+        .then((res) => res.json())
+        .then((data) => {
+          dataObj = data
+          setCountyArticles(dataObj)
+        })
 
-        {
-          id: 2,
-          headline: 'Mayor implements curfew',
-          county: 'CHITTENDEN',
-          link: 'www.cnn.com'
-        },
+    if (dataObj) {
 
-        {
-          id: 3,
-          headline: 'Restaurant Closures',
-          county: 'RUTLAND',
-          link: 'www.theatlantic.com'
+      // Loop through each article
+      for (const element of dataObj) {
+
+        // loop and check if article is associated with current county
+        for (const county of element.newsAudience) {
+
+           // if article is associated with county that was clicked, place in array so it can be displayed
+           if (county.toUpperCase() === countyName) {
+            countyArticles.push(element)
+          } 
         }
-      ]
-
-    for (const element of newsArray) {
-      if (element.county === countyName) countyArticles.push(element)
+      }
     }
     setCountyArticles(countyArticles)
     return (countyArticles)
+
   }
 
   // Render the Map 
@@ -118,19 +112,13 @@ function CovidMap() {
                     positions={borders}
 
                     eventHandlers={{
+
                       click: () => {
                         getNewsLink(points.attributes.CNTYNAME)
-                      }
-                    }}
-
-                    onMouseOver={(e) => {
-                      e.target.openPopup();
-                      getNewsLink(points.attributes.CNTYNAME)
-                    }}
-                    onMouseOut={(e) => {
-                      e.target.closePopup();
+                      },
                     }}
                   >
+
                     <Popup>
                       <div>{points.attributes.CNTYNAME}</div>
                       <div>Total Cases To Date: {points.attributes.C_Total}</div>
@@ -150,12 +138,12 @@ function CovidMap() {
       <h4 id='news-header'>News of Interest</h4>
 
       <div>
-      
+
         <div id="article-container">
           {countyArticles ? (
             countyArticles.map((id) => (
               <div id="news-links">
-                <a id="article-link" href={id.link} >{id.headline}</a>
+                <a id="article-link" href={id.link} >{id.newsSummary.title}</a>
               </div>
             ))
           ) : (
