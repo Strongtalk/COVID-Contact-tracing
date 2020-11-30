@@ -1,5 +1,6 @@
 // imports
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "./add-info.css";
 
 // component creation
@@ -25,6 +26,15 @@ function AddInfo() {
   }, []);
 
   console.log(contactInfo);
+
+  let history = useHistory();
+
+  function gohome() {
+    history.push({
+      pathname: "/userprofile",
+    });
+  }
+
 
   return (
     //general wrapper for page
@@ -88,13 +98,13 @@ function AddInfo() {
         )
       })}
       </div>
-      <form id="soloFormContainer" action="/userprofile">
+      <div id="soloFormContainer">
         <p id="soloEvent">
           Finished with event entry or did not come in close contact with anyone
           during this event instance?
         </p>
-        <input className="addInfoSubmitButton" type="submit" value="Events Page"></input>
-      </form>
+        <button className="addInfoSubmitButton" onClick={gohome}>Events Page</button>
+      </div>
       
     </div>
   );

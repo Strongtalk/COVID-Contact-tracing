@@ -1,16 +1,22 @@
 import React from "react";
 import "./sendAlert.css";
-
-function sendTheAlert() {
-  fetch(`/send-alert`, { method: "POST" });
-  document.location = "/userprofile";
-}
-
-function returnToUserProfile() {
-  document.location = "/userprofile";
-}
+import { useHistory } from "react-router-dom";
 
 function SendAlert() {
+  let history = useHistory();
+
+  function sendTheAlert() {
+    fetch(`/send-alert`, { method: "POST" });
+    history.push({
+      pathname: "/userprofile",
+    });
+  }
+
+  function returnToUserProfile() {
+    history.push({
+      pathname: "/userprofile",
+    });
+  }
   return (
     <div id="container">
       <h1 id="sendAlertTitle">

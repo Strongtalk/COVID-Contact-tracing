@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import "./profilePage.css";
 import firebaseApp from "../auth/firebase.js";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import "./Calendar.css";
 
 function ProfilePage() {
   const [profile, setProfile] = useState("");
@@ -80,15 +80,12 @@ function ProfilePage() {
     evt.preventDefault();
   }
 
-  // Helper function to format date in user friendly format
-  function formatDate(eventDate) {
-    if (eventDate != null) {
-      let date = new Date(eventDate);
-      let portionOfDay = date.getHours() < 12 ? "am" : "pm";
-      let hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
-      let minutes =
-        date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-      return hours + ":" + minutes + " " + portionOfDay;
+
+  // Helper function to format time in user friendly format
+  function formatTime(eventTime) {
+    if (eventTime != null) {
+      let time = eventTime.substr(11, 5);
+      return time;
     } else {
       return null;
     }
@@ -128,34 +125,22 @@ function ProfilePage() {
             {eventInfo.length > 0 ? (
               <ul id="eventList">
                 {eventInfo.map((userEvent) => {
-                  return (
-                    <div id="eventPrintContainer">
-                      <div>
-                        <a
-                          id="eventTag"
-                          key={userEvent._id}
-                          href={userEvent}
-                          onClick={(evt) => clickEvent(userEvent._id, evt)}
-                        >
-                          {userEvent.name.toUpperCase()}
-                        </a>
-                      </div>
-                      <div>
-                        <p>
-                          {formatDate(userEvent.start) +
-                            "-" +
-                            formatDate(userEvent.end)}
-                        </p>
-                        <p></p>
-                      </div>
+                  console.log('userEvent.start ', userEvent.start)
+                  return <div id='eventPrintContainer' >
+                    <div>
+                      <a id='eventTag' key={userEvent._id} href={userEvent} onClick={(evt) => clickEvent(userEvent._id, evt)}>{userEvent.name.toUpperCase()}
+                      </a>
                     </div>
-                  );
+                    <div>
+                      <p>{formatTime(userEvent.start) + '-' + formatTime(userEvent.end)}</p>
+                      <p></p>
+                    </div>
+                  </div>;
                 })}
               </ul>
             ) : null}
           </div>
         </div>
-        <div id="buttonContainer"></div>
         <div id="statusButtonContainer">
           <button
             onClick={positiveOfPositive}
