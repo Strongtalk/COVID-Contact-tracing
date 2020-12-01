@@ -33,6 +33,12 @@ function UpdateInfo() {
   }, []);
 
 
+  function gohome() {
+    history.push({
+      pathname: "/userprofile",
+    });
+  }
+
   function handleSubmit(evt) {
 
     const data = {
@@ -118,13 +124,13 @@ function UpdateInfo() {
       </form>
 
           ) : null}
-      <form id="finishedContainer" action="/userprofile">
+    <div id="finishedContainer">
         <p id="soloEvent">
           Finished with event entry or did not come in close contact with anyone
           during this event instance?
         </p>
-        <input className="addInfoSubmitButton" type="submit" value="Events Page"></input>
-      </form>
+        <button className="addInfoSubmitButton" onClick={gohome}>Events Page</button>
+      </div>
     </div>
   );
 }
