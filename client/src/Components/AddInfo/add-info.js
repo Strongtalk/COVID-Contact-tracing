@@ -11,14 +11,19 @@ function AddInfo() {
    let userIdLocal = localStorage.getItem("id");
    let eventIdLocal = localStorage.getItem("eventId");
 
+ 
+
   //this is to retrieve the event ID added on the last page and associate it with the contact that are about to be entered
   const cookies = document.cookie;
   const cookieSlice = cookies.slice(15, 39);
 
+    console.log(eventIdLocal)
+   console.log(cookieSlice)
+
   const showContacts = () => {
     // this grabs all of the event participants for a specific event and returns it as an object
     // right now just in console log but will eventually get this displaying on the page ?
-    fetch(`/eventcontact/${eventIdLocal}`)
+    fetch(`/eventcontact/${cookieSlice}`)
       .then((response) => response.json())
       .then((contact) => {
         setContactInfo(contact);
@@ -44,7 +49,7 @@ function AddInfo() {
       <h2 id='addInfoSubtitle' >Please complete for each contact</h2>
       <form id='formContainer' method="POST" action="/eventcontact">
         <div id="typeInputContainer">
-          <input type="hidden" name="eventid" value={eventIdLocal} />
+          <input type="hidden" name="eventid" value={cookieSlice} />
           <input
             type="text"
             placeholder="Name"
