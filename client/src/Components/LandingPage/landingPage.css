@@ -9,7 +9,9 @@
 #landingPageTitle{
   color: rgb(246, 246, 237);
   padding-top: 35px;
+  padding-bottom: 10px;
   margin-bottom: 20px;
+  border-bottom: 10px double rgb(246, 246, 237);
 }
 
 .individualArticleContainers{
@@ -29,17 +31,20 @@
 .newsText{
   font-size: 17px;
   padding-bottom: 10px;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .continueReadingButton {
   color: rgb(246, 246, 237);
   border: 1px solid black;
-  width: 150px;
-  height: 25px;
+  width: 160px;
+  height: 30px;
   font-size: 17px;
   text-align: center;
-  background-color: rgb(176, 137, 64);
+  background-color: #42625d;
   border-radius: 3px;
+  padding-top:3px;
 }
 .aTag{
   text-decoration: none;

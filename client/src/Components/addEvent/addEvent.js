@@ -52,7 +52,7 @@ function AddEvent(props) {
 
   return (
     <div className='addEventContainer'>
-      <h1 className="addEventTitle" >Add a Event</h1>
+      <h1 className="addEventTitle" >Add an Event</h1>
 
       <form className="eventContainer" method="POST" onSubmit={handleSubmit}>
         <input type="hidden" name="userid" value={objectId} />

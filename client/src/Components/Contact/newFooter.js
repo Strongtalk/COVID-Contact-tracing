@@ -19,9 +19,7 @@ function Footer() {
           </a>
         </div>
         <p id="legalWords">
-          If you are experiencing symptoms please contact your primary physican!
-          Some blah blah lorem ipsum about how we aren''t liable. Really, you
-          tryna sue? You should probably wear a mask.
+        This application is not affiliated with the CDC, VT Department of Health, or any municipality. You are participating voluntarily. 
         </p>
       </div>
       <div id="footerFooterContent">

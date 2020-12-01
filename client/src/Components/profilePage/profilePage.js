@@ -117,7 +117,6 @@ function ProfilePage() {
             <Calendar onClickDay={(evt) => clickCalendarDate(evt)} />
           </div>
         </div>
-
         <div id="eventListContainer">
           <h4 id="eventListTitle">Your Events: </h4>
           <h3 id="eventListSubtitle">Click to Edit or see Contacts</h3>

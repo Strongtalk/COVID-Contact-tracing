@@ -29,34 +29,37 @@ function UserLogin({ history }) {
 
   return (
     <div id="loginContainer">
-      <h1 id="loginTitle"> Log-In:</h1>
-      <form id="loginForm" onSubmit={handleLogin}>
-        <input
-          className="loginInput"
-          type="text"
-          name="username"
-          placeholder="Email:"
-        />
-        <input
-          className="loginInput"
-          type="password"
-          name="pass"
-          placeholder="Password:"
-        />
-        <a id="signUpLink" href="/user">
-          <p id="signUpText">Don't have an account? Sign up!</p>
-        </a>
-        <button id="forgotPasswordButton">Forgot Password?</button>
-        <div>
+        {/* <h1 id="loginTitle"> Log In</h1> */}
+        <form id="loginForm" onSubmit={handleLogin}>
           <input
-            id="submitButton"
-            value="Log In"
-            type="submit"
-            placeholder="submit"
+            id="usernameInput"
+            className="loginInput"
+            type="text"
+            name="username"
+            placeholder="Email:"
           />
-        </div>
-      </form>
-    </div>
+          <input
+            className="loginInput"
+            type="password"
+            name="pass"
+            placeholder="Password:"
+          />
+          <div>
+            <input
+              id="submitButton"
+              value="Log In"
+              type="submit"
+              placeholder="submit"
+            />
+          </div>
+          <a id="signUpLink" href="/user">
+            <p id="signUpText">Don't have an account? Sign up!</p>
+          </a>
+          <button id="forgotPasswordButton">Forgot Password? Click Here!</button>
+        </form>
+        
+        <img alt="hello" src="/Images/newImage.png" id="loginImage" />
+      </div>
   );
 }
 

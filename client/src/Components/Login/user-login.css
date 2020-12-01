@@ -1,52 +1,78 @@
 #loginContainer {
-  background-color: #93bfb9;
-  height: 120vh;
+  height: 80vh;
   margin: 0;
   text-align: center;
+  width: 100vw;
+}
+#loginImage {
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: -5;
+  position: absolute;
 }
 #loginTitle {
-  padding-top: 35px;
-  margin-bottom: 15px;
+  text-align: left;
+  margin: 10px 30px;
+  padding: 10px 17px;
+  background-color: #b4b5d1;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 70px;
 }
 
 #loginForm {
   text-align: left;
   margin: 0 30px;
   padding: 10px 17px;
-  background-color: rgb(246, 246, 237);
+  background-color: #b4b5d1;
   border: 1px solid black;
   border-radius: 10px;
+  height: 45vh;
+  margin-top: 60px;
+}
+#usernameInput {
+  margin-top: 20px;
 }
 
-.loginInput{
-    border: 1px solid black;
-    margin: 5px 0;
-    width: 75vw;
-    height: 35px;
-    font-size: 25px;
-    border-radius: 3px;
+.loginInput {
+  border: 1px solid black;
+  margin: 5px 0;
+  width: 75vw;
+  height: 45px;
+  font-size: 25px;
+  border-radius: 3px;
+  background-color: rgb(246, 246, 237);
 }
 
-#signUpLink{
-    text-decoration: none;
+#signUpLink {
+  text-decoration: none;
 }
 
-#signUpText{
-    margin-top: 5px;
-    color: black;
-    font-size: 18px;
+#signUpText {
+  margin-top: 15px;
+  color: black;
+  font-size: 18px;
+  text-align: center;
 }
-#forgotPasswordButton{
-    font-size: 18px;
-    margin: 0;
-    margin-bottom: 10px;
+#forgotPasswordButton {
+  font-size: 18px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 75vw;
 }
 
 #submitButton {
   text-align: center;
   border: 1px solid black;
-  font-size: 18px;
+  font-size: 25px;
   padding: 6px 10px;
-  background-color: #edc3c2;
+  background-color: #86869c;
   border-radius: 5px;
+  width: 60vw;
+  margin-top: 15px;
+  position: relative;
+  left: 27px;
+  color: rgb(246, 246, 237);
 }

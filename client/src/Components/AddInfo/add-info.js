@@ -52,21 +52,21 @@ function AddInfo() {
           <input type="hidden" name="eventid" value={cookieSlice} />
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Name:"
             name="name"
             className="addInfoInput"
             required
           ></input>
           <input
             type="text"
-            placeholder="Email"
+            placeholder="Email:"
             name="email"
             className="addInfoInput"
             required
           ></input>
           <input
             type="text"
-            placeholder="Phone Number:"
+            placeholder="Phone:"
             maxLength="10"
             name="phone"
             className="addInfoInput"
@@ -92,7 +92,7 @@ function AddInfo() {
         <input className="addInfoSubmitButton" type="submit" value="ADD CONTACT" />
       </form>
       <div id='contactAddedContainer' >
-      <h3>CONTACT(S) ADDED FOR EVENT:</h3>
+      <h3 id='contactsAddedTitle' >CONTACT(S) ADDED FOR EVENT</h3>
       {contactInfo.length === 0 && (<div><p>No contacts added</p> </div>)} 
       {contactInfo.map((contact, index) => {
         return (

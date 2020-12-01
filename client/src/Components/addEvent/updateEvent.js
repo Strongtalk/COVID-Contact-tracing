@@ -216,7 +216,7 @@ function UpdateEvent(props) {
         )}
         {contactInfo.map((contact, index) => {
           return (
-            <div key={index}>
+            <div id="contactNameContainer" key={index}>
               <a
                 className="contactName"
                 href={contact._id}
@@ -230,8 +230,8 @@ function UpdateEvent(props) {
   
       </div>
       
-      <button id="eventSubmit" onClick={handleDelete} >Delete</button>
-      <buton id="eventSubmit" onClick= {handleAddContact}>Add Contact</buton>
+      <button className="updateButtons" onClick={handleDelete} >Delete</button>
+      <buton className="updateButtons" onClick= {handleAddContact}>Add Contact</buton>
         
     </div>
   );

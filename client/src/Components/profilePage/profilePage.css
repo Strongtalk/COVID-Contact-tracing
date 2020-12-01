@@ -1,15 +1,16 @@
 #profilePageContainer {
-  background-color: #BF856D; 
+  background-color: #7DBAB1; 
   text-align: center;
 }
 
 #profileName {
-  padding-top: 39px;
+  padding-top: 50px;
   margin-bottom: 10px;
   color: rgb(246, 246, 237);
   font-size: 32px;
   text-align: left;
   border-bottom: 5px double lightgoldenrodyellow;
+  height: 18vh;
 
 
   animation: fadeInAnimation ease-in-out 3s;
@@ -40,15 +41,14 @@
 }
 .profileButtons {
   text-align: center;
-  font-size: 15px;
+  font-size: 20px;
   border: 1px solid black;
   margin-right: 10px;
-  height: 70px;
-  width: 200px;
+  height: 60px;
+  width: 180px;
   border-radius: 5px;
-  background-color: #2A7369;
-  color: white;
-  font-size: 28px;
+  background-color: #D0D19F;
+  color: black;
 }
 #calendarTutorial{
   font-size: 20px;
@@ -64,6 +64,10 @@
   padding: 20px;
   border-radius: 5px;
   margin-left: 10px;
+  margin-bottom: 20px;
+}
+#calendarContainer{
+  margin-top: 10px;
 }
 
 
@@ -84,6 +88,7 @@
   height: 70vh;
   background-color: rgb(246, 246, 237);
   margin: 20px;
+  margin-top: 25px;
   border-radius: 5px;
 }
 #eventList{
@@ -91,25 +96,24 @@
 }
 #eventPrintContainer{
   margin: 10px;
-  background-color:#D9973B; 
+  background-color:#D0D19F; 
   padding: 10px;
   width: 200px;
   border: 1px solid black;
   border-radius: 5px;
-  color: rgb(246, 246, 237);
+  color: black;
 }
 #eventTag{
-  color: rgb(47, 47, 47);
   text-decoration: none;
   font-size: 18px;
-  color: rgb(246, 246, 237);
+  color: black;
 }
 .statusButtons {
   height: 80px;
   width: 250px;
-  background-color: rgb(0, 0, 0);
+  background-color: #173C54;
   font-size: 30px;
   margin-bottom: 20px;
   border-radius: 10px;
-  color: rgb(200, 138, 138);
+  color: rgb(183, 159, 26);
 }

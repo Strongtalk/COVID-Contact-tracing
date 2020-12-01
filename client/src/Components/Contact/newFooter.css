@@ -10,9 +10,9 @@
 }
 
 #footerTitle {
-  background-color: #BF856D;
+  background-color: #42625d;
   width: 100vw;
-  height: 30px;
+  height: 35px;
   font-size: 25px;
   margin: 0;
 }
@@ -27,12 +27,14 @@
 }
 #legalWords {
   margin-right: 20px;
-  padding-top:2px;
-  font-size: 14px;
+  padding: 3px 7px;
+  font-size: 17px;
   height: 115px;
   width: 60vw;
   color: black;
   background-color: rgb(246, 246, 237);
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 #footerFooterContent{

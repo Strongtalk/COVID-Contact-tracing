@@ -41,10 +41,25 @@
   border: 1px solid black;
   border-radius: 10px;
 }
+#termContainer{
+  margin: 5px 0;
+}
+#termsLabel{
+  padding-left: 5px;
+}
 
 #cookiesTitle {
   font-size: 18px;
 }
 #cookiesSubtitle {
   margin-top: 3px;
+}
+
+#legalWording{
+  text-align: left;
+  margin: 0 30px;
+  padding: 10px 17px;
+  background-color: rgb(246, 246, 237);
+  border: 1px solid black;
+  border-radius: 10px;
 }

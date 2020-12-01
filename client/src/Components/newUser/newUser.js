@@ -37,7 +37,7 @@ const NewUser = ({ history }) => {
   return (
     //general wrapper for page
     <div id="pageContainer">
-      <h1 id="signUpTitle">Sign Up:</h1>
+      <h1 id="signUpTitle">Sign Up</h1>
       <form
         id="inputContainer"
         method="POST"
@@ -90,7 +90,7 @@ const NewUser = ({ history }) => {
         <input
           className="newUserInput"
           type="text"
-          placeholder="Phone Number: "
+          placeholder="Phone: "
           maxLength="7"
           name="cell"
           required
@@ -102,7 +102,12 @@ const NewUser = ({ history }) => {
           name="password"
           required
         />
+        <div id='termContainer' >
+        <input type='checkbox'></input>
+        <label id="termsLabel" >Agree to Terms and Conditions</label>
+        </div>
         <input id="createAccountButton" type="submit" value="Create Account" />
+      
       </form>
       <div id='cookiesContainer' >
       <h1 id='cookiesTitle' >WE USE COOKIES:</h1>

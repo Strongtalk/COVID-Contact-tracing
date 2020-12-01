@@ -19,18 +19,21 @@ function SendAlert() {
   }
   return (
     <div id="container">
+      <div id='titleContainer' >
       <h1 id="sendAlertTitle">
-        Confirm that you want to send POSITIVE COVID alert?
+        Confirm that you want to send a POSITIVE COVID alert?
       </h1>
-      <h2 id="sendAlertSubtitle">
-        This alert will send an anonymous alert to every contact saved for the
+      <p id="sendAlertSubtitle">
+        This alert will send an anonymous text message to every contact saved for the
         past two weeks
-      </h2>
+      </p>
+      </div>
       <button className="returnButton" onClick={returnToUserProfile}>
-        Return to Profile
+        Return to My Events
       </button>
+      <div id='border'></div>
       <button className="sendAlertButton" onClick={sendTheAlert}>
-        Yes, I am positive
+        SEND ALERT
       </button>
     </div>
   );
