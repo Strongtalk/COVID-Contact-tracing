@@ -10,6 +10,7 @@
   height: 100vh;
   z-index: -5;
   position: absolute;
+  opacity: .7;
 }
 #loginTitle {
   text-align: left;
@@ -45,11 +46,11 @@
   background-color: rgb(246, 246, 237);
 }
 
-#signUpLink {
+.signUpLink {
   text-decoration: none;
 }
 
-#signUpText {
+.signUpText {
   margin-top: 15px;
   color: black;
   font-size: 18px;

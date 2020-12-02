@@ -29,7 +29,6 @@ function UserLogin({ history }) {
 
   return (
     <div id="loginContainer">
-        {/* <h1 id="loginTitle"> Log In</h1> */}
         <form id="loginForm" onSubmit={handleLogin}>
           <input
             id="usernameInput"
@@ -52,10 +51,10 @@ function UserLogin({ history }) {
               placeholder="submit"
             />
           </div>
-          <a id="signUpLink" href="/user">
-            <p id="signUpText">Don't have an account? Sign up!</p>
+          <a className="signUpLink" href="/user">
+            <p className="signUpText">Don't have an account? Sign up!</p>
           </a>
-          <button id="forgotPasswordButton">Forgot Password? Click Here!</button>
+          <a href='/user' className="signUpLink"><p className='signUpText' >Forgot Password? Click Here!</p></a>
         </form>
         
         <img alt="hello" src="/Images/newImage.png" id="loginImage" />

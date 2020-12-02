@@ -14,7 +14,7 @@ function AddEvent(props) {
 
 
   let objectId = localStorage.getItem("id");
-  console.log('id is:', objectId)
+  
 
   useEffect(() => {
     console.log('In Add Event: ', props.location.state);
@@ -22,8 +22,6 @@ function AddEvent(props) {
   }, []);
 
   function handleSubmit(evt) {
-    console.log('submitting add', evt.target.description)
-
     const data =
     {
       name: evt.target.name,
@@ -40,8 +38,7 @@ function AddEvent(props) {
       body: JSON.stringify(data),
     })
       .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
+      .then(data => { 
       })
       .catch((error) => {
         console.error('Error:', error);
