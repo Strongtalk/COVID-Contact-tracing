@@ -12,7 +12,7 @@ function UpdateInfo() {
 
   //this is to retrieve the event ID added on the last page and associate it with the contact that are about to be entered
   const cookies = document.cookie;
-  const cookieSlice = cookies.slice(15, 39);
+  
 
    // Read userId and eventId from local storage
    let userIdLocal = localStorage.getItem("id");
@@ -26,8 +26,10 @@ function UpdateInfo() {
       .then((contact) => {
         setContactInfo(contact);
       });
+      
   };
-
+  console.log(contactIdLocal)
+  console.log(eventIdLocal)
   useEffect(() => {
     getContact();
   }, []);

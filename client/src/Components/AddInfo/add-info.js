@@ -17,7 +17,7 @@ function AddInfo() {
   const cookies = document.cookie;
   const cookieSlice = cookies.slice(15, 39);
 
-    console.log(eventIdLocal)
+  console.log(eventIdLocal)
    console.log(cookieSlice)
 
   const showContacts = () => {

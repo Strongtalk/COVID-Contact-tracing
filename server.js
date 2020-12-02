@@ -217,7 +217,6 @@ app.post("/update-contact/:contactId", async (request, response) => {
   };
 
   let statusObj = await eventContactCollection.update(contact)
-  response.cookie("contactId", request.body.contactId);
   response.redirect("/update-info");
 });
 
@@ -228,7 +227,6 @@ app.post("/send-alert", (request, response) => {
   // hard coded number and message //
   sendSMS("8023388026", "Alert, Someone you came in contact with in the last two weeks has tested POSITIVE for COVID-19");
   sendSMS("9782219788", "Alert, Someone you came in contact with in the last two weeks has tested POSITIVE for COVID-19");
-  sendSMS("8023530833", "Alert, Someone you came in contact with in the last two weeks has tested POSITIVE for COVID-19");
   response.send({ ok: true });
 });
 
