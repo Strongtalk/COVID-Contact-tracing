@@ -50,7 +50,7 @@ function LandingPage() {
               <div className='individualArticleContainers' key={index}>
               <h3 className="newsTitle">{article.newsSummary.title.toUpperCase()} </h3>
               <p className='newsText' >{article.newsSummary.description}</p>
-              <a className='aTag' href={article.newsSummary.url}><h2 
+              <a className='aTag'  rel="noreferrer" target='_blank' href={article.newsSummary.url}><h2 
               className="continueReadingButton" >Continue Reading</h2></a>
             </div>
           )

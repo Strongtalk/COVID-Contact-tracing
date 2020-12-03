@@ -7,10 +7,10 @@ function Footer() {
       <h1 id="footerTitle">Resources</h1>
       <div id="contentContainer">
         <div id="iconWrapper">
-          <a className="iconContainer" href="https://www.cdc.gov/">
+          <a className="iconContainer" rel="noreferrer" target='_blank' href="https://www.cdc.gov/">
             <img className="icon" src="/images/cdc.png" alt="Cdc-logo" />
           </a>
-          <a className="iconContainer" href="https://www.healthvermont.gov/">
+          <a className="iconContainer" rel="noreferrer" target='_blank' href="https://www.healthvermont.gov/">
             <img
               className="icon"
               src="/images/vermont-dpt-of-health.png"

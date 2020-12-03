@@ -15,6 +15,7 @@ function AddInfo() {
 
   //this is to retrieve the event ID added on the last page and associate it with the contact that are about to be entered
   const cookies = document.cookie;
+  console.log('All Cookies ', cookies)
   const cookieSlice = cookies.slice(15, 39);
 
   console.log(eventIdLocal)

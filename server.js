@@ -144,7 +144,7 @@ app.post("/update-event", async (request, response) => {
   };
 
   let statusObj = await eventCollection.update(event);
-  response.cookie("eventId", request.body.eventId);
+  // response.cookie("eventId", request.body.eventId);
   response.redirect("/update-event");
 });
 
