@@ -16,7 +16,7 @@ const Ul = styled.ul`
 
   @media (max-width: 767px) {
     flex-flow: column nowrap;
-    background-color:  #93BFB9;
+    background-color:  #D7E0DA;
     position: fixed;
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
     top: 0;
@@ -37,6 +37,11 @@ const Ul = styled.ul`
 
     li {
       color: #000000;
+      background: white;
+      padding: 5px;
+      margin: 5px;
+      margin-top: 22px;
+      border: 1px solid black;
     }
     a:link {
       text-decoration: none;
